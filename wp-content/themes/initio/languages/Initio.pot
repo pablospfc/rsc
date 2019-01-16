@@ -1,0 +1,962 @@
+# This file is distrubuted under the GPL-2.0+
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Initio v1.0.5\n"
+"POT-Creation-Date: 2016-11-09 16:42-0500\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Vitaly Pinchev <info@vmthemes.com>\n"
+"Language-Team: VM Themes <info@vmthemes.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Textdomain-Support: yesX-Generator: Poedit 1.7.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x;esc_html_e;esc_html__;esc_attr_e;esc_attr__;"
+"_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2;_n_noop:1,2;"
+"__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit 1.8.9\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: 404.php:13
+msgid "Error 404 - Page not found!"
+msgstr ""
+
+#: 404.php:14
+msgid "Sorry! It seems that the page you are looking for is not here."
+msgstr ""
+
+#: breadcrumbs.php:12
+msgid "Home"
+msgstr ""
+
+#: breadcrumbs.php:38
+msgid "Tag: "
+msgstr ""
+
+#: breadcrumbs.php:40 breadcrumbs.php:41 breadcrumbs.php:42
+msgid "Archive for "
+msgstr ""
+
+#: breadcrumbs.php:43
+msgid "Author: "
+msgstr ""
+
+#: breadcrumbs.php:44
+msgid "Blog Archives "
+msgstr ""
+
+#: breadcrumbs.php:45
+msgid "Search Results "
+msgstr ""
+
+#: comments.php:25
+#, php-format
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:32 comments.php:50
+msgid "Comment navigation"
+msgstr ""
+
+#: comments.php:33 comments.php:51
+msgid "&larr; Older Comments"
+msgstr ""
+
+#: comments.php:34 comments.php:52
+msgid "Newer Comments &rarr;"
+msgstr ""
+
+#: comments.php:57
+msgid "Comments are closed."
+msgstr ""
+
+#: content-none.php:13
+msgid "Nothing Found!"
+msgstr ""
+
+#: content-none.php:14
+msgid ""
+"Sorry, but nothing matched your search criteria. Please try again with some "
+"different keywords."
+msgstr ""
+
+#: copyright.php:9
+msgid "home"
+msgstr ""
+
+#: copyright.php:10
+msgid "Initio Theme"
+msgstr ""
+
+#: copyright.php:10
+msgid " powered by "
+msgstr ""
+
+#: copyright.php:10
+msgid "WordPress"
+msgstr ""
+
+#: features-section.php:42
+msgid "Featured Image"
+msgstr ""
+
+#: features-section.php:62
+msgid "Responsive Design"
+msgstr ""
+
+#: features-section.php:69
+msgid "Unlimited Colors"
+msgstr ""
+
+#: features-section.php:76 services-section-noimage.php:104
+#: services-section.php:104
+msgid "Clean Code"
+msgstr ""
+
+#: features-section.php:83
+msgid "eCommerce Ready"
+msgstr ""
+
+#: fromblog-section.php:40 post-formats.php:36 post-formats.php:57
+#, fuzzy
+msgid "Read More"
+msgstr "Подробнее"
+
+#: functions/initio-customizer.php:15
+msgid "If you like our work. Buy us a coffee."
+msgstr ""
+
+#: functions/initio-customizer.php:25
+msgid "Theme Support"
+msgstr ""
+
+#: functions/initio-customizer.php:26
+msgid "View Theme Demo"
+msgstr ""
+
+#: functions/initio-customizer.php:27
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: functions/initio-customizer.php:35
+msgid "Raleway"
+msgstr ""
+
+#: functions/initio-customizer.php:54
+msgid "Ideal Image Slider"
+msgstr ""
+
+#: functions/initio-customizer.php:54
+msgid "Unslider"
+msgstr ""
+
+#: functions/initio-customizer.php:57 functions/initio-image-sliders.php:28
+#: functions/initio-image-sliders.php:35 functions/initio-image-sliders.php:37
+msgid "Slide"
+msgstr ""
+
+#: functions/initio-customizer.php:57
+msgid "Fade"
+msgstr ""
+
+#: functions/initio-customizer.php:60
+msgid "No Sidebars"
+msgstr ""
+
+#: functions/initio-customizer.php:60
+msgid "Right Sidebar"
+msgstr ""
+
+#: functions/initio-customizer.php:60
+msgid "Left Sidebar"
+msgstr ""
+
+#: functions/initio-customizer.php:63
+msgid "Excerpt"
+msgstr ""
+
+#: functions/initio-customizer.php:63
+msgid "Full Content"
+msgstr ""
+
+#: functions/initio-customizer.php:67 functions/initio-customizer.php:75
+msgid "Disable"
+msgstr ""
+
+#: functions/initio-customizer.php:68 functions/initio-functions.php:168
+msgid "Main Sidebar"
+msgstr ""
+
+#: functions/initio-customizer.php:69
+msgid "Below Content"
+msgstr ""
+
+#: functions/initio-customizer.php:76
+msgid "Above Content"
+msgstr ""
+
+#: functions/initio-customizer.php:94
+msgid "Initio Theme Options"
+msgstr ""
+
+#: functions/initio-customizer.php:101
+msgid "Theme Information"
+msgstr ""
+
+#: functions/initio-customizer.php:114
+msgid " "
+msgstr ""
+
+#: functions/initio-customizer.php:123
+msgid "General Settings"
+msgstr ""
+
+#: functions/initio-customizer.php:136
+msgid "Theme Color"
+msgstr ""
+
+#: functions/initio-customizer.php:150
+msgid "Display Breadcrumbs"
+msgstr ""
+
+#: functions/initio-customizer.php:164
+msgid "Enable Animation"
+msgstr ""
+
+#: functions/initio-customizer.php:178
+msgid "Enable Responsive Design"
+msgstr ""
+
+#: functions/initio-customizer.php:192
+msgid "Enable Scrollup"
+msgstr ""
+
+#: functions/initio-customizer.php:205
+msgid "ScrollUp Color"
+msgstr ""
+
+#: functions/initio-customizer.php:218
+msgid "ScrollUp Hover Color"
+msgstr ""
+
+#: functions/initio-customizer.php:228
+msgid "Logo Settings"
+msgstr ""
+
+#: functions/initio-customizer.php:231
+msgid ""
+"To upload custom logo image - go to Appearance > Customize > Site Identity"
+msgstr ""
+
+#: functions/initio-customizer.php:243
+msgid "Logo Width (px)"
+msgstr ""
+
+#: functions/initio-customizer.php:257
+msgid "Logo Height (px)"
+msgstr ""
+
+#: functions/initio-customizer.php:271
+msgid "Logo Top Margin (px)"
+msgstr ""
+
+#: functions/initio-customizer.php:285
+msgid "Logo Left Margin (px)"
+msgstr ""
+
+#: functions/initio-customizer.php:299
+msgid "Logo Bottom Margin (px)"
+msgstr ""
+
+#: functions/initio-customizer.php:313
+msgid "Logo Right Margin (px)"
+msgstr ""
+
+#: functions/initio-customizer.php:327
+msgid "Logo Uppercase"
+msgstr ""
+
+#: functions/initio-customizer.php:342
+msgid "Select logo font family"
+msgstr ""
+
+#: functions/initio-customizer.php:357
+msgid "Logo Font Size (px)"
+msgstr ""
+
+#: functions/initio-customizer.php:371
+msgid "Logo Font Weight"
+msgstr ""
+
+#: functions/initio-customizer.php:384
+msgid "Logo Color"
+msgstr ""
+
+#: functions/initio-customizer.php:398
+msgid "Display Tagline Underneath Logo"
+msgstr ""
+
+#: functions/initio-customizer.php:412
+msgid "Tagline Font Size (px)"
+msgstr ""
+
+#: functions/initio-customizer.php:425
+msgid "Tagline Color"
+msgstr ""
+
+#: functions/initio-customizer.php:439
+msgid "Tagline Uppercase"
+msgstr ""
+
+#: functions/initio-customizer.php:448
+msgid "Navigation Settings"
+msgstr ""
+
+#: functions/initio-customizer.php:462
+msgid "Sticky Menu"
+msgstr ""
+
+#: functions/initio-customizer.php:476
+msgid "Menu Top Margin (px)"
+msgstr ""
+
+#: functions/initio-customizer.php:491
+msgid "Select Menu Font Family"
+msgstr ""
+
+#: functions/initio-customizer.php:506
+msgid "Menu Font Size (px)"
+msgstr ""
+
+#: functions/initio-customizer.php:520
+msgid "Menu Uppercase"
+msgstr ""
+
+#: functions/initio-customizer.php:533
+msgid "Navigation Menu Font Color"
+msgstr ""
+
+#: functions/initio-customizer.php:546
+msgid "Navigation Menu Border Color"
+msgstr ""
+
+#: functions/initio-customizer.php:559
+msgid "Navigation Menu Background Color"
+msgstr ""
+
+#: functions/initio-customizer.php:572
+msgid "SubMenu Background Color"
+msgstr ""
+
+#: functions/initio-customizer.php:585
+msgid "Menu Hover Font Color"
+msgstr ""
+
+#: functions/initio-customizer.php:598
+msgid "Menu Background Hover Color"
+msgstr ""
+
+#: functions/initio-customizer.php:611
+msgid "Selected Menu Color"
+msgstr ""
+
+#: functions/initio-customizer.php:619
+msgid "Typography Settings"
+msgstr ""
+
+#: functions/initio-customizer.php:634
+msgid "Select Body Font Family"
+msgstr ""
+
+#: functions/initio-customizer.php:649
+msgid "Body Font Size (px)"
+msgstr ""
+
+#: functions/initio-customizer.php:662
+msgid "Body Font Color"
+msgstr ""
+
+#: functions/initio-customizer.php:670
+msgid "Header Settings"
+msgstr ""
+
+#: functions/initio-customizer.php:683
+msgid "Header Background Color"
+msgstr ""
+
+#: functions/initio-customizer.php:697
+msgid "Header Background Color Opacity"
+msgstr ""
+
+#: functions/initio-customizer.php:713
+msgid "Display Top Header Section"
+msgstr ""
+
+#: functions/initio-customizer.php:727
+msgid "Address"
+msgstr ""
+
+#: functions/initio-customizer.php:741
+msgid "Phone Number"
+msgstr ""
+
+#: functions/initio-customizer.php:755
+msgid "Email"
+msgstr ""
+
+#: functions/initio-customizer.php:768 functions/initio-customizer.php:1413
+msgid "Top Section Font Color"
+msgstr ""
+
+#: functions/initio-customizer.php:781
+msgid "Top Section Color"
+msgstr ""
+
+#: functions/initio-customizer.php:789
+msgid "Home Page Settings"
+msgstr ""
+
+#: functions/initio-customizer.php:803
+msgid "Enable Image Slider"
+msgstr ""
+
+#: functions/initio-customizer.php:817
+msgid "Display Features Section"
+msgstr ""
+
+#: functions/initio-customizer.php:831
+msgid "Display About Section"
+msgstr ""
+
+#: functions/initio-customizer.php:845
+msgid "Display Services Section"
+msgstr ""
+
+#: functions/initio-customizer.php:859
+msgid "Display Get In Touch Section"
+msgstr ""
+
+#: functions/initio-customizer.php:873
+msgid "Display Latest News Section"
+msgstr ""
+
+#: functions/initio-customizer.php:887
+msgid "Display Blog Posts"
+msgstr ""
+
+#: functions/initio-customizer.php:901
+msgid "Display Social Links"
+msgstr ""
+
+#: functions/initio-customizer.php:909
+msgid "Image Slider Settings"
+msgstr ""
+
+#: functions/initio-customizer.php:923
+msgid "Default Image Slider"
+msgstr ""
+
+#: functions/initio-customizer.php:939
+msgid "Image Slider Height (px)"
+msgstr ""
+
+#: functions/initio-customizer.php:953
+msgid "Image Slider Category"
+msgstr ""
+
+#: functions/initio-customizer.php:969
+msgid "Slideshow Interval"
+msgstr ""
+
+#: functions/initio-customizer.php:972
+msgid "1000 = 1 second, default value: 5000"
+msgstr ""
+
+#: functions/initio-customizer.php:984
+msgid "Animation Speed"
+msgstr ""
+
+#: functions/initio-customizer.php:987
+msgid "1000 = 1 second, default value: 800"
+msgstr ""
+
+#: functions/initio-customizer.php:999
+msgid "Number of Slides"
+msgstr ""
+
+#: functions/initio-customizer.php:1013
+msgid "Image Slider Effect"
+msgstr ""
+
+#: functions/initio-customizer.php:1018 functions/initio-customizer.php:1076
+msgid "Can be only used with Ideal Image Slider"
+msgstr ""
+
+#: functions/initio-customizer.php:1030
+msgid "Enable Slider Captions"
+msgstr ""
+
+#: functions/initio-customizer.php:1044
+msgid "Caption Position Left %"
+msgstr ""
+
+#: functions/initio-customizer.php:1058
+msgid "Caption Position Top (px)"
+msgstr ""
+
+#: functions/initio-customizer.php:1061 functions/initio-customizer.php:1158
+#: functions/initio-customizer.php:1173 functions/initio-customizer.php:1188
+#: functions/initio-customizer.php:1203
+msgid "Can be only used with Unslider Image Slider"
+msgstr ""
+
+#: functions/initio-customizer.php:1073
+msgid "Caption Position Bottom %"
+msgstr ""
+
+#: functions/initio-customizer.php:1088
+msgid "Caption Width %"
+msgstr ""
+
+#: functions/initio-customizer.php:1102
+msgid "Caption Title Font Size px"
+msgstr ""
+
+#: functions/initio-customizer.php:1116
+msgid "Caption Text Font Size px"
+msgstr ""
+
+#: functions/initio-customizer.php:1129
+msgid "Caption Title Color"
+msgstr ""
+
+#: functions/initio-customizer.php:1142
+msgid "Captions Text Color"
+msgstr ""
+
+#: functions/initio-customizer.php:1155
+msgid "Captions Button Color"
+msgstr ""
+
+#: functions/initio-customizer.php:1170
+msgid "Enable Captions Button"
+msgstr ""
+
+#: functions/initio-customizer.php:1185
+msgid "Captions Button Text"
+msgstr ""
+
+#: functions/initio-customizer.php:1200
+msgid "Enable Slider Dots"
+msgstr ""
+
+#: functions/initio-customizer.php:1209
+msgid "Footer Settings"
+msgstr ""
+
+#: functions/initio-customizer.php:1222
+msgid "Footer Background Color"
+msgstr ""
+
+#: functions/initio-customizer.php:1235
+msgid "Copyright Section Background Color"
+msgstr ""
+
+#: functions/initio-customizer.php:1248
+msgid "Footer Widget Title Color"
+msgstr ""
+
+#: functions/initio-customizer.php:1261
+msgid "Footer Widget Title Border Color"
+msgstr ""
+
+#: functions/initio-customizer.php:1274
+msgid "Footer Widget Text Color"
+msgstr ""
+
+#: functions/initio-customizer.php:1287
+msgid "Footer Widget Text Border Color"
+msgstr ""
+
+#: functions/initio-customizer.php:1300
+msgid "Footer Social Icons Color"
+msgstr ""
+
+#: functions/initio-customizer.php:1314
+msgid "Enable Footer Widgets"
+msgstr ""
+
+#: functions/initio-customizer.php:1328
+msgid "Copyright Text"
+msgstr ""
+
+#: functions/initio-customizer.php:1336
+msgid "Layout Settings"
+msgstr ""
+
+#: functions/initio-customizer.php:1351
+msgid "Theme Layout"
+msgstr ""
+
+#: functions/initio-customizer.php:1360
+msgid "Blog Settings"
+msgstr ""
+
+#: functions/initio-customizer.php:1373 functions/initio-customizer.php:1539
+#: functions/initio-customizer.php:1822 functions/initio-customizer.php:1884
+#: functions/initio-customizer.php:2035 functions/initio-customizer.php:2123
+#: functions/initio-customizer.php:2242
+msgid "Background Color"
+msgstr ""
+
+#: functions/initio-customizer.php:1387 functions/initio-customizer.php:1553
+#: functions/initio-customizer.php:1836 functions/initio-customizer.php:1898
+#: functions/initio-customizer.php:2049 functions/initio-customizer.php:2137
+#: functions/initio-customizer.php:2256
+msgid "Background Image"
+msgstr ""
+
+#: functions/initio-customizer.php:1400
+msgid "Top Section Background Color"
+msgstr ""
+
+#: functions/initio-customizer.php:1427
+msgid "Top Section Image"
+msgstr ""
+
+#: functions/initio-customizer.php:1443
+msgid "Blog Content"
+msgstr ""
+
+#: functions/initio-customizer.php:1458
+msgid "Blog Excerpt Length"
+msgstr ""
+
+#: functions/initio-customizer.php:1472
+msgid "Use Simple Pagination"
+msgstr ""
+
+#: functions/initio-customizer.php:1487
+msgid "Post Navigation Links"
+msgstr ""
+
+#: functions/initio-customizer.php:1503
+msgid "Post Info Position"
+msgstr ""
+
+#: functions/initio-customizer.php:1518
+msgid "Featured Image Inside the Post"
+msgstr ""
+
+#: functions/initio-customizer.php:1526
+msgid "Features Section"
+msgstr ""
+
+#: functions/initio-customizer.php:1566 functions/initio-customizer.php:1849
+#: functions/initio-customizer.php:1911 functions/initio-customizer.php:2062
+#: functions/initio-customizer.php:2194
+msgid "Title Color"
+msgstr ""
+
+#: functions/initio-customizer.php:1579 functions/initio-customizer.php:1862
+msgid "Text Color"
+msgstr ""
+
+#: functions/initio-customizer.php:1593 functions/initio-customizer.php:2181
+msgid "Title Text"
+msgstr ""
+
+#: functions/initio-customizer.php:1607
+msgid "Description Text"
+msgstr ""
+
+#: functions/initio-customizer.php:1621
+msgid "Feature #1"
+msgstr ""
+
+#: functions/initio-customizer.php:1625 functions/initio-customizer.php:1669
+#: functions/initio-customizer.php:1715 functions/initio-customizer.php:1759
+msgid "Select Page to Display as One of the Features"
+msgstr ""
+
+#: functions/initio-customizer.php:1637
+msgid "Feature #1 Icon"
+msgstr ""
+
+#: functions/initio-customizer.php:1640 functions/initio-customizer.php:1684
+#: functions/initio-customizer.php:1730 functions/initio-customizer.php:1774
+#, php-format
+msgid ""
+"Enter Font Awesome icon name. For icon name refer to: <a href=\"%1$s\" "
+"target=\"_blank\">Font Awesome Website</a>"
+msgstr ""
+
+#: functions/initio-customizer.php:1652
+msgid "Feature #1 Image"
+msgstr ""
+
+#: functions/initio-customizer.php:1665
+msgid "Feature #2"
+msgstr ""
+
+#: functions/initio-customizer.php:1681
+msgid "Feature #2 Icon"
+msgstr ""
+
+#: functions/initio-customizer.php:1696
+msgid "Feature #2 Image"
+msgstr ""
+
+#: functions/initio-customizer.php:1711
+msgid "Feature #3"
+msgstr ""
+
+#: functions/initio-customizer.php:1727
+msgid "Feature #3 Icon"
+msgstr ""
+
+#: functions/initio-customizer.php:1742
+msgid "Feature #3 Image"
+msgstr ""
+
+#: functions/initio-customizer.php:1755
+msgid "Feature #4"
+msgstr ""
+
+#: functions/initio-customizer.php:1771
+msgid "Feature #4 Icon"
+msgstr ""
+
+#: functions/initio-customizer.php:1786
+msgid "Feature #4 Image"
+msgstr ""
+
+#: functions/initio-customizer.php:1794
+msgid "About Us Section"
+msgstr ""
+
+#: functions/initio-customizer.php:1807
+msgid "About Us Page"
+msgstr ""
+
+#: functions/initio-customizer.php:1811
+msgid "Select Page to Display in About Us Section"
+msgstr ""
+
+#: functions/initio-customizer.php:1871
+msgid "Services Section"
+msgstr ""
+
+#: functions/initio-customizer.php:1924
+msgid "Section Text Color"
+msgstr ""
+
+#: functions/initio-customizer.php:1938
+msgid "Section Text"
+msgstr ""
+
+#: functions/initio-customizer.php:1953
+msgid "Section Image"
+msgstr ""
+
+#: functions/initio-customizer.php:1967
+msgid "Display Image Inside Services Section"
+msgstr ""
+
+#: functions/initio-customizer.php:1981
+msgid "Service #"
+msgstr ""
+
+#: functions/initio-customizer.php:1985
+msgid "Select Page to Display as One of the Services"
+msgstr ""
+
+#: functions/initio-customizer.php:1997
+msgid "Icon to Display in Box #"
+msgstr ""
+
+#: functions/initio-customizer.php:2000
+#, php-format
+msgid ""
+"Enter Font Awesome icon name. For example: fa-coffee. For icon name refer "
+"to: <a href=\"%1$s\" target=\"_blank\">Font Awesome Website</a>"
+msgstr ""
+
+#: functions/initio-customizer.php:2007
+msgid "Get In Touch Section"
+msgstr ""
+
+#: functions/initio-customizer.php:2020
+msgid "Get In Touch Page"
+msgstr ""
+
+#: functions/initio-customizer.php:2024
+msgid "Select Page to Display in Get In Touch Section"
+msgstr ""
+
+#: functions/initio-customizer.php:2075
+msgid "Subtitle Color"
+msgstr ""
+
+#: functions/initio-customizer.php:2089
+msgid "Button Text"
+msgstr ""
+
+#: functions/initio-customizer.php:2102
+msgid "Button Color"
+msgstr ""
+
+#: functions/initio-customizer.php:2110
+msgid "Latest News Section"
+msgstr ""
+
+#: functions/initio-customizer.php:2151
+msgid "Latest News Category"
+msgstr ""
+
+#: functions/initio-customizer.php:2167
+msgid "Number of Posts"
+msgstr ""
+
+#: functions/initio-customizer.php:2207
+msgid "Post Title Color"
+msgstr ""
+
+#: functions/initio-customizer.php:2220
+msgid "Post Meta Color"
+msgstr ""
+
+#: functions/initio-customizer.php:2228
+msgid "Social Links"
+msgstr ""
+
+#: functions/initio-customizer.php:2231
+msgid "Enter your profile URL. To remove it, just leave it blank"
+msgstr ""
+
+#: functions/initio-customizer.php:2270
+msgid "Facebook"
+msgstr ""
+
+#: functions/initio-customizer.php:2284
+msgid "Twitter"
+msgstr ""
+
+#: functions/initio-customizer.php:2298
+msgid "Google Plus"
+msgstr ""
+
+#: functions/initio-customizer.php:2312
+msgid "LinkedIn"
+msgstr ""
+
+#: functions/initio-customizer.php:2326
+msgid "Instagram"
+msgstr ""
+
+#: functions/initio-customizer.php:2340
+msgid "Vimeo"
+msgstr ""
+
+#: functions/initio-functions.php:45
+msgid "Primary Menu"
+msgstr ""
+
+#: functions/initio-functions.php:177
+msgid "Footer Widget 1"
+msgstr ""
+
+#: functions/initio-functions.php:186
+msgid "Footer Widget 2"
+msgstr ""
+
+#: functions/initio-functions.php:195
+msgid "Footer Widget 3"
+msgstr ""
+
+#: functions/initio-functions.php:204
+msgid "Footer Widget 4"
+msgstr ""
+
+#: functions/initio-functions.php:246
+msgid "&larr; Previous"
+msgstr ""
+
+#: functions/initio-functions.php:247
+msgid "Next &rarr;"
+msgstr ""
+
+#: functions/initio-functions.php:370
+msgid "Social"
+msgstr ""
+
+#: getintouch-section.php:38 getintouch-section.php:39
+msgid "Get In Touch with Us"
+msgstr ""
+
+#: header.php:44
+msgid "Toggle navigation"
+msgstr ""
+
+#: post-info.php:14
+#, php-format
+msgid "View all posts in %s"
+msgstr ""
+
+#: post-info.php:19
+msgid "by "
+msgstr ""
+
+#: post-info.php:21 post-meta.php:11
+msgid "No Comments"
+msgstr ""
+
+#: post-info.php:21 post-meta.php:11
+msgid "1 Comment"
+msgstr ""
+
+#: post-info.php:21 post-meta.php:11
+msgid "% Comments"
+msgstr ""
+
+#: post-meta.php:13
+msgid "More"
+msgstr ""
+
+#: services-section-noimage.php:60 services-section.php:60
+msgid "Easy to Use"
+msgstr ""
+
+#: services-section-noimage.php:71 services-section.php:71
+msgid "Easy Theme Customizer"
+msgstr ""
+
+#: services-section-noimage.php:82 services-section.php:82
+msgid "Great Performance"
+msgstr ""
+
+#: services-section-noimage.php:93 services-section.php:93
+msgid "Very Well Documented"
+msgstr ""
+
+#: services-section-noimage.php:115 services-section.php:115
+msgid "24/7 Support"
+msgstr ""
+
+#: services-section.php:125
+msgid "Services"
+msgstr ""
+
+#: sidebar.php:13
+msgid "Archives"
+msgstr ""
+
+#: sidebar.php:21
+msgid "Meta"
+msgstr ""
