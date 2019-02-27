@@ -1,0 +1,9 @@
+<?php
+if (!defined('ABSPATH') || !$this instanceof \MocaBonita\view\MbView) :
+    die("Você não tem permissão para acessar este arquivo!");
+endif;
+?>
+
+<div ng-app="appBackRsc" ng-cloak>
+    <?= $this->getContent(); ?>
+</div>

@@ -1,0 +1,4 @@
+2019-01-21T16:21:48+00:00 CRITICAL Maximum execution time of 30 seconds exceeded in C:\xampp\htdocs\rsc\wp-content\plugins\woocommerce\includes\libraries\action-scheduler\classes\ActionScheduler_QueueRunner.php on line 6
+
+2019-01-21T16:27:03+00:00 CRITICAL Maximum execution time of 30 seconds exceeded in C:\xampp\htdocs\rsc\wp-content\plugins\woocommerce\includes\admin\class-wc-admin-taxonomies.php on line 12
+

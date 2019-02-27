@@ -1,0 +1,29 @@
+<?php
+if (!defined('ABSPATH') || !$this instanceof \MocaBonita\view\MbView) :
+    die("Você não tem permissão para acessar este arquivo!");
+endif;
+?>
+
+<?= $this->getContent();?>
+
+<script>
+
+    var serialize = function(obj) {
+        var str = [];
+        for(var p in obj)
+            if (obj.hasOwnProperty(p)) {
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            }
+        return str.join("&");
+    };
+
+    var urlAdmin = function (complement) {
+        var fullUrl = "<?= home_url("wp-admin"); ?>";
+        return fullUrl + "/" + complement;
+    };
+
+    var url = function (complement) {
+        var fullUrl = "<?= home_url(); ?>";
+        return fullUrl + "/" + complement;
+    };
+</script>

@@ -1,0 +1,21 @@
+{
+  "name": "Pablo Santos",
+  "authors": [
+    "PABLO"
+  ],
+  "description": "bower para front end",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "barbara-js": "^1.4.0"
+  }
+}

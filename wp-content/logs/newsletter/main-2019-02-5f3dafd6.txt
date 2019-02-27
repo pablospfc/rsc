@@ -1,0 +1,7 @@
+27-02-2019 11:44:47 - ERROR - m: 44,3 MB, u: 0 - Blocked by transient newsletter_main_engine set 1 seconds ago
+27-02-2019 12:40:25 - ERROR - m: 44,3 MB, u: 0 - Blocked by transient newsletter_main_engine set 0 seconds ago
+27-02-2019 14:07:07 - ERROR - m: 44,3 MB, u: 0 - Blocked by transient newsletter_main_engine set 0 seconds ago
+27-02-2019 14:51:44 - ERROR - m: 44,3 MB, u: 0 - Blocked by transient newsletter_main_engine set 0 seconds ago
+27-02-2019 15:01:54 - ERROR - m: 44,3 MB, u: 0 - Blocked by transient newsletter_main_engine set 1 seconds ago
+27-02-2019 15:06:49 - ERROR - m: 45,4 MB, u: 0 - Blocked by transient newsletter_main_engine set 1 seconds ago
+27-02-2019 15:31:56 - ERROR - m: 45,4 MB, u: 0 - Blocked by transient newsletter_main_engine set 0 seconds ago

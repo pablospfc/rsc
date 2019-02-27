@@ -1,0 +1,151 @@
+<?php
+
+namespace MocaBonita\model;
+
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Arr;
+use MocaBonita\tools\eloquent\MbModel;
+
+/**
+ * Main class of the MocaBonita User
+ *
+ * @author    Jhordan Lima <jhorlima@icloud.com>
+ * @category  WordPress
+ * @package   \MocaBonita\model
+ *
+ * @copyright Jhordan Lima 2017
+ * @copyright Divisão de Projetos e Desenvolvimento - DPD
+ * @copyright Núcleo de Tecnologia da Informação - NTI
+ * @copyright Universidade Estadual do Maranhão - UEMA
+ *
+ */
+class MbWpUser extends MbModel
+{
+
+    /**
+     * Stores the current User
+     *
+     * @var MbWpUser
+     */
+    protected static $currentUser = null;
+
+    /**
+     * Stores the custom rule attribute name
+     *
+     * @var string
+     */
+    protected static $ruleAttr = null;
+
+    /**
+     * Stored table primarykey
+     *
+     * @var string
+     */
+    protected $primaryKey = 'ID';
+
+    /**
+     * Stored if table has timestamps
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
+     * Date elements
+     *
+     * @var array
+     */
+    protected $dates = [
+        'user_registered',
+    ];
+
+    /**
+     * Fillable elements
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_login',
+        'user_pass',
+        'user_nicename',
+        'user_email',
+        'user_url',
+        'user_registered',
+        'user_status',
+        'display_name',
+    ];
+
+    /**
+     * Hidden elementes
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'user_pass',
+        'user_activation_key',
+        'user_status',
+    ];
+
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'user_registered' => 'datetime',
+    ];
+
+    /**
+     * Get the table associated with the model.
+     *
+     * @return string
+     */
+    public function getTable()
+    {
+        return $this->getWpdb()->base_prefix . "users";
+    }
+
+    /**
+     * Get user meta
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function metas()
+    {
+        return $this->hasMany(MbWpUserMeta::class, 'user_id');
+    }
+
+    /**
+     * Get current user logged
+     *
+     * @param bool $dontThrowException
+     *
+     * @return MbWpUser
+     *
+     * @throws \Exception
+     */
+    public static function getCurrentUser($dontThrowException = false)
+    {
+        if (!self::$currentUser instanceof MbWpUser) {
+
+            try {
+                self::$currentUser = self::findOrFail(get_current_user_id());
+            } catch (\Exception $e) {
+                self::$currentUser = new self();
+                self::$currentUser->forceFill([
+                    'ID'            => 0,
+                    'user_login'    => 'Anonymous',
+                    'user_nicename' => 'Anonymous',
+                    'display_name'  => 'Anonymous',
+                ]);
+            }
+        }
+
+        if (!self::$currentUser->exists && !$dontThrowException) {
+            throw new \Exception("No users have been logged in!");
+        }
+
+        return self::$currentUser;
+    }
+}
