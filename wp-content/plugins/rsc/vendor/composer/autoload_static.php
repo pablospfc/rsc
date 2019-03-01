@@ -32,6 +32,7 @@ class ComposerStaticInit32749367af15bdb4df301759eec80524
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'PagSeguro\\' => 10,
         ),
         'M' => 
         array (
@@ -94,6 +95,10 @@ class ComposerStaticInit32749367af15bdb4df301759eec80524
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'PagSeguro\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pagseguro/pagseguro-php-sdk/source',
         ),
         'MocaBonita\\' => 
         array (

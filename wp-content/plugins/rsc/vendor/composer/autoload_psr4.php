@@ -17,6 +17,7 @@ return array(
     'Symfony\\Component\\EventDispatcher\\' => array($vendorDir . '/symfony/event-dispatcher'),
     'Symfony\\Component\\Debug\\' => array($vendorDir . '/symfony/debug'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
+    'PagSeguro\\' => array($vendorDir . '/pagseguro/pagseguro-php-sdk/source'),
     'MocaBonita\\' => array($vendorDir . '/jhorlima/wp-mocabonita/src'),
     'Illuminate\\Support\\' => array($vendorDir . '/illuminate/support'),
     'Illuminate\\Session\\' => array($vendorDir . '/illuminate/session'),
