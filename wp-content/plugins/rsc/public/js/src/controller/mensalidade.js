@@ -1,9 +1,5 @@
 appFrontRsc.controller('mensalidadeController', function ($scope,$document,RscService, ModalService) {
 
-    $scope.listarFaturamentos = function(){
-        console.log("controller");
-        //RscService.getFaturamentosByFuncionarioESocio($scope,formulario);
-    };
     $scope.showFormMensalidadeModal = function () {
         ModalService.showModal({
             templateUrl: './wp-content/plugins/rsc/view/mensalidade/modal_calculo.phtml',

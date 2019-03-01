@@ -11,5 +11,10 @@ appFrontRsc.controller('mensalidadeModalController', function ($scope, $window, 
         RscService.getMensalidade($scope,formulario);
     };
 
+    $scope.listarFaturamentos = function(formulario){
+        if (!angular.isUndefined(formulario.socios) && !angular.isUndefined(formulario.funcionarios))
+        RscService.getFaturamentosByFuncionarioESocio($scope,formulario);
+    };
+
 
 });

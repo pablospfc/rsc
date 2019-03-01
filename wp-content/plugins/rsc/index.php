@@ -76,7 +76,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
 
     $mensalidadePage->getMbAsset()
         ->setJs(MbPath::pBwDir("jquery/dist/jquery.min.js"))
-        //->setCss(MbPath::pCssDir("style.css"))
+        ->setCss(MbPath::pCssDir("style.css"))
         //->setCss(MbPath::pBwDir("bootstrap/dist/css/bootstrap.min.css"))
         //->setCss(MbPath::pBwDir("bootstrap/dist/css/bootstrap-grid.min.css"))
         //->setJs(MbPath::pBwDir("bootstrap/dist/js/bootstrap.min.js"))

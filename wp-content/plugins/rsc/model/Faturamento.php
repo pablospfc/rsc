@@ -22,7 +22,7 @@ class Faturamento extends MbModel
             "fat.*"
         )
             ->from("rsc_faturamento as fat")
-            ->join("rsc_mensalidade as men","men.id","=","fat.id_mensalidade")
+            ->join("rsc_mensalidade as men","men.id_faturamento","=","fat.id")
             ->where("men.socios_minimo", "<=", $socios)
             ->where("men.socios_maximo", ">=", $socios)
             ->where("men.funcionarios_minimo", "<=", $funcionarios)

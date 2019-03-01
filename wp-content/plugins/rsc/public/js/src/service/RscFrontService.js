@@ -73,7 +73,6 @@ appFrontRsc.service('RscService', function ($request) {
     };
 
     this.getFaturamentosByFuncionarioESocio = function ($scope,formulario) {
-        console.log("chegiou aqui");
         $scope.alert.changeShow(false);
         $request.get(urlAdmin("admin-ajax.php"))
             .addParams({
@@ -84,9 +83,9 @@ appFrontRsc.service('RscService', function ($request) {
             })
             .load($scope.loading.getRequestLoad('Listando Faturamentos...'))
             .send(function (data) {
-                console.log(data);
                 $scope.listFaturamentos = data;
             }, function (meta) {
+                $scope.listFaturamentos= undefined;
                 $scope.alert.responseError(meta);
                 $scope.alert.changeType("danger");
             });
