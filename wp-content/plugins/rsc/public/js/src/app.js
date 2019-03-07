@@ -4,6 +4,8 @@ var appFrontRsc = angular.module('appFrontRsc', [
     'ngRoute',
     'ngMessages',
     'angularModalService',
+    'mgo-angular-wizard',
+    'ui.utils.masks'
 ]);
 
 appFrontRsc.config(function ($routeProvider) {
@@ -15,6 +17,13 @@ appFrontRsc.config(function ($routeProvider) {
                 action : "formulario_calculo"
             })),
             controller: 'mensalidadeController',
+        })
+        .when('/cadastro', {
+            templateUrl: urlAdmin("admin-post.php?" + serialize({
+                page : "cliente",
+                action : "cadastro"
+            })),
+            controller: 'clienteController',
         })
         .otherwise({redirectTo: '/'});
 });

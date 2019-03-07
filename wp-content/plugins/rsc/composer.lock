@@ -1,11 +1,47 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3df8b947549f96be5e03f6cb2b9cdcc8",
+    "content-hash": "d9b868d5074084856980142d4750ac70",
     "packages": [
+        {
+            "name": "carloswgama/php-pagseguro",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CarlosWGama/php-pagseguro.git",
+                "reference": "754fc4e7a27ff0420f0b7ed88c56fb0fb87aa234"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CarlosWGama/php-pagseguro/zipball/754fc4e7a27ff0420f0b7ed88c56fb0fb87aa234",
+                "reference": "754fc4e7a27ff0420f0b7ed88c56fb0fb87aa234",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CWG\\PagSeguro\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Carlos W. Gama",
+                    "email": "carloswgama@gmail.com"
+                }
+            ],
+            "description": "Classe para realizar pagamentos comuns e recorrentes no PagSeguro",
+            "time": "2018-07-01T00:05:59+00:00"
+        },
         {
             "name": "doctrine/inflector",
             "version": "v1.1.0",

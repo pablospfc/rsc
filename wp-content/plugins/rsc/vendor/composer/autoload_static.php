@@ -49,6 +49,10 @@ class ComposerStaticInit32749367af15bdb4df301759eec80524
             'Illuminate\\Contracts\\' => 21,
             'Illuminate\\Container\\' => 21,
         ),
+        'C' => 
+        array (
+            'CWG\\PagSeguro\\' => 14,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -135,6 +139,10 @@ class ComposerStaticInit32749367af15bdb4df301759eec80524
         'Illuminate\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/illuminate/container',
+        ),
+        'CWG\\PagSeguro\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/carloswgama/php-pagseguro/src',
         ),
     );
 

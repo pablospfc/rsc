@@ -1382,5 +1382,43 @@
             "debug",
             "dump"
         ]
+    },
+    {
+        "name": "carloswgama/php-pagseguro",
+        "version": "2.1.1",
+        "version_normalized": "2.1.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/CarlosWGama/php-pagseguro.git",
+            "reference": "754fc4e7a27ff0420f0b7ed88c56fb0fb87aa234"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/CarlosWGama/php-pagseguro/zipball/754fc4e7a27ff0420f0b7ed88c56fb0fb87aa234",
+            "reference": "754fc4e7a27ff0420f0b7ed88c56fb0fb87aa234",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2018-07-01T00:05:59+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "CWG\\PagSeguro\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Carlos W. Gama",
+                "email": "carloswgama@gmail.com"
+            }
+        ],
+        "description": "Classe para realizar pagamentos comuns e recorrentes no PagSeguro"
     }
 ]
