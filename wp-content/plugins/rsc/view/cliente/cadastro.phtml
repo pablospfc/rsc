@@ -241,12 +241,6 @@
                     <button class="btn btn-success btn-sm"
                             type="submit"
                             ng-disabled="formDadosCliente.$error.required || formDadosCliente.$invalid ">
-                        Salvar Dados
-                    </button>
-
-                    <button class="btn btn-info btn-sm"
-                            type="button"
-                            ng-click="testar()">
                         Avançar
                     </button>
                 </div>
@@ -259,10 +253,13 @@
         <div class="col-sm-10 col-sm-offset-1">
             <form name="formDadosContrato"
                   autocomplete="off"
+                  ng-submit="salvarContrato()"
                   novalidate>
+                <input type="hidden" name="id_cliente" value="{{id_cliente}}"/>
+                <h5 class="page-header">Plano para Contratação</h5>
                 <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="unidade">Localidade:</label>
+                    <div class="form-group col-md-4">
+                        <label for="unidade">Sua Localidade:</label>
                         <select class="form-control"
                                 ng-model="formContrato.id_unidade"
                                 ng-options="unidade.id as unidade.nome for unidade in listUnidades"
@@ -270,7 +267,7 @@
                                 id="unidade">
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-3">
                         <label for="tipo_empresa">Tipo de Empresa:</label>
                         <select class="form-control"
                                 ng-model="formContrato.id_tipo_empresa"
@@ -279,8 +276,8 @@
                                 id="tipo_empresa">
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="socios">Quantidade de Sócios:</label>
+                    <div class="form-group col-md-3">
+                        <label for="socios">Número de Sócios:</label>
                         <input type="number"
                                name="socios"
                                pattern="[0-9]*"
@@ -293,10 +290,11 @@
                                ng-model="formContrato.socios"
                                ng-blur="listarFaturamentos(formContrato)"/>
                     </div>
+
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="funcionarios">Quantidade de Funcionários:</label>
+                    <div class="form-group col-md-3">
+                        <label for="funcionarios">Número de Funcionários:</label>
                         <input type="number"
                                name="funcionarios"
                                class="form-control"
@@ -307,16 +305,25 @@
                                ng-model="formContrato.funcionarios"
                                ng-blur="listarFaturamentos(formContrato)"/>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="faturamento">Faturamento:</label>
+
+                    <div class="form-group col-md-3">
+                        <label for="faturamento">Faturamento Mensal:</label>
                         <select class="form-control"
                                 ng-model="formContrato.id_faturamento"
                                 ng-required="true"
                                 ng-options="faturamento.id as faturamento.nome for faturamento in listFaturamentos"
+                                ng-change="calculaMensalidade(formContrato)"
                                 id="faturamento">
                         </select>
                     </div>
+                    <input type="hidden" name="id_mensalidade" value="{{mensalidade[0].id}}"
                 </div>
+
+                <div class="col-sm-12 text-center" ng-if="mensalidade">
+                    <label>Valor Pago: {{mensalidade ? 'R$ '+mensalidade[0].mensalidade : 'R$ 0,00'}}</label>
+                </div>
+
+
 
                 <div class="form-group col-sm-12 text-center">
 
@@ -327,9 +334,8 @@
                     </button>
 
                     <button class="btn btn-info waves-effect btn-sm"
-                            type="button"
-                            ng-disabled="formDadosContrato.$error.required"
-                            wz-next>
+                            type="submit"
+                            ng-disabled="formDadosContrato.$error.required">
                         Avançar
                     </button>
 

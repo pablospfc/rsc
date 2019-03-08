@@ -1,15 +1,37 @@
-appFrontRsc.service('RscService', function ($request) {
+appFrontRsc.service('RscService', function ($request, WizardHandler, $rootScope, $q) {
 
     this.cadastrarCliente = function ($scope) {
+        //var deferred = $q.defer();
         $scope.alert.changeShow(false);
         $request.post(urlAdmin("admin-ajax.php")).addParams({
             page: 'cliente',
             action: 'cadastrarCliente'
         }).addData($scope.formCliente).load($scope.loading.getRequestLoad('Cadastrando cliente...')).send(function (data) {
+            //$scope.alert.responseSuccess(data.message);
+            $scope.processando = false;
+            $scope.id_cliente = data.id;
+            WizardHandler.wizard().next();
+        }, function (meta) {
+            $scope.formCliente = undefined;
+            $scope.alert.responseError(meta);
+            $scope.alert.changeType('danger');
+            $scope.alert.changeTitle('');
+           // deferred.reject(meta);
+        });
+
+       // return deferred.promise;
+    };
+
+    this.cadastrarContrato = function ($scope) {
+        $scope.alert.changeShow(false);
+        $request.post(urlAdmin("admin-ajax.php")).addParams({
+            page: 'cliente',
+            action: 'cadastrarContrato'
+        }).addData($scope.formCliente).load($scope.loading.getRequestLoad('Cadastrando contrato...')).send(function (data) {
             $scope.alert.responseSuccess(data.message);
             $scope.processando = false;
         }, function (meta) {
-            $scope.formCliente = undefined;
+            $scope.formContrato = undefined;
             $scope.alert.responseError(meta);
             $scope.alert.changeType('danger');
             $scope.alert.changeTitle('');

@@ -1,4 +1,4 @@
-appFrontRsc.controller('clienteController', function ($scope,$document,RscService) {
+appFrontRsc.controller('clienteController', function ($scope,$document,WizardHandler, RscService) {
     RscService.getGeneros($scope);
     RscService.getEstadosCivis($scope);
 
@@ -9,12 +9,28 @@ appFrontRsc.controller('clienteController', function ($scope,$document,RscServic
     };
 
     $scope.salvarCliente = function(){
-        console.log($scope.formCliente);
         RscService.cadastrarCliente($scope);
     };
 
-    $scope.testar = function(){
-        console.log("testando");
+    $scope.calculaMensalidade = function(formulario){
+        RscService.getMensalidade($scope,formulario);
     };
+
+    $scope.salvarContrato = function(){
+        RscService.cadastrarContrato($scope);
+    };
+
+    $scope.nextToContratacao = function(){
+        WizardHandler.wizard().next();
+        RscService.getUnidades($scope);
+        RscService.getTiposEmpresa($scope);
+    };
+
+    $scope.listarFaturamentos = function(formulario){
+        if (!angular.isUndefined(formulario.socios) && !angular.isUndefined(formulario.funcionarios))
+            RscService.getFaturamentosByFuncionarioESocio($scope,formulario);
+    };
+
+
 
 });

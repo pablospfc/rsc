@@ -31,7 +31,8 @@ class Mensalidade extends MbModel
     {
 
             $dados = self::select(
-                "mensalidade"
+                        "id",
+                                 "mensalidade"
             )
                 ->from("rsc_mensalidade")
                 ->where("id_tipo_empresa", $idTipoEmpresa)
