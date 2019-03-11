@@ -9,7 +9,13 @@ appFrontRsc.controller('clienteController', function ($scope,$document,WizardHan
     };
 
     $scope.salvarCliente = function(){
-        RscService.cadastrarCliente($scope);
+        RscService.cadastrarCliente($scope).then(function(sucess){
+            WizardHandler.wizard().next();
+            RscService.getUnidades($scope);
+            RscService.getTiposEmpresa($scope);
+        },function(error){
+            //
+        });
     };
 
     $scope.calculaMensalidade = function(formulario){
@@ -17,13 +23,11 @@ appFrontRsc.controller('clienteController', function ($scope,$document,WizardHan
     };
 
     $scope.salvarContrato = function(){
-        RscService.cadastrarContrato($scope);
-    };
+        RscService.cadastrarContrato($scope).then(function(sucess){
+            WizardHandler.wizard().next();
+        },function(error){
 
-    $scope.nextToContratacao = function(){
-        WizardHandler.wizard().next();
-        RscService.getUnidades($scope);
-        RscService.getTiposEmpresa($scope);
+        });
     };
 
     $scope.listarFaturamentos = function(formulario){

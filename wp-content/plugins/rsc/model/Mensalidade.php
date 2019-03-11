@@ -45,7 +45,7 @@ class Mensalidade extends MbModel
                 ->toArray();
 
            if (!is_array($dados) || empty($dados))
-               throw new \Exception('Não oferecemos mensalidade para os dados fornecidos. Por favor informe dados diferentes!');
+               throw new \Exception('Não oferecemos mensalidade para os dados fornecidos. Por favor entre em contato conosco enviando um email para cadastro@rsccontabilidade.com.br.');
 
             return $dados;
 

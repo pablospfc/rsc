@@ -75,6 +75,11 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setRequiresLogin(false)
         ->setCapability("read");
 
+    $clientePage->addMbAction("cadastrarContrato")
+        ->setRequiresMethod("POST")
+        ->setRequiresLogin(false)
+        ->setCapability("read");
+
     $mensalidadePage->addMbAction("formulario_calculo")
         ->setRequiresMethod("GET")
         ->setCapability("read")

@@ -1,40 +1,41 @@
 appFrontRsc.service('RscService', function ($request, WizardHandler, $rootScope, $q) {
 
     this.cadastrarCliente = function ($scope) {
-        //var deferred = $q.defer();
-        $scope.alert.changeShow(false);
+        var deferred = $q.defer();
+        $rootScope.alert.changeShow(false);
         $request.post(urlAdmin("admin-ajax.php")).addParams({
             page: 'cliente',
             action: 'cadastrarCliente'
-        }).addData($scope.formCliente).load($scope.loading.getRequestLoad('Cadastrando cliente...')).send(function (data) {
-            //$scope.alert.responseSuccess(data.message);
+        }).addData($scope.formCliente).load($rootScope.loading.getRequestLoad('Cadastrando cliente...')).send(function (data) {
+            $rootScope.alert.responseSuccess(data.message);
+            deferred.resolve(data);
             $scope.processando = false;
             $scope.id_cliente = data.id;
-            WizardHandler.wizard().next();
+            //WizardHandler.wizard().next();
         }, function (meta) {
             $scope.formCliente = undefined;
-            $scope.alert.responseError(meta);
-            $scope.alert.changeType('danger');
-            $scope.alert.changeTitle('');
-           // deferred.reject(meta);
+            $rootScope.alert.responseError(meta);
+            $rootScope.alert.changeType('danger');
+            $rootScope.alert.changeTitle('');
+            deferred.reject(meta);
         });
 
-       // return deferred.promise;
+        return deferred.promise;
     };
 
     this.cadastrarContrato = function ($scope) {
-        $scope.alert.changeShow(false);
+        $rootScope.alert.changeShow(false);
         $request.post(urlAdmin("admin-ajax.php")).addParams({
             page: 'cliente',
             action: 'cadastrarContrato'
-        }).addData($scope.formCliente).load($scope.loading.getRequestLoad('Cadastrando contrato...')).send(function (data) {
-            $scope.alert.responseSuccess(data.message);
+        }).addData($scope.formContrato).load($rootScope.loading.getRequestLoad('Cadastrando contrato...')).send(function (data) {
+            $rootScope.alert.responseSuccess(data.message);
             $scope.processando = false;
         }, function (meta) {
             $scope.formContrato = undefined;
-            $scope.alert.responseError(meta);
-            $scope.alert.changeType('danger');
-            $scope.alert.changeTitle('');
+            $rootScope.alert.responseError(meta);
+            $rootScope.alert.changeType('danger');
+            $rootScope.alert.changeTitle('');
         });
     };
 

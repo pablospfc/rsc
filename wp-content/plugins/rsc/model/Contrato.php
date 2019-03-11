@@ -21,4 +21,19 @@ class Contrato extends MbModel
         'id_mensalidade',
     ];
 
+    public function inserir($dados){
+        try{
+            $contrato=  Contrato::updateOrCreate([
+                'id_cliente'     => $dados['id_cliente'],
+                'id_mensalidade' => $dados['id_mensalidade'],
+            ]);
+
+            return ['message'=>'Contrato cadastrado com sucesso','id'=> $contrato->id];
+
+        }catch(\Exception $e){
+            Log::createFromException($e->getMessage());
+            throw new \Exception("Erro ao cadastrar o seu contrato. Por favor entre em contato com o administrador do site");
+        }
+    }
+
 }

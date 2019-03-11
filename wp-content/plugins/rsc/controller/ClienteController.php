@@ -13,6 +13,7 @@ use MocaBonita\controller\MbController;
 use MocaBonita\tools\MbRequest;
 use MocaBonita\tools\MbResponse;
 use RSC\model\Cliente;
+use RSC\model\Contrato;
 
 class ClienteController extends MbController
 {
@@ -21,8 +22,14 @@ class ClienteController extends MbController
         throw new \Exception("Action indisponível!");
     }
 
-    public function cadastrarClienteAction(MbRequest $mbRequest){
+    public function cadastrarClienteAction(MbRequest $mbRequest)
+    {
         return (new Cliente())->inserir($mbRequest->inputSource());
+    }
+
+    public function cadastrarContratoAction(MbRequest $mbRequest)
+    {
+        return (new Contrato())->inserir($mbRequest->inputSource());
     }
 
     public function clienteShortcode()
