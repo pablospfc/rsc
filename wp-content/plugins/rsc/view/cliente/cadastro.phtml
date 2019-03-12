@@ -235,8 +235,6 @@
                     </div>
                 </div>
 
-
-
                 <div class="form-group col-sm-12 text-center">
                     <button class="btn btn-success btn-sm"
                             type="submit"
@@ -252,10 +250,11 @@
     <wz-step wz-title="Contratação">
         <div class="col-sm-10 col-sm-offset-1">
             <form name="formDadosContrato"
+                  method="post"
                   autocomplete="off"
                   ng-submit="salvarContrato()"
                   novalidate>
-                <input type="hidden" name="id_cliente" value="{{id_cliente}}"/>
+                <input type="hidden" name="id_cliente" ng-model="formContrato.id_cliente" ng-value="{{id_cliente}}"/>
                 <h5 class="page-header">Plano para Contratação</h5>
                 <div class="row">
                     <div class="form-group col-md-4">
@@ -290,7 +289,6 @@
                                ng-model="formContrato.socios"
                                ng-blur="listarFaturamentos(formContrato)"/>
                     </div>
-
                 </div>
                 <div class="row">
                     <div class="form-group col-md-3">
@@ -316,14 +314,14 @@
                                 id="faturamento">
                         </select>
                     </div>
-                    <input type="hidden" name="id_mensalidade" value="{{mensalidade[0].id}}"
+                    <input type="hidden" name="id_mensalidade" ng-model="formContrato.id_mensalidade" ng-value="{{mensalidade[0].id}}"
                 </div>
 
                 <div class="col-sm-12 text-center" ng-if="mensalidade">
                     <label>Valor Pago: {{mensalidade ? 'R$ '+mensalidade[0].mensalidade : 'R$ 0,00'}}</label>
+                    <label>Cliente: {{id_cliente}}</label>
+                    <label>Plano: {{mensalidade[0].id}}</label>
                 </div>
-
-
 
                 <div class="form-group col-sm-12 text-center">
 

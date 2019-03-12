@@ -28,6 +28,7 @@ class Contrato extends MbModel
                 'id_mensalidade' => $dados['id_mensalidade'],
             ]);
 
+            //error_log(var_export($dados,true));
             return ['message'=>'Contrato cadastrado com sucesso','id'=> $contrato->id];
 
         }catch(\Exception $e){

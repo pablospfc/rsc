@@ -24,7 +24,7 @@ appFrontRsc.controller('clienteController', function ($scope,$document,WizardHan
 
     $scope.salvarContrato = function(){
         RscService.cadastrarContrato($scope).then(function(sucess){
-            WizardHandler.wizard().next();
+           // WizardHandler.wizard().next();
         },function(error){
 
         });
