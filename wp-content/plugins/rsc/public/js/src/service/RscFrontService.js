@@ -11,7 +11,7 @@ appFrontRsc.service('RscService', function ($request, WizardHandler, $rootScope,
             deferred.resolve(data);
             $scope.processando = false;
             $scope.id_cliente = data.id;
-            //WizardHandler.wizard().next();
+            $scope.formCliente = undefined;
         }, function (meta) {
             $scope.formCliente = undefined;
             $rootScope.alert.responseError(meta);
@@ -23,19 +23,19 @@ appFrontRsc.service('RscService', function ($request, WizardHandler, $rootScope,
         return deferred.promise;
     };
 
-    this.cadastrarContrato = function ($scope) {
-        console.log($scope.formContrato);
+    this.cadastrarContrato = function (formulario) {
+        console.log(formulario);
         var deferred = $q.defer();
         $rootScope.alert.changeShow(false);
         $request.post(urlAdmin("admin-ajax.php")).addParams({
             page: 'cliente',
             action: 'cadastrarContrato'
-        }).addData($scope.formContrato).load($rootScope.loading.getRequestLoad('Cadastrando contrato...')).send(function (data) {
+        }).addData(formulario).load($rootScope.loading.getRequestLoad('Cadastrando contrato...')).send(function (data) {
             $rootScope.alert.responseSuccess(data.message);
-            $scope.processando = false;
+            //$scope.processando = false;
             deferred.resolve(data);
         }, function (meta) {
-            $scope.formContrato = undefined;
+            //$scope.formContrato = undefined;
             $rootScope.alert.responseError(meta);
             $rootScope.alert.changeType('danger');
             $rootScope.alert.changeTitle('');

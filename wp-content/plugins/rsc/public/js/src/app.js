@@ -8,6 +8,15 @@ var appFrontRsc = angular.module('appFrontRsc', [
     'ui.utils.masks'
 ]);
 
+appFrontRsc.directive('ngUpdateHidden',function() {
+    return function(scope, el, attr) {
+        var model = attr['ngModel'];
+        scope.$watch(model, function(nv) {
+            el.val(nv);
+        });
+    };
+});
+
 appFrontRsc.config(function ($routeProvider) {
 
     $routeProvider

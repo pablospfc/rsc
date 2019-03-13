@@ -22,8 +22,8 @@ appFrontRsc.controller('clienteController', function ($scope,$document,WizardHan
         RscService.getMensalidade($scope,formulario);
     };
 
-    $scope.salvarContrato = function(){
-        RscService.cadastrarContrato($scope).then(function(sucess){
+    $scope.salvarContrato = function(formulario){
+        RscService.cadastrarContrato(formulario).then(function(sucess){
            // WizardHandler.wizard().next();
         },function(error){
 
