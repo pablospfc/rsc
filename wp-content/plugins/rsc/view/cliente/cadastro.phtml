@@ -253,7 +253,7 @@
                   autocomplete="off"
                   ng-submit="salvarContrato(formContrato)"
                   novalidate>
-                <input type="hidden" name="id_cliente" ng-model="formContrato.id_cliente" ng-value="{{id_cliente}}" ng-update-hidden/>
+                <input type="hidden" name="id_cliente" ng-model="formContrato.id_cliente" ng-value="formContrato.id_cliente = id_cliente"/>
                 <h5 class="page-header">Plano para Contratação</h5>
                 <div class="row">
                     <div class="form-group col-md-4">
@@ -313,7 +313,7 @@
                                 id="faturamento">
                         </select>
                     </div>
-                    <input type="hidden" name="id_mensalidade" ng-model="formContrato.id_mensalidade" ng-value="{{mensalidade[0].id}}" ng-update-hidden/>
+                    <input type="hidden" name="id_mensalidade" ng-model="formContrato.id_mensalidade" ng-value="formContrato.id_mensalidade = mensalidade[0].id"/>
                 </div>
 
                 <div class="col-sm-12 text-center" ng-if="mensalidade">
