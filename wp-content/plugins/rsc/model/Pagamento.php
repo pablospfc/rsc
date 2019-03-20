@@ -22,11 +22,17 @@ class Pagamento extends MbModel
     ];
 
     public function inserir($dados){
-        $pagamento = Pagamento::createOrUpdate([
-            'id_contrato' => $dados['id_contrato'],
-            'valor'       => $dados['valor'],
-            'status'      => 0,
-        ]);
+        try {
+            $pagamento = Pagamento::createOrUpdate([
+                'id_contrato' => $dados['id_contrato'],
+                'valor' => $dados['valor'],
+                'id_status' => $dados['id_status'],
+            ]);
+            return ['message'=>'Pagamento realizado com sucesso','id'=>$pagamento->id];
+        }catch(\Exception $e){
+            Log::createFromException($e->getMessage());
+            throw new \Exception("Não foi possível cadastrar pagamento no sistema.");
+        }
 
 
     }

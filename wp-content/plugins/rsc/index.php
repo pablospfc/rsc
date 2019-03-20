@@ -15,6 +15,7 @@ use MocaBonita\MocaBonita;
 use MocaBonita\tools\MbEvent;
 use MocaBonita\tools\MbPage;
 use MocaBonita\tools\MbPath;
+use RSC\controller\AssinaturaController;
 use RSC\controller\ClienteController;
 use RSC\controller\MensalidadeController;
 use RSC\model\EstadoCivil;
@@ -46,6 +47,20 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
     $clientePage = MbPage::create("Cliente")
         ->setController(ClienteController::class)
         ->setSlug("cliente");
+
+    $assinaturaPage = MbPage::create("Assinatura")
+        ->setController(AssinaturaController::class)
+        ->setSlug("assinatura");
+
+    $assinaturaPage->addMbAction("criarPlano")
+        ->setRequiresMethod("GET")
+        ->setCapability("read")
+        ->setRequiresLogin(false);
+
+    $assinaturaPage->addMbAction("cancelar")
+        ->setRequiresMethod("GET")
+        ->setCapability("read")
+        ->setRequiresLogin(false);
 
     $clientePage->addMbAction("cadastro")
         ->setRequiresMethod("GET")
@@ -166,5 +181,6 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
 
     $mocabonita->addMbPage($mensalidadePage);
     $mocabonita->addMbPage($clientePage);
+    $mocabonita->addMbPage($assinaturaPage);
 
 },true);
