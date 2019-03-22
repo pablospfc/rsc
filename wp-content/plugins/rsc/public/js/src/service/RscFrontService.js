@@ -32,7 +32,7 @@ appFrontRsc.service('RscService', function ($request, WizardHandler, $rootScope,
             action: 'cadastrarContrato'
         }).addData(formulario).load($rootScope.loading.getRequestLoad('Cadastrando contrato...')).send(function (data) {
             $rootScope.alert.responseSuccess(data.message);
-            //$scope.processando = false;
+            $rootScope.id_contrato= data.id;
             deferred.resolve(data);
         }, function (meta) {
             //$scope.formContrato = undefined;
@@ -94,6 +94,23 @@ appFrontRsc.service('RscService', function ($request, WizardHandler, $rootScope,
                 $scope.alert.responseError(meta);
                 $scope.alert.changeType("danger");
 
+            });
+    };
+
+    this.getDadosParaAssinatura = function ($scope) {
+        $scope.alert.changeShow(false);
+        $request.get(urlAdmin("admin-ajax.php"))
+            .addParams({
+                page: "assinatura",
+                action: "getDadosParaAssinatura",
+                id_contrato: $scope.id_contrato,
+            })
+            .load($scope.loading.getRequestLoad('listando dados para confirmação...'))
+            .send(function (data) {
+                $scope.dados_contrato = data;
+            }, function (meta) {
+                $scope.alert.responseError(meta);
+                $scope.alert.changeType("danger");
             });
     };
 

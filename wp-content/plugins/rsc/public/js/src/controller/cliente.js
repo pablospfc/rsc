@@ -1,4 +1,4 @@
-appFrontRsc.controller('clienteController', function ($scope,$document,WizardHandler, RscService) {
+appFrontRsc.controller('clienteController', function ($scope, $rootScope, $document,WizardHandler, RscService) {
     RscService.getGeneros($scope);
     RscService.getEstadosCivis($scope);
 
@@ -24,11 +24,15 @@ appFrontRsc.controller('clienteController', function ($scope,$document,WizardHan
 
     $scope.salvarContrato = function(formulario){
         RscService.cadastrarContrato(formulario).then(function(sucess){
-           // WizardHandler.wizard().next();
+            $scope.id_contrato = $rootScope.id_contrato;
+            WizardHandler.wizard().next();
+            RscService.getDadosParaAssinatura($scope)
         },function(error){
 
         });
     };
+
+
 
     $scope.listarFaturamentos = function(formulario){
         if (!angular.isUndefined(formulario.socios) && !angular.isUndefined(formulario.funcionarios))

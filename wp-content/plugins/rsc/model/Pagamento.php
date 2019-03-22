@@ -18,7 +18,8 @@ class Pagamento extends MbModel
     protected $fillable = [
         'id_contrato',
         'valor',
-        'status',
+        'id_status',
+        'codigo_assinatura'
     ];
 
     public function inserir($dados){
@@ -27,6 +28,7 @@ class Pagamento extends MbModel
                 'id_contrato' => $dados['id_contrato'],
                 'valor' => $dados['valor'],
                 'id_status' => $dados['id_status'],
+                'codigo_assinatura' => $dados['codigo_assinatura']
             ]);
             return ['message'=>'Pagamento realizado com sucesso','id'=>$pagamento->id];
         }catch(\Exception $e){

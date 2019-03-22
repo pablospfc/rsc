@@ -81,14 +81,9 @@ class Assinatura
 
             try{
                 $codigo = $this->pagseguro->assinaPlano();
-                (new Pagamento())->inserir(
-                    [
-                        'id_contrato'       => $dados['id_contrato'],
-                        'valor'             => $dados['valor'],
-                        'id_status'         => 1,
-                        'codigo_assinatura' => $codigo,
-                    ]
-                );
+
+                $url = $this->pagseguro->assinarPlanoCheckout($codigo);
+                header('Location: '.$url);
             } catch (\Exception $e) {
                 Log::createFromException($e);
                 throw new \Exception('Não foi possível realizar sua assinatura');
@@ -104,8 +99,18 @@ class Assinatura
         }
     }
 
-    public function getNotificacao(){
-
+    public function getNotificacao($post){
+        if ($post['notificationType'] == 'preApproval') {
+            $codigo = $post['notificationCode']; //Recebe o código da notificação e busca as informações de como está a assinatura
+            $response = $this->pagseguro->consultarNotificacao($codigo);
+             (new Pagamento())->inserir([
+                'id_status' => $response['status'],
+                'valor' => $response['grossAmount'],
+                'codigo_assinatura' => $response['code'],
+                'id_contrato'       => 1,
+            ]);
+            //print_r($response);die;
+        }
     }
 
 }

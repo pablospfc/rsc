@@ -13,6 +13,7 @@ use MocaBonita\controller\MbController;
 use MocaBonita\tools\MbRequest;
 use MocaBonita\tools\MbResponse;
 use RSC\model\Assinatura;
+use RSC\model\Contrato;
 
 class AssinaturaController extends MbController
 {
@@ -26,6 +27,18 @@ class AssinaturaController extends MbController
     }
     public function cancelarAction(){
         return (new Assinatura())->cancelar();
+    }
+
+    public function assinarAction(MbRequest $mbRequest){
+        return (new Assinatura())->assinar($mbRequest->inputSource());
+    }
+
+    public function getDadosParaAssinaturaAction(MbRequest $request){
+        return (new Contrato())->getDadosParaAssinatura($request->query('id_contrato'));
+    }
+
+    public function getNotificacao(MbRequest $request){
+        return (new Assinatura())->getNotificacao($request->inputSource());
     }
 
 }
