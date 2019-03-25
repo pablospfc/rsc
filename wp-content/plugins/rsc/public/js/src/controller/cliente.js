@@ -1,4 +1,4 @@
-appFrontRsc.controller('clienteController', function ($scope, $rootScope, $document,WizardHandler, RscService) {
+appFrontRsc.controller('clienteController', function ($scope, $rootScope,$window, $document,WizardHandler, RscService) {
     RscService.getGeneros($scope);
     RscService.getEstadosCivis($scope);
 
@@ -33,7 +33,11 @@ appFrontRsc.controller('clienteController', function ($scope, $rootScope, $docum
     };
 
     $scope.assinar = function(formulario){
-        RscService.assinar(formulario);
+        RscService.assinarPlano(formulario).then(function(sucess){
+            $window.open(sucess.url,'_blank');
+        },function(error){
+
+        })
     };
 
 

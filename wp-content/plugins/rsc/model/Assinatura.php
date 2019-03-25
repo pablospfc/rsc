@@ -77,13 +77,15 @@ class Assinatura
             //Código usado pelo vendedor para identificar qual é a compra
         $this->pagseguro->setReferencia("CWG004");
             //Plano usado (Esse código é criado durante a criação do plano)
-        $this->pagseguro->setPlanoCode($dados['plano_pagseguro']);
+        $this->pagseguro->setPlanoCode($dados['codigo_pagseguro']);
 
             try{
-                $codigo = $this->pagseguro->assinaPlano();
+                //$codigo = $this->pagseguro->assinaPlano();
 
-                $url = $this->pagseguro->assinarPlanoCheckout($codigo);
-                header('Location: '.$url);
+                $url = $this->pagseguro->assinarPlanoCheckout($dados['codigo_pagseguro']);
+                error_log(var_export($url,true));
+                error_log(var_export($dados,true));
+                return['message'=>'Você será redirecionado para o PagSeguro...','url'=>$url];
             } catch (\Exception $e) {
                 Log::createFromException($e);
                 throw new \Exception('Não foi possível realizar sua assinatura'.$e->getMessage());
@@ -100,17 +102,25 @@ class Assinatura
     }
 
     public function getNotificacao($post){
-        if ($post['notificationType'] == 'preApproval') {
-            $codigo = $post['notificationCode']; //Recebe o código da notificação e busca as informações de como está a assinatura
-            $response = $this->pagseguro->consultarNotificacao($codigo);
-             (new Pagamento())->inserir([
-                'id_status' => $response['status'],
-                'valor' => $response['grossAmount'],
-                'codigo_assinatura' => $response['code'],
-                'id_contrato'       => 1,
-            ]);
-            //print_r($response);die;
-        }
+        header("access-control-allow-origin: https://sandbox.pagseguro.uol.com.br");
+            try {
+                if ($post['notificationType'] == 'preApproval') {
+                    $codigo = $post['notificationCode']; //Recebe o código da notificação e busca as informações de como está a assinatura
+                    $response = $this->pagseguro->consultarNotificacao($codigo, $this->email,$this->token );
+
+                    error_log(var_export($response,true));
+                   $pagamento = (new Pagamento())->inserir([
+                        'id_status' => $response['status'],
+                        'valor' => $response['grossAmount'],
+                        'codigo_assinatura' => $response['code'],
+                        'id_contrato' => 1,
+                    ]);
+                    //print_r($response);die;
+                }
+            }catch(\Exception $e){
+                Log::createFromException($e);
+                throw new \Exception("Não foi possível atualizar o pagamento");
+            }
     }
 
 }

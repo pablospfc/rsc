@@ -37,7 +37,7 @@ class AssinaturaController extends MbController
         return (new Contrato())->getDadosParaAssinatura($request->query('id_contrato'));
     }
 
-    public function getNotificacao(MbRequest $request){
+    public function getNotificacaoAction(MbRequest $request){
         return (new Assinatura())->getNotificacao($request->inputSource());
     }
 

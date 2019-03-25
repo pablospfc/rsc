@@ -22,7 +22,7 @@ class PagamentoController extends MbController
     }
 
     public function inserirAtualizarPagamento(MbRequest $request){
-       //return (new Pagamento())->inserir($request->inputSource('notificationCode'),$request->inputSource())
+       return (new Pagamento())->inserir($request->inputSource('notificationCode'),$request->inputSource());
     }
 
 }

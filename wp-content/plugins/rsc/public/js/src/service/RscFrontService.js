@@ -24,7 +24,6 @@ appFrontRsc.service('RscService', function ($request, WizardHandler, $rootScope,
     };
 
     this.cadastrarContrato = function (formulario) {
-        console.log(formulario);
         var deferred = $q.defer();
         $rootScope.alert.changeShow(false);
         $request.post(urlAdmin("admin-ajax.php")).addParams({
@@ -45,8 +44,7 @@ appFrontRsc.service('RscService', function ($request, WizardHandler, $rootScope,
         return deferred.promise;
     };
 
-    this.assinar = function (formulario) {
-        console.log(formulario);
+    this.assinarPlano = function (formulario) {
         var deferred = $q.defer();
         $rootScope.alert.changeShow(false);
         $request.post(urlAdmin("admin-ajax.php")).addParams({
@@ -130,7 +128,6 @@ appFrontRsc.service('RscService', function ($request, WizardHandler, $rootScope,
             .load($scope.loading.getRequestLoad('listando dados para confirmação...'))
             .send(function (data) {
                 $scope.formAssinatura = data[0];
-                console.log($scope.formAssinatura);
             }, function (meta) {
                 $scope.alert.responseError(meta);
                 $scope.alert.changeType("danger");
