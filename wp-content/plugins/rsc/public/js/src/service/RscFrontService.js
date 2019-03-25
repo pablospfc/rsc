@@ -45,6 +45,28 @@ appFrontRsc.service('RscService', function ($request, WizardHandler, $rootScope,
         return deferred.promise;
     };
 
+    this.assinar = function (formulario) {
+        console.log(formulario);
+        var deferred = $q.defer();
+        $rootScope.alert.changeShow(false);
+        $request.post(urlAdmin("admin-ajax.php")).addParams({
+            page: 'assinatura',
+            action: 'assinar'
+        }).addData(formulario).load($rootScope.loading.getRequestLoad('Redirecionando para o pagamento...')).send(function (data) {
+            $rootScope.alert.responseSuccess(data.message);
+            deferred.resolve(data);
+        }, function (meta) {
+            //$scope.formContrato = undefined;
+            $rootScope.alert.responseError(meta);
+            $rootScope.alert.changeType('danger');
+            $rootScope.alert.changeTitle('');
+            deferred.reject(meta);
+        });
+
+        return deferred.promise;
+    };
+
+
     this.getDadosPorCep = function($scope){
         var requestLink = function(cep){
             return "https://viacep.com.br/ws/" + cep + "/json/";
@@ -107,7 +129,8 @@ appFrontRsc.service('RscService', function ($request, WizardHandler, $rootScope,
             })
             .load($scope.loading.getRequestLoad('listando dados para confirmação...'))
             .send(function (data) {
-                $scope.dados_contrato = data;
+                $scope.formAssinatura = data[0];
+                console.log($scope.formAssinatura);
             }, function (meta) {
                 $scope.alert.responseError(meta);
                 $scope.alert.changeType("danger");

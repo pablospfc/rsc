@@ -86,7 +86,7 @@ class Assinatura
                 header('Location: '.$url);
             } catch (\Exception $e) {
                 Log::createFromException($e);
-                throw new \Exception('Não foi possível realizar sua assinatura');
+                throw new \Exception('Não foi possível realizar sua assinatura'.$e->getMessage());
             }
     }
 

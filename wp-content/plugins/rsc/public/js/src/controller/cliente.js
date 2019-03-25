@@ -32,6 +32,10 @@ appFrontRsc.controller('clienteController', function ($scope, $rootScope, $docum
         });
     };
 
+    $scope.assinar = function(formulario){
+        RscService.assinar(formulario);
+    };
+
 
 
     $scope.listarFaturamentos = function(formulario){
