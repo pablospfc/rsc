@@ -106,7 +106,7 @@ class Assinatura
             try {
                 if ($post['notificationType'] == 'preApproval') {
                     $codigo = $post['notificationCode']; //Recebe o código da notificação e busca as informações de como está a assinatura
-                    $response = $this->pagseguro->consultarNotificacao($codigo, $this->email,$this->token );
+                    $response = $this->pagseguro->consultarNotificacao($codigo );
 
                     error_log(var_export($response,true));
                    $pagamento = (new Pagamento())->inserir([

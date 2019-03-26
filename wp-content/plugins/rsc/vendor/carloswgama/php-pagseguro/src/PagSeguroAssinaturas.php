@@ -35,7 +35,7 @@ class PagSeguroAssinaturas {
 	* @access private
 	* @var string
 	*/
-	private $urlAPISandbox = 'https://ws.sandbox.pagseguro.uol.com.br/v2/';
+	private $urlAPISandbox = 'https://ws.sandbox.pagseguro.uol.com.br/';
 
 	/**
 	* URL para o pagamento em Sandbox
@@ -410,8 +410,8 @@ class PagSeguroAssinaturas {
 	}
  
 	/** Realiza uma consulta a notificação **/
-	public function consultarNotificacao($codePagSeguro,$email, $token) {
-		$response = $this->get($this->getURLAPI() . 'transactions/notifications/' . $codePagSeguro.'?email='.$email.'&token='.$token);
+	public function consultarNotificacao($codePagSeguro) {
+		$response = $this->get($this->getURLAPI().'pre-approvals/notifications/'.$codePagSeguro);
         error_log(var_export($response,true));
 		if ($response['http_code'] == 200) {
 			return $response['body'];
