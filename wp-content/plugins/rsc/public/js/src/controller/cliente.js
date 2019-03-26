@@ -1,4 +1,5 @@
-appFrontRsc.controller('clienteController', function ($scope, $rootScope,$window, $document,WizardHandler, RscService) {
+appFrontRsc.controller('clienteController', function ($scope,PagSeguro, $rootScope,$window, $document,WizardHandler, RscService) {
+
     RscService.getGeneros($scope);
     RscService.getEstadosCivis($scope);
 
@@ -16,6 +17,10 @@ appFrontRsc.controller('clienteController', function ($scope, $rootScope,$window
         },function(error){
             //
         });
+    };
+
+    $scope.getDadosCartao = function(){
+        console.log(PagSeguro.pagseguro.getSenderHash());
     };
 
     $scope.calculaMensalidade = function(formulario){

@@ -188,6 +188,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pBwDir("angular-wizard/dist/angular-wizard.min.js"))
         ->setJs(MbPath::pBwDir("angular-input-masks/angular-input-masks-standalone.js"))
         ->setJs(MbPath::pJsDir("src/app.js"))
+        ->setJs(MbPath::pJsDir("pagseguro/pagseguro.directpayment.js"))
         ->setJs(MbPath::pJsDir("src/controller/cliente.js"))
         ->setJs(MbPath::pJsDir("src/service/RscFrontService.js"));
 

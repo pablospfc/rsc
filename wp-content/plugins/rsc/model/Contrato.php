@@ -19,16 +19,19 @@ class Contrato extends MbModel
     protected $fillable= [
         'id_cliente',
         'id_mensalidade',
+        'codigo_assinatura',
     ];
 
     public function inserir($dados){
         try{
             $contrato=  Contrato::updateOrCreate([
-                'id_cliente'     => $dados['id_cliente'],
-                'id_mensalidade' => $dados['id_mensalidade'],
+                'id_cliente' => $dados['id_cliente'],
+            ],[
+                'id_cliente'        => $dados['id_cliente'],
+                'id_mensalidade'    => $dados['id_mensalidade'],
+                'codigo_assinatura' => $dados['codigo_assinatura'],
             ]);
 
-            //error_log(var_export($dados,true));
             return ['message'=>'Contrato cadastrado com sucesso','id'=> $contrato->id];
 
         }catch(\Exception $e){
@@ -39,6 +42,7 @@ class Contrato extends MbModel
 
     public function getDadosParaAssinatura($idContrato){
         $dados = self::select(
+            "cli.id as id_cliente",
             "cli.nome as nome",
             "cli.cpf as cpf",
             "cli.email as email",

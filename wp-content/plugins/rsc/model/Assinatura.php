@@ -8,6 +8,7 @@
 
 namespace RSC\model;
 use CWG\PagSeguro\PagSeguroAssinaturas;
+use MocaBonita\tools\eloquent\MbDatabase;
 
 class Assinatura
 {
@@ -83,8 +84,10 @@ class Assinatura
                 //$codigo = $this->pagseguro->assinaPlano();
 
                 $url = $this->pagseguro->assinarPlanoCheckout($dados['codigo_pagseguro']);
-                error_log(var_export($url,true));
-                error_log(var_export($dados,true));
+                (new Contrato())->inserir([
+                    'id_cliente' => $dados['id_cliente'],
+                    'codigo_pagseguro' => $dados['codigo_pagseguro']
+                ]);
                 return['message'=>'Você será redirecionado para o PagSeguro...','url'=>$url];
             } catch (\Exception $e) {
                 Log::createFromException($e);
@@ -108,19 +111,55 @@ class Assinatura
                     $codigo = $post['notificationCode']; //Recebe o código da notificação e busca as informações de como está a assinatura
                     $response = $this->pagseguro->consultarNotificacao($codigo );
 
-                    error_log(var_export($response,true));
+                    $status = $this->setStatus($response['status']);
+
                    $pagamento = (new Pagamento())->inserir([
-                        'id_status' => $response['status'],
+                        'id_status' => $status,
                         'valor' => $response['grossAmount'],
                         'codigo_assinatura' => $response['code'],
                         'id_contrato' => 1,
                     ]);
-                    //print_r($response);die;
+
                 }
             }catch(\Exception $e){
                 Log::createFromException($e);
                 throw new \Exception("Não foi possível atualizar o pagamento");
             }
+    }
+
+    private function setStatus($status){
+            $newStatus= null;
+           switch ($status){
+               case 'INITIATED':
+                   $newStatus = 1;
+                   break;
+               case 'PENDING':
+                   $newStatus = 2;
+                   break;
+               case 'ACTIVE':
+                   $newStatus = 3;
+                   break;
+               case 'PAYMENT_METHOD_CHANGE':
+                   $newStatus = 4;
+                   break;
+               case 'SUSPENDED':
+                   $newStatus = 5;
+                   break;
+               case 'CANCELLED':
+                   $newStatus = 6;
+                   break;
+               case 'CANCELLED_BY_RECEIVER':
+                   $newStatus = 7;
+                   break;
+               case 'CANCELLED_BY_SENDER':
+                   $newStatus = 8;
+                   break;
+               case 'EXPIRED':
+                   $newStatus = 9;
+                   break;
+           }
+
+           return $newStatus;
     }
 
 }
