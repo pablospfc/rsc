@@ -45,23 +45,23 @@ appFrontRsc.service('RscService', function ($request, WizardHandler, $rootScope,
     };
 
     this.assinarPlano = function (formulario) {
-        var deferred = $q.defer();
+        //var deferred = $q.defer();
         $rootScope.alert.changeShow(false);
         $request.post(urlAdmin("admin-ajax.php")).addParams({
             page: 'assinatura',
             action: 'assinar'
-        }).addData(formulario).load($rootScope.loading.getRequestLoad('Redirecionando para o pagamento...')).send(function (data) {
+        }).addData(formulario).load($rootScope.loading.getRequestLoad('Processando Pagamento...')).send(function (data) {
             $rootScope.alert.responseSuccess(data.message);
-            deferred.resolve(data);
+            //deferred.resolve(data);
         }, function (meta) {
             //$scope.formContrato = undefined;
             $rootScope.alert.responseError(meta);
             $rootScope.alert.changeType('danger');
             $rootScope.alert.changeTitle('');
-            deferred.reject(meta);
+            //deferred.reject(meta);
         });
 
-        return deferred.promise;
+        //return deferred.promise;
     };
 
 
@@ -115,6 +115,27 @@ appFrontRsc.service('RscService', function ($request, WizardHandler, $rootScope,
                 $scope.alert.changeType("danger");
 
             });
+    };
+
+    this.getSessao = function ($scope) {
+        var deferred = $q.defer();
+        $scope.alert.changeShow(false);
+        $request.get(urlAdmin("admin-ajax.php"))
+            .addParams({
+                page: "assinatura",
+                action: "iniciaSessao",
+            })
+            .load($scope.loading.getRequestLoad('Iniciando Sessao...'))
+            .send(function (data) {
+                //$scope.id_sessao = data[0][0];
+                deferred.resolve(data[0][0]);
+                //console.log($scope.id_sessao);
+            }, function (meta) {
+                $scope.alert.responseError(meta);
+                $scope.alert.changeType("danger");
+                deferred.reject(meta);
+            });
+        return deferred.promise;
     };
 
     this.getDadosParaAssinatura = function ($scope) {

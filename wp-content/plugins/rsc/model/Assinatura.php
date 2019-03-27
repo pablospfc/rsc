@@ -7,22 +7,30 @@
  */
 
 namespace RSC\model;
+
 use CWG\PagSeguro\PagSeguroAssinaturas;
 use MocaBonita\tools\eloquent\MbDatabase;
-
+use RSC\model\Contrato;
 class Assinatura
 {
-       private $email = "claudiopablosilva@hotmail.com";
-       private $token = "2382B416442D464CADC943D232AD6045";
-       private $sandbox = true;
-       private $pagseguro = null;
+    private $email = "claudiopablosilva@hotmail.com";
+    private $token = "2382B416442D464CADC943D232AD6045";
+    private $sandbox = true;
+    private $pagseguro = null;
 
-        function __construct()
-        {
+    function __construct()
+    {
         $this->pagseguro = new PagSeguroAssinaturas($this->email, $this->token, $this->sandbox);
-        }
+    }
 
-    public function criarPlano(){
+    public function iniciaSessao()
+    {
+        $id = $this->pagseguro->iniciaSessao();
+        return [$id];
+    }
+
+    public function criarPlano()
+    {
         //Cria um nome para o plano
         $this->pagseguro->setReferencia('LUCRO PRESUMIDO - SERVIÇO');
 
@@ -48,54 +56,57 @@ class Assinatura
 //Máximo de pessoas que podem usar esse plano. Exemplo 10.000 pessoas podem usar esse plano
         $this->pagseguro->setMaximoUsuariosNoPlano(10000);
 
-        try{
-            $codigoPlano =  $this->pagseguro->criarPlano();
-            return ['message'=>'Plano com código '.$codigoPlano.' criado com sucesso'];
+        try {
+            $codigoPlano = $this->pagseguro->criarPlano();
+            return ['message' => 'Plano com código ' . $codigoPlano . ' criado com sucesso'];
         } catch (\Exception $e) {
             Log::createFromException($e);
-            throw new \Exception('Não foi possível criar o plano.'.$e->getMessage());
+            throw new \Exception('Não foi possível criar o plano.' . $e->getMessage());
         }
 
     }
 
-    public function assinar($dados){
-                    //Nome do comprador igual a como esta no CARTÂO
+    public function assinar($dados)
+    {
+        //Nome do comprador igual a como esta no CARTÂO
         $this->pagseguro->setNomeCliente($dados['nome']);
-            //Email do comprovador
+        //Email do comprovador
         $this->pagseguro->setEmailCliente($dados['email']);
-            //Informa o telefone DD e número
+        //Informa o telefone DD e número
         $this->pagseguro->setTelefone($dados['ddd'], $dados['telefone']);
-            //Informa o CPF
+        //Informa o CPF
         $this->pagseguro->setCPF($dados['cpf']);
-            //Informa o endereço RUA, NUMERO, COMPLEMENTO, BAIRRO, CIDADE, ESTADO, CEP
+        //Informa o endereço RUA, NUMERO, COMPLEMENTO, BAIRRO, CIDADE, ESTADO, CEP
         $this->pagseguro->setEnderecoCliente($dados['rua'], $dados['numero'], $dados['complemento'], $dados['bairro'], $dados['cidade'], $dados['estado'], $dados['cep']);
-            //Informa o ano de nascimento
+        //Informa o ano de nascimento
         $this->pagseguro->setNascimentoCliente($dados['data_nascimento']);
-            //Infora o Hash  gerado na etapa anterior (assinando.php), é obrigatório para comunicação com checkoutr transparente
-        //$this->pagseguro->setHashCliente($_POST['hash']);
-            //Informa o Token do Cartão de Crédito gerado na etapa anterior (assinando.php)
-        //$this->pagseguro->setTokenCartao($_POST['token']);
-            //Código usado pelo vendedor para identificar qual é a compra
-        $this->pagseguro->setReferencia("CWG004");
-            //Plano usado (Esse código é criado durante a criação do plano)
+        //Infora o Hash  gerado na etapa anterior (assinando.php), é obrigatório para comunicação com checkoutr transparente
+        $this->pagseguro->setHashCliente($_POST['hash']);
+        //Informa o Token do Cartão de Crédito gerado na etapa anterior (assinando.php)
+        $this->pagseguro->setTokenCartao($_POST['token']);
+        //Código usado pelo vendedor para identificar qual é a compra
+        $this->pagseguro->setReferencia($dados['id_cliente']);
+        //Plano usado (Esse código é criado durante a criação do plano)
         $this->pagseguro->setPlanoCode($dados['codigo_pagseguro']);
 
-            try{
-                //$codigo = $this->pagseguro->assinaPlano();
+        try {
+            $codigo = $this->pagseguro->assinaPlano();
 
-                $url = $this->pagseguro->assinarPlanoCheckout($dados['codigo_pagseguro']);
-                (new Contrato())->inserir([
-                    'id_cliente' => $dados['id_cliente'],
-                    'codigo_pagseguro' => $dados['codigo_pagseguro']
-                ]);
-                return['message'=>'Você será redirecionado para o PagSeguro...','url'=>$url];
-            } catch (\Exception $e) {
-                Log::createFromException($e);
-                throw new \Exception('Não foi possível realizar sua assinatura'.$e->getMessage());
-            }
+            //$url = $this->pagseguro->assinarPlanoCheckout($dados['codigo_pagseguro']);
+
+            Contrato::where('id_cliente', $dados['id_cliente'])
+                ->update(['codigo_pagseguro' => $codigo]);
+
+            return ['message' => 'A sua compra foi processada com sucesso'];
+
+        } catch (\Exception $e) {
+            Log::createFromException($e);
+            throw new \Exception('Não foi possível realizar sua assinatura' . $e->getMessage());
+        }
     }
 
-    public function cancelar($codePagSeguro){
+    public function cancelar($codePagSeguro)
+    {
         try {
             print_r($this->pagseguro->cancelarAssinatura($codePagSeguro));
         } catch (\Exception $e) {
@@ -104,62 +115,64 @@ class Assinatura
         }
     }
 
-    public function getNotificacao($post){
+    public function getNotificacao($post)
+    {
         header("access-control-allow-origin: https://sandbox.pagseguro.uol.com.br");
-            try {
-                if ($post['notificationType'] == 'preApproval') {
-                    $codigo = $post['notificationCode']; //Recebe o código da notificação e busca as informações de como está a assinatura
-                    $response = $this->pagseguro->consultarNotificacao($codigo );
+        try {
+            if ($post['notificationType'] == 'preApproval') {
+                $codigo = $post['notificationCode']; //Recebe o código da notificação e busca as informações de como está a assinatura
+                $response = $this->pagseguro->consultarNotificacao($codigo);
 
-                    $status = $this->setStatus($response['status']);
+                $status = $this->setStatus($response['status']);
 
-                   $pagamento = (new Pagamento())->inserir([
-                        'id_status' => $status,
-                        'valor' => $response['grossAmount'],
-                        'codigo_assinatura' => $response['code'],
-                        'id_contrato' => 1,
-                    ]);
+                $pagamento = (new Pagamento())->inserir([
+                    'id_status' => $status,
+                    'valor' => $response['grossAmount'],
+                    'codigo_assinatura' => $response['code'],
+                    'id_contrato' => 1,
+                ]);
 
-                }
-            }catch(\Exception $e){
-                Log::createFromException($e);
-                throw new \Exception("Não foi possível atualizar o pagamento");
             }
+        } catch (\Exception $e) {
+            Log::createFromException($e);
+            throw new \Exception("Não foi possível atualizar o pagamento");
+        }
     }
 
-    private function setStatus($status){
-            $newStatus= null;
-           switch ($status){
-               case 'INITIATED':
-                   $newStatus = 1;
-                   break;
-               case 'PENDING':
-                   $newStatus = 2;
-                   break;
-               case 'ACTIVE':
-                   $newStatus = 3;
-                   break;
-               case 'PAYMENT_METHOD_CHANGE':
-                   $newStatus = 4;
-                   break;
-               case 'SUSPENDED':
-                   $newStatus = 5;
-                   break;
-               case 'CANCELLED':
-                   $newStatus = 6;
-                   break;
-               case 'CANCELLED_BY_RECEIVER':
-                   $newStatus = 7;
-                   break;
-               case 'CANCELLED_BY_SENDER':
-                   $newStatus = 8;
-                   break;
-               case 'EXPIRED':
-                   $newStatus = 9;
-                   break;
-           }
+    private function setStatus($status)
+    {
+        $newStatus = null;
+        switch ($status) {
+            case 'INITIATED':
+                $newStatus = 1;
+                break;
+            case 'PENDING':
+                $newStatus = 2;
+                break;
+            case 'ACTIVE':
+                $newStatus = 3;
+                break;
+            case 'PAYMENT_METHOD_CHANGE':
+                $newStatus = 4;
+                break;
+            case 'SUSPENDED':
+                $newStatus = 5;
+                break;
+            case 'CANCELLED':
+                $newStatus = 6;
+                break;
+            case 'CANCELLED_BY_RECEIVER':
+                $newStatus = 7;
+                break;
+            case 'CANCELLED_BY_SENDER':
+                $newStatus = 8;
+                break;
+            case 'EXPIRED':
+                $newStatus = 9;
+                break;
+        }
 
-           return $newStatus;
+        return $newStatus;
     }
 
 }

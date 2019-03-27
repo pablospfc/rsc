@@ -1,4 +1,5 @@
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/angular-wizard@latest/dist/angular-wizard.min.css">
+<link rel="stylesheet" type="text/css"
+      href="https://cdn.jsdelivr.net/npm/angular-wizard@latest/dist/angular-wizard.min.css">
 <wizard on-finish="inscrever()" indicators-position="top">
     <br><br>
     <div class="row">
@@ -34,7 +35,7 @@
                                type="text"
                                ui-date-mask="DD/MM/YYYY"
                                placeholder="Data de Nascimento"
-                               />
+                        />
                     </div>
                     <div class="form-group col-md-3">
                         <label for="genero">Gênero:(*)</label>
@@ -172,8 +173,8 @@
                     </div>
                 </div>
 
-                    <h5 class="page-header">Contato</h5>
-                      <div class="row">
+                <h5 class="page-header">Contato</h5>
+                <div class="row">
                     <div class="form-group col-md-2">
                         <label for="ddd">DDD:</label>
                         <input type="text"
@@ -212,18 +213,18 @@
                                ng-required="true"
                                placeholder="Email"/>
                     </div>
-                      </div>
+                </div>
                 <h5 class="page-header">Usuário</h5>
                 <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="senha">Senha:(*)</label>
-                    <input type="password"
-                           ng-model="formCliente.senha"
-                           class="form-control"
-                           id="senha"
-                           ng-required="true"
-                           placeholder="Senha"/>
-                </div>
+                    <div class="form-group col-md-4">
+                        <label for="senha">Senha:(*)</label>
+                        <input type="password"
+                               ng-model="formCliente.senha"
+                               class="form-control"
+                               id="senha"
+                               ng-required="true"
+                               placeholder="Senha"/>
+                    </div>
                     <div class="form-group col-md-4">
                         <label for="confirma_senha">Confirma Senha:(*)</label>
                         <input type="password"
@@ -235,19 +236,21 @@
                     </div>
                 </div>
 
+
                 <div class="form-group col-sm-12 text-center">
                     <button class="btn btn-success btn-sm"
                             type="submit"
                             ng-disabled="formDadosCliente.$error.required || formDadosCliente.$invalid ">
                         Avançar
                     </button>
-
+<!--
                     <button class="btn btn-success btn-sm"
                             type="button"
-                            ng-click="getDadosCartao()"
-                            >
+                            ng-click="getBandeiraCartao('4111111111111111')"
+                    >
                         Cartão
                     </button>
+                    -->
                 </div>
 
             </form>
@@ -260,7 +263,8 @@
                   autocomplete="off"
                   ng-submit="salvarContrato(formContrato)"
                   novalidate>
-                <input type="hidden" name="id_cliente" ng-model="formContrato.id_cliente" ng-value="formContrato.id_cliente = id_cliente"/>
+                <input type="hidden" name="id_cliente" ng-model="formContrato.id_cliente"
+                       ng-value="formContrato.id_cliente = id_cliente"/>
                 <h5 class="page-header">Plano para Contratação</h5>
                 <div class="row">
                     <div class="form-group col-md-4">
@@ -320,7 +324,8 @@
                                 id="faturamento">
                         </select>
                     </div>
-                    <input type="hidden" name="id_mensalidade" ng-model="formContrato.id_mensalidade" ng-value="formContrato.id_mensalidade = mensalidade[0].id"/>
+                    <input type="hidden" name="id_mensalidade" ng-model="formContrato.id_mensalidade"
+                           ng-value="formContrato.id_mensalidade = mensalidade[0].id"/>
                 </div>
 
                 <div class="col-sm-12 text-center" ng-if="mensalidade">
@@ -351,144 +356,199 @@
 
     <wz-step wz-title="Pagamento">
         <div class="col-sm-10 col-sm-offset-1">
-        <form method="post" ng-submit="assinar(formAssinatura)">
-            <h5 class="page-header">Dados do Cliente</h5>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label for="nome">Nome Completo:(*)</label>
-                    <input type="nome"
-                           ng-model="formAssinatura.nome"
-                           class="form-control"
-                           id="nome"
-                           ng-readonly="true"
-                           placeholder="Nome"/>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="data_nascimento">Email:(*)</label>
-                    <input id="data_nascimento"
-                           ng-init="tratarData(formCliente)"
-                           ng-model="formAssinatura.data_nascimento"
-                           class="form-control"
-                           type="text"
-                           ng-readonly="true"
-                           ui-date-mask="DD/MM/YYYY"
-                           placeholder="Data de Nascimento"
-                    />
-                </div>
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="/#cartao" data-toggle="tab">Cartão de Crédito</a></li>
+                <li><a href="/#boleto" data-toggle="tab">Boleto Bancário</a></li>
+            </ul>
 
-                <div class="form-group col-md-3">
-                    <label for="telefoneResidencial">Telefone Residencial:</label>
-                    <input type="text"
-                           ng-model="formAssinatura.telefone_residencial"
-                           class="form-control"
-                           id="telefoneResidencial"
-                           ng-readonly="true"
-                           placeholder="Telefone Residencial"/>
+            <div class="tab-content">
+                <div class="tab-pane active in" id="first-tab">
+                    <form method="post" ng-submit="assinarCartao(formAssinatura)">
+                        <div class="form-group">
+                            <label for="nome">Número do Cartão:(*)</label>
+                            <input type="text"
+                                   ng-model="formAssinatura.numero"
+                                   class="form-control"
+                                   id="nome"
+                                   ng-required="true"
+                                   placeholder="Número do Cartão"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV:(*)</label>
+                            <input type="text"
+                                   ng-model="formAssinatura.cvv"
+                                   class="form-control"
+                                   id="cvv"
+                                   ng-required="true"
+                                   placeholder="CVV"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="mes_expiracao">Mês de Expiração:(*)</label>
+                            <input type="text"
+                                   ng-model="formAssinatura.mes_expiracao"
+                                   class="form-control"
+                                   id="mes_expiracao"
+                                   ng-required="true"
+                                   placeholder="Mês de Expiração"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="ano_expiracao">Ano de Expiração:(*)</label>
+                            <input type="text"
+                                   ng-model="formAssinatura.ano_expiracao"
+                                   class="form-control"
+                                   id="ano_expiracao"
+                                   ng-required="true"
+                                   placeholder="Ano de Expiração"/>
+                        </div>
+                    </form>
                 </div>
-
-                <div class="form-group col-md-3">
-                    <label for="telefoneCelular">Telefone Celular:(*)</label>
-                    <input type="text"
-                           ng-model="formAssinatura.telefone_celular"
-                           class="form-control"
-                           id="telefoneCelular"
-                           ng-readonly="true"
-                           placeholder="Telefone Celular"/>
-                </div>
-
-                <div class="form-group col-md-3">
-                    <label for="rg">CPF:(*)</label>
-                    <input type="text"
-                           ng-model="formAssinatura.cpf"
-                           class="form-control"
-                           id="cpf"
-                           ng-readonly="true"
-                           placeholder="CPF"/>
+                <div class="tab-pane" id="second-tab">
+                    <p>Em desenvolvimento.</p>
                 </div>
             </div>
 
-            <h5 class="page-header">Endereço</h5>
-            <div class="row">
-                <div class="form-group col-md-3">
-                    <label for="cep">CEP:(*)</label>
-                    <input type="text"
-                           ng-model="formAssinatura.cep"
-                           class="form-control"
-                           id="cep"
-                           ng-readonly="true"
-                           placeholder="CEP"/>
-                </div>
+            <!-- <form method="post" ng-submit="assinar(formAssinatura)">
+                 <h5 class="page-header">Formas de Pagamento</h5>
+                 <div class="row">
+                     <div class="form-group col-md-6">
+                         <label for="nome">Nome Completo:(*)</label>
+                         <input type="nome"
+                                ng-model="formAssinatura.nome"
+                                class="form-control"
+                                id="nome"
+                                ng-readonly="true"
+                                placeholder="Nome"/>
+                     </div>
+                     <div class="form-group col-md-3">
+                         <label for="data_nascimento">Email:(*)</label>
+                         <input id="data_nascimento"
+                                ng-init="tratarData(formCliente)"
+                                ng-model="formAssinatura.data_nascimento"
+                                class="form-control"
+                                type="text"
+                                ng-readonly="true"
+                                ui-date-mask="DD/MM/YYYY"
+                                placeholder="Data de Nascimento"
+                         />
+                     </div>
 
-                <div class="form-group col-md-4">
-                    <label for="rua">Rua:(*)</label>
-                    <input type="text"
-                           ng-model="formAssinatura.rua"
-                           class="form-control"
-                           id="rua"
-                           ng-readonly="true"
-                           placeholder="Rua"/>
-                </div>
+                     <div class="form-group col-md-3">
+                         <label for="telefoneResidencial">Telefone Residencial:</label>
+                         <input type="text"
+                                ng-model="formAssinatura.telefone_residencial"
+                                class="form-control"
+                                id="telefoneResidencial"
+                                ng-readonly="true"
+                                placeholder="Telefone Residencial"/>
+                     </div>
 
-                <div class="form-group col-md-3">
-                    <label for="numero">Número:(*)</label>
-                    <input type="text"
-                           ng-model="formAssinatura.numero"
-                           class="form-control"
-                           id="numero"
-                           ng-readonly="true"
-                           placeholder="Número"/>
-                </div>
+                     <div class="form-group col-md-3">
+                         <label for="telefoneCelular">Telefone Celular:(*)</label>
+                         <input type="text"
+                                ng-model="formAssinatura.telefone_celular"
+                                class="form-control"
+                                id="telefoneCelular"
+                                ng-readonly="true"
+                                placeholder="Telefone Celular"/>
+                     </div>
 
-                <div class="form-group col-md-4">
-                    <label for="complemento">Complemento:(*)</label>
-                    <input type="text"
-                           ng-model="formAssinatura.complemento"
-                           class="form-control"
-                           id="complemento"
-                           ng-readonly="true"
-                           placeholder="Complemento"/>
-                </div>
+                     <div class="form-group col-md-3">
+                         <label for="rg">CPF:(*)</label>
+                         <input type="text"
+                                ng-model="formAssinatura.cpf"
+                                class="form-control"
+                                id="cpf"
+                                ng-readonly="true"
+                                placeholder="CPF"/>
+                     </div>
+                 </div>
 
-                <div class="form-group col-md-3">
-                    <label for="bairro">Bairro:</label>
-                    <input type="text"
-                           ng-model="formAssinatura.bairro"
-                           class="form-control"
-                           id="bairro"
-                           ng-readonly="true"
-                           placeholder="Bairro"/>
-                </div>
+                 <h5 class="page-header">Endereço</h5>
+                 <div class="row">
+                     <div class="form-group col-md-3">
+                         <label for="cep">CEP:(*)</label>
+                         <input type="text"
+                                ng-model="formAssinatura.cep"
+                                class="form-control"
+                                id="cep"
+                                ng-readonly="true"
+                                placeholder="CEP"/>
+                     </div>
 
-                <div class="form-group col-md-3">
-                    <label for="cidade">Cidade:(*)</label>
-                    <input type="text"
-                           ng-model="formAssinatura.cidade"
-                           class="form-control"
-                           id="cidade"
-                           ng-readonly="true"
-                           placeholder="Cidade"/>
-                </div>
+                     <div class="form-group col-md-4">
+                         <label for="rua">Rua:(*)</label>
+                         <input type="text"
+                                ng-model="formAssinatura.rua"
+                                class="form-control"
+                                id="rua"
+                                ng-readonly="true"
+                                placeholder="Rua"/>
+                     </div>
 
-                <div class="form-group col-md-3">
-                    <label for="estado">Estado:</label>
-                    <input type="text"
-                           ng-model="formAssinatura.estado"
-                           class="form-control"
-                           id="estado"
-                           ng-readonly="true"
-                           placeholder="Estado"/>
-                </div>
-            </div>
+                     <div class="form-group col-md-3">
+                         <label for="numero">Número:(*)</label>
+                         <input type="text"
+                                ng-model="formAssinatura.numero"
+                                class="form-control"
+                                id="numero"
+                                ng-readonly="true"
+                                placeholder="Número"/>
+                     </div>
+
+                     <div class="form-group col-md-4">
+                         <label for="complemento">Complemento:(*)</label>
+                         <input type="text"
+                                ng-model="formAssinatura.complemento"
+                                class="form-control"
+                                id="complemento"
+                                ng-readonly="true"
+                                placeholder="Complemento"/>
+                     </div>
+
+                     <div class="form-group col-md-3">
+                         <label for="bairro">Bairro:</label>
+                         <input type="text"
+                                ng-model="formAssinatura.bairro"
+                                class="form-control"
+                                id="bairro"
+                                ng-readonly="true"
+                                placeholder="Bairro"/>
+                     </div>
+
+                     <div class="form-group col-md-3">
+                         <label for="cidade">Cidade:(*)</label>
+                         <input type="text"
+                                ng-model="formAssinatura.cidade"
+                                class="form-control"
+                                id="cidade"
+                                ng-readonly="true"
+                                placeholder="Cidade"/>
+                     </div>
+
+                     <div class="form-group col-md-3">
+                         <label for="estado">Estado:</label>
+                         <input type="text"
+                                ng-model="formAssinatura.estado"
+                                class="form-control"
+                                id="estado"
+                                ng-readonly="true"
+                                placeholder="Estado"/>
+                     </div>
+                 </div>
 
 
 
-            <div class="form-group col-sm-12 text-center">
-                <button class="btn btn-success btn-sm"
-                        type="submit">
-                    Avançar
-                </button>
-            </div>
-        </form>
+
+
+                 <div class="form-group col-sm-12 text-center">
+                     <button class="btn btn-success btn-sm"
+                             type="submit">
+                         Avançar
+                     </button>
+                 </div>
+             </form>-->
+
+
         </div>
     </wz-step>
 

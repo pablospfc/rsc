@@ -25,8 +25,13 @@ class AssinaturaController extends MbController
     public function criarPlanoAction(){
         return (new Assinatura())->criarPlano();
     }
+
     public function cancelarAction(){
         return (new Assinatura())->cancelar();
+    }
+
+    public function iniciaSessaoAction(){
+        return (new Assinatura())->iniciaSessao();
     }
 
     public function assinarAction(MbRequest $mbRequest){

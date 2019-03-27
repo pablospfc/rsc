@@ -10,6 +10,7 @@
  */
 
 namespace RSC;
+
 use MocaBonita\tools\MbRequest;
 use MocaBonita\MocaBonita;
 use MocaBonita\tools\MbEvent;
@@ -73,6 +74,11 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setCapability("read");
 
     $assinaturaPage->addMbAction("getDadosParaAssinatura")
+        ->setRequiresMethod("GET")
+        ->setCapability("read")
+        ->setRequiresLogin(false);
+
+    $assinaturaPage->addMbAction("iniciaSessao")
         ->setRequiresMethod("GET")
         ->setCapability("read")
         ->setRequiresLogin(false);
@@ -145,7 +151,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setCapability("read")
         ->setRequiresLogin(false)
         ->setCallback(function (MbRequest $mbRequest) {
-            return Faturamento::getFaturamentoBySociosFuncionarios( $mbRequest->query('socios'),$mbRequest->query('funcionarios'));
+            return Faturamento::getFaturamentoBySociosFuncionarios($mbRequest->query('socios'), $mbRequest->query('funcionarios'));
         });
 
     $mocabonita->addMbShortcode("mensalidade_calc", $mensalidadePage, "mensalidade");
@@ -164,7 +170,6 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pBwDir("angular-br-filters/release/angular-br-filters.min.js"))
         ->setJs(MbPath::pBwDir("angular-messages/angular-messages.min.js"))
         ->setJs(MbPath::pBwDir("angular-route/angular-route.min.js"))
-
         ->setJs(MbPath::pJsDir("src/app.js"))
         ->setJs(MbPath::pJsDir("src/controller/mensalidade.js"))
         ->setJs(MbPath::pJsDir("src/controller/mensalidade-modal.js"))
@@ -193,10 +198,8 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pJsDir("src/service/RscFrontService.js"));
 
 
-
-
     $mocabonita->addMbPage($mensalidadePage);
     $mocabonita->addMbPage($clientePage);
     $mocabonita->addMbPage($assinaturaPage);
 
-},true);
+}, true);
