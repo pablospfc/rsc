@@ -68,6 +68,7 @@ class Assinatura
 
     public function assinar($dados)
     {
+        $data = implode("/",array_reverse(explode("-",$dados['data_nascimento'])));
         //Nome do comprador igual a como esta no CARTÂO
         $this->pagseguro->setNomeCliente($dados['nome']);
         //Email do comprovador
@@ -79,11 +80,11 @@ class Assinatura
         //Informa o endereço RUA, NUMERO, COMPLEMENTO, BAIRRO, CIDADE, ESTADO, CEP
         $this->pagseguro->setEnderecoCliente($dados['rua'], $dados['numero'], $dados['complemento'], $dados['bairro'], $dados['cidade'], $dados['estado'], $dados['cep']);
         //Informa o ano de nascimento
-        $this->pagseguro->setNascimentoCliente($dados['data_nascimento']);
+        $this->pagseguro->setNascimentoCliente($data);
         //Infora o Hash  gerado na etapa anterior (assinando.php), é obrigatório para comunicação com checkoutr transparente
-        $this->pagseguro->setHashCliente($_POST['hash']);
+        $this->pagseguro->setHashCliente($dados['hash']);
         //Informa o Token do Cartão de Crédito gerado na etapa anterior (assinando.php)
-        $this->pagseguro->setTokenCartao($_POST['token']);
+        $this->pagseguro->setTokenCartao($dados['token']);
         //Código usado pelo vendedor para identificar qual é a compra
         $this->pagseguro->setReferencia($dados['id_cliente']);
         //Plano usado (Esse código é criado durante a criação do plano)
@@ -92,12 +93,16 @@ class Assinatura
         try {
             $codigo = $this->pagseguro->assinaPlano();
 
-            //$url = $this->pagseguro->assinarPlanoCheckout($dados['codigo_pagseguro']);
-
             Contrato::where('id_cliente', $dados['id_cliente'])
-                ->update(['codigo_pagseguro' => $codigo]);
+                ->update(['codigo_assinatura' => $codigo]);
 
-            return ['message' => 'A sua compra foi processada com sucesso'];
+            $pagamento = (new Pagamento())->inserir([
+                'id_contrato' => $dados['id_contrato'],
+                'valor' => $dados['mensalidade'],
+                'id_status' => 1,
+            ]);
+
+            return ['message' => 'O seu pagamento está sendo processado...'];
 
         } catch (\Exception $e) {
             Log::createFromException($e);
@@ -125,13 +130,13 @@ class Assinatura
 
                 $status = $this->setStatus($response['status']);
 
-                $pagamento = (new Pagamento())->inserir([
-                    'id_status' => $status,
-                    'valor' => $response['grossAmount'],
-                    'codigo_assinatura' => $response['code'],
-                    'id_contrato' => 1,
-                ]);
+                $idContrato = Contrato::where('codigo_assinatura','=',$response['code'])
+                    ->first(['id']);
 
+                Pagamento::where('id_contrato', $idContrato->id)
+                    ->update(['id_status' => $status]);
+
+                return ['message'=> 'Pagamento processado com sucesso'];
             }
         } catch (\Exception $e) {
             Log::createFromException($e);

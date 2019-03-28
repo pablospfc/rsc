@@ -25,8 +25,6 @@ class Contrato extends MbModel
     public function inserir($dados){
         try{
             $contrato=  Contrato::updateOrCreate([
-                'id_cliente' => $dados['id_cliente'],
-            ],[
                 'id_cliente'        => $dados['id_cliente'],
                 'id_mensalidade'    => $dados['id_mensalidade'],
                 'codigo_assinatura' => $dados['codigo_assinatura'],
@@ -35,7 +33,7 @@ class Contrato extends MbModel
             return ['message'=>'Contrato cadastrado com sucesso','id'=> $contrato->id];
 
         }catch(\Exception $e){
-            Log::createFromException($e->getMessage());
+            Log::createFromException($e);
             throw new \Exception("Erro ao cadastrar o seu contrato. Por favor entre em contato com o administrador do site");
         }
     }
@@ -46,6 +44,7 @@ class Contrato extends MbModel
             "cli.nome as nome",
             "cli.cpf as cpf",
             "cli.email as email",
+            "cli.ddd as ddd",
             "cli.telefone_residencial as telefone",
             "cli.telefone_celular as celular",
             "cli.rua",
@@ -56,6 +55,7 @@ class Contrato extends MbModel
             "cli.estado",
             "cli.cep",
             "cli.data_nascimento",
+            "con.id as id_contrato",
             "pla.mensalidade",
             "pla.codigo_pagseguro",
             "fat.nome as faturamento",

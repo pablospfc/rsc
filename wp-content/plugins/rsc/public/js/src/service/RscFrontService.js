@@ -52,6 +52,7 @@ appFrontRsc.service('RscService', function ($request, WizardHandler, $rootScope,
             action: 'assinar'
         }).addData(formulario).load($rootScope.loading.getRequestLoad('Processando Pagamento...')).send(function (data) {
             $rootScope.alert.responseSuccess(data.message);
+            $rootScope.formAssinatura = undefined;
             //deferred.resolve(data);
         }, function (meta) {
             //$scope.formContrato = undefined;

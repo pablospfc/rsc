@@ -79,8 +79,10 @@ appFrontRsc.controller('clienteController', function ($scope, $rootScope, $windo
             PagSeguroDirectPayment.setSessionId(data);
             formulario.hash = PagSeguroDirectPayment.getSenderHash();
             PagSeguroDirectPayment.getBrand({
-                cardBin: numero,
+                cardBin: formulario.numero,
                 success: function (response) {
+                    console.log(response.brand.name);
+
                     PagSeguroDirectPayment.createCardToken({
                         cardNumber: formulario.numero,
                         brand: response.brand.name,
@@ -97,8 +99,8 @@ appFrontRsc.controller('clienteController', function ($scope, $rootScope, $windo
                         },
                     });
                 },
-                error: function (response) {
-                    console.log(response);
+                error: function (error) {
+                    console.log(error);
                 },
             });
 

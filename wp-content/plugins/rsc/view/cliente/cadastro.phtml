@@ -365,12 +365,13 @@
                 <div class="tab-pane active in" id="first-tab">
                     <form method="post" ng-submit="assinarCartao(formAssinatura)">
                         <div class="form-group">
-                            <label for="nome">Número do Cartão:(*)</label>
+                            <label for="numero_cartao">Número do Cartão:(*)</label>
                             <input type="text"
                                    ng-model="formAssinatura.numero"
                                    class="form-control"
-                                   id="nome"
+                                   id="numero_cartao"
                                    ng-required="true"
+                                   ng-value="4111111111111111"
                                    placeholder="Número do Cartão"/>
                         </div>
                         <div class="form-group">
@@ -380,6 +381,7 @@
                                    class="form-control"
                                    id="cvv"
                                    ng-required="true"
+                                   ng-value="123"
                                    placeholder="CVV"/>
                         </div>
                         <div class="form-group">
@@ -389,6 +391,7 @@
                                    class="form-control"
                                    id="mes_expiracao"
                                    ng-required="true"
+                                   ng-value="12"
                                    placeholder="Mês de Expiração"/>
                         </div>
                         <div class="form-group">
@@ -398,7 +401,24 @@
                                    class="form-control"
                                    id="ano_expiracao"
                                    ng-required="true"
+                                   ng-value="2030"
                                    placeholder="Ano de Expiração"/>
+                        </div>
+
+                        <div class="form-group col-sm-12 text-center">
+
+                            <button class="btn btn-danger waves-effect btn-sm"
+                                    type="button"
+                                    wz-previous>
+                                Voltar
+                            </button>
+
+                            <button class="btn btn-info waves-effect btn-sm"
+                                    type="submit"
+                                    ng-disabled="formAssinatura.$error.required">
+                                Realizar Pagamento
+                            </button>
+
                         </div>
                     </form>
                 </div>
