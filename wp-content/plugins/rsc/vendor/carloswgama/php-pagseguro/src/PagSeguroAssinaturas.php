@@ -412,7 +412,7 @@ class PagSeguroAssinaturas {
 	/** Realiza uma consulta a notificação **/
 	public function consultarNotificacao($codePagSeguro) {
 		$response = $this->get($this->getURLAPI().'pre-approvals/notifications/'.$codePagSeguro);
-        error_log(var_export($response,true));
+        //error_log(var_export($response,true));
 		if ($response['http_code'] == 200) {
 			return $response['body'];
 		} else {
@@ -420,7 +420,20 @@ class PagSeguroAssinaturas {
 		}
 	}
 
-	/** Consulta uma assinatura **/
+    /** Realiza uma consulta a notificação **/
+    public function consultarNotificacaoTransacao($codePagSeguro) {
+        $response = $this->get($this->getURLAPI('v2/transactions/notifications/'. $codePagSeguro));
+        if (isset($response->code)) {
+            $dados = (array) $response;
+            $dados['info'] = $dados;
+            return $dados;
+        } else {
+            throw new \Exception($response);
+        }
+    }
+
+
+    /** Consulta uma assinatura **/
 	public function consultaAssinatura($codePagSeguro) {
 		$response = $this->get($this->getURLAPI() . 'pre-approvals/' . $codePagSeguro);
 

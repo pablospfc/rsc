@@ -124,17 +124,15 @@ class Assinatura
     {
         header("access-control-allow-origin: https://sandbox.pagseguro.uol.com.br");
         try {
-            if ($post['notificationType'] == 'preApproval') {
+            if ($post['notificationType'] == 'transaction') {
                 $codigo = $post['notificationCode']; //Recebe o código da notificação e busca as informações de como está a assinatura
-                $response = $this->pagseguro->consultarNotificacao($codigo);
-
-                $status = $this->setStatus($response['status']);
+                $response = $this->pagseguro->consultarNotificacaoTransacao($codigo);
 
                 $idContrato = Contrato::where('codigo_assinatura','=',$response['code'])
                     ->first(['id']);
 
                 Pagamento::where('id_contrato', $idContrato->id)
-                    ->update(['id_status' => $status]);
+                          ->update(['id_status' => $response['status']]);
 
                 return ['message'=> 'Pagamento processado com sucesso'];
             }
@@ -144,7 +142,7 @@ class Assinatura
         }
     }
 
-    private function setStatus($status)
+    private function setStatusAssinatura($status)
     {
         $newStatus = null;
         switch ($status) {
@@ -179,5 +177,7 @@ class Assinatura
 
         return $newStatus;
     }
+
+
 
 }

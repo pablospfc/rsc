@@ -11,7 +11,7 @@ appFrontRsc.service('RscService', function ($request, WizardHandler, $rootScope,
             deferred.resolve(data);
             $scope.processando = false;
             $scope.id_cliente = data.id;
-            $scope.formCliente = undefined;
+            $scope.formCliente = data;
         }, function (meta) {
             $scope.formCliente = undefined;
             $rootScope.alert.responseError(meta);
