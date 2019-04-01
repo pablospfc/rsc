@@ -18,12 +18,11 @@ endif;
           novalidate>
 
             <div class="form-group">
-                <label for=" cpf
-            ">CPF:(*)</label>
+                <label for="cpf">CPF:(*)</label>
             <input type="text"
-                   ng-model="formLogin.cpf"
+                   ng-model="formLogin.login"
                    class="form-control"
-                   id="cpf"
+                   id="login"
                    ng-required="true"
                    placeholder="CPF"/>
         </div>
@@ -32,7 +31,7 @@ endif;
         <div class="form-group">
             <label for="senha">Senha:(*)</label>
             <input type="password"
-                   ng-model="formCliente.senha"
+                   ng-model="formLogin.senha"
                    class="form-control"
                    id="senha"
                    ng-required="true"
@@ -45,8 +44,15 @@ endif;
                     ng-disabled="formDadosLogin.$error.required || formDadosLogin.$invalid ">
                 Entrar
             </button>
+            <button class="btn btn-success btn-sm"
+                    ng-click="redirecionar('/cadastro')"
+                    type="button">
+                Cadastre-se
+            </button>
+
 
         </div>
+
     </form>
 
 </div>

@@ -17,21 +17,7 @@ class Login extends MbModel
 
     public function autenticar($dados){
         $dados = self::select(
-            "cli.id as id_cliente",
-            "cli.nome as nome",
-            "cli.cpf as cpf",
-            "cli.email as email",
-            "cli.ddd as ddd",
-            "cli.telefone_residencial as telefone",
-            "cli.telefone_celular as celular",
-            "cli.rua",
-            "cli.numero",
-            "cli.complemento",
-            "cli.bairro",
-            "cli.cidade",
-            "cli.estado",
-            "cli.cep",
-            "cli.data_nascimento",
+            "cli.*",
             "usu.login"
         )
             ->from("rsc_usuario as usu")
@@ -44,7 +30,7 @@ class Login extends MbModel
         if (!is_array($dados) || empty($dados))
             throw new \Exception('Não foi possível realizar o login no sistema. É possível que os dados fornecidos estejam incorretos!');
 
-        return $dados;
+        return ['dados' => $dados,'uid' => uniqid("ang_")];
     }
 
 }
