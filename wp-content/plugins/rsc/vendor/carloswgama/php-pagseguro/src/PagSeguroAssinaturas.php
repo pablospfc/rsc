@@ -420,19 +420,6 @@ class PagSeguroAssinaturas {
 		}
 	}
 
-    /** Realiza uma consulta a notificação **/
-    public function consultarNotificacaoTransacao($codePagSeguro) {
-        $response = $this->get($this->getURLAPI('v2/transactions/notifications/'. $codePagSeguro));
-        if (isset($response->code)) {
-            $dados = (array) $response;
-            $dados['info'] = $dados;
-            return $dados;
-        } else {
-            throw new \Exception($response);
-        }
-    }
-
-
     /** Consulta uma assinatura **/
 	public function consultaAssinatura($codePagSeguro) {
 		$response = $this->get($this->getURLAPI() . 'pre-approvals/' . $codePagSeguro);

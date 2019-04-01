@@ -22,6 +22,20 @@ appFrontRsc.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: urlAdmin("admin-post.php?" + serialize({
+                page: "login",
+                action: "login"
+            })),
+            controller: 'loginController',
+        })
+        .when('/login', {
+            templateUrl: urlAdmin("admin-post.php?" + serialize({
+                page: "login",
+                action: "login"
+            })),
+            controller: 'loginController',
+        })
+        .when('/simulador', {
+            templateUrl: urlAdmin("admin-post.php?" + serialize({
                 page: "mensalidade",
                 action: "formulario_calculo"
             })),
@@ -34,7 +48,7 @@ appFrontRsc.config(function ($routeProvider) {
             })),
             controller: 'clienteController',
         })
-        .otherwise({redirectTo: '/'});
+        .otherwise({redirectTo: '/login'});
 });
 
 appFrontRsc.run(function ($rootScope, bootstrap) {

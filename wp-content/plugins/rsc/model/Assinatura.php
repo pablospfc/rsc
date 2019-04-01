@@ -9,6 +9,7 @@
 namespace RSC\model;
 
 use CWG\PagSeguro\PagSeguroAssinaturas;
+use CWG\PagSeguro\PagSeguroCompras;
 use MocaBonita\tools\eloquent\MbDatabase;
 use RSC\model\Contrato;
 class Assinatura
@@ -124,9 +125,10 @@ class Assinatura
     {
         header("access-control-allow-origin: https://sandbox.pagseguro.uol.com.br");
         try {
+            $compra = new PagSeguroCompras($this->email,$this->token,$this->sandbox);
             if ($post['notificationType'] == 'transaction') {
                 $codigo = $post['notificationCode']; //Recebe o código da notificação e busca as informações de como está a assinatura
-                $response = $this->pagseguro->consultarNotificacaoTransacao($codigo);
+                $response = $compra->consultarNotificacao($codigo);
 
                 $idContrato = Contrato::where('codigo_assinatura','=',$response['code'])
                     ->first(['id']);

@@ -18,6 +18,7 @@ use MocaBonita\tools\MbPage;
 use MocaBonita\tools\MbPath;
 use RSC\controller\AssinaturaController;
 use RSC\controller\ClienteController;
+use RSC\controller\LoginController;
 use RSC\controller\MensalidadeController;
 use RSC\model\EstadoCivil;
 use RSC\model\Genero;
@@ -52,6 +53,20 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
     $assinaturaPage = MbPage::create("Assinatura")
         ->setController(AssinaturaController::class)
         ->setSlug("assinatura");
+
+    $loginPage = MbPage::create("Login")
+        ->setController(LoginController::class)
+        ->setSlug("login");
+
+    $loginPage->addMbAction("logar")
+        ->setRequiresMethod("POST")
+        ->setRequiresLogin(false)
+        ->setCapability("read");
+
+    $loginPage->addMbAction("login")
+        ->setRequiresMethod("GET")
+        ->setCapability("read")
+        ->setRequiresLogin(false);
 
     $assinaturaPage->addMbAction("criarPlano")
         ->setRequiresMethod("GET")
@@ -175,7 +190,8 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pJsDir("src/controller/mensalidade-modal.js"))
         ->setJs(MbPath::pJsDir("src/service/RscFrontService.js"));
 
-    $mocabonita->addMbShortcode("cadastro_cliente", $clientePage, "cliente")
+    //$mocabonita->addMbShortcode("cadastro_cliente", $clientePage, "cliente")
+    $mocabonita->addMbShortcode("login", $loginPage, "login")
         ->getMbAsset()
         ->setJs(MbPath::pBwDir("jquery/dist/jquery.min.js"))
         //->setCss(MbPath::pCssDir("style.css"))
@@ -193,7 +209,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pBwDir("angular-wizard/dist/angular-wizard.min.js"))
         ->setJs(MbPath::pBwDir("angular-input-masks/angular-input-masks-standalone.js"))
         ->setJs(MbPath::pJsDir("src/app.js"))
-        ->setJs(MbPath::pJsDir("pagseguro/pagseguro.directpayment.js"))
+        ->setJs(MbPath::pJsDir("src/controller/login.js"))
         ->setJs(MbPath::pJsDir("src/controller/cliente.js"))
         ->setJs(MbPath::pJsDir("src/service/RscFrontService.js"));
 
@@ -201,5 +217,6 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
     $mocabonita->addMbPage($mensalidadePage);
     $mocabonita->addMbPage($clientePage);
     $mocabonita->addMbPage($assinaturaPage);
+    $mocabonita->addMbPage($loginPage);
 
 }, true);
