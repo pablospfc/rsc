@@ -16,6 +16,7 @@ use MocaBonita\MocaBonita;
 use MocaBonita\tools\MbEvent;
 use MocaBonita\tools\MbPage;
 use MocaBonita\tools\MbPath;
+use RSC\common\Sessao;
 use RSC\controller\AssinaturaController;
 use RSC\controller\ClienteController;
 use RSC\controller\LoginController;
@@ -67,6 +68,13 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setRequiresMethod("GET")
         ->setCapability("read")
         ->setRequiresLogin(false);
+
+    $loginPage->addMbAction("estaLogado")
+        ->setRequiresMethod("GET")
+        ->setCapability("read")
+        ->setCallback(function () {
+            return Sessao::instanciar()->existe('user');
+        });
 
     $assinaturaPage->addMbAction("criarPlano")
         ->setRequiresMethod("GET")

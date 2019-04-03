@@ -37,6 +37,7 @@ class LoginController extends MbController
             ->setAction("login");
     }
 
+
     public function logarAction(MbRequest $request){
         return (new Login())->autenticar($request->inputSource());
     }

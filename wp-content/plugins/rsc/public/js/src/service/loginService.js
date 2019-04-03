@@ -27,6 +27,19 @@ appFrontRsc.factory('loginService', function($http, $location, sessionService){
             $location.path('/');
         },
         islogged: function(){
+            $request.get(urlAdmin("admin-ajax.php"))
+                .addParams({
+                    page: "login",
+                    action: "estaLogado",
+                })
+                .load($scope.loading.getRequestLoad('Calculando a mensalidade...'))
+                .send(function (data) {
+                    $scope.mensalidade = data;
+                }, function (meta) {
+                    $scope.alert.responseError(meta);
+                    $scope.alert.changeType("danger");
+
+                });
             var checkSession = $http.post('session.php');
             return checkSession;
         },
