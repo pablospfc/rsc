@@ -1,4 +1,4 @@
-appFrontRsc.controller('clienteController', function ($scope, $rootScope, $window, $document, WizardHandler, RscService) {
+appFrontRsc.controller('clienteController', function ($scope, loginService, $rootScope, $window, $document, WizardHandler, RscService) {
 
     RscService.getGeneros($scope);
     RscService.getEstadosCivis($scope);
@@ -16,6 +16,10 @@ appFrontRsc.controller('clienteController', function ($scope, $rootScope, $windo
         }, function (error) {
             //
         });
+    };
+
+    $scope.sair = function(){
+        loginService.logout();
     };
 
     $scope.getDadosCartao = function () {

@@ -9,6 +9,8 @@
 namespace RSC\model;
 use MocaBonita\tools\eloquent\MbModel;
 use RSC\common\Encryption;
+use RSC\common\Sessao;
+use RSC\common\Validation;
 
 class Login extends MbModel
 {
@@ -16,6 +18,7 @@ class Login extends MbModel
     public $timestamps = true;
 
     public function autenticar($dados){
+
         $dados = self::select(
             "cli.*",
             "usu.login"
@@ -27,10 +30,16 @@ class Login extends MbModel
             ->get()
             ->toArray();
 
+        $dados[0]['data_nascimento'] = Validation::dateToBr($dados[0]['data_nascimento']);
+        $dados[0]['data_emissao_rg'] = Validation::dateToBr($dados[0]['data_emissao_rg']);
+
         if (!is_array($dados) || empty($dados))
             throw new \Exception('Não foi possível realizar o login no sistema. É possível que os dados fornecidos estejam incorretos!');
 
-        return ['dados' => $dados,'uid' => uniqid("ang_")];
+        $user = uniqid("ang_");
+        Sessao::instanciar()->set('user',$user);
+
+        return ['dados' => $dados,'uid' => $user];
     }
 
 }

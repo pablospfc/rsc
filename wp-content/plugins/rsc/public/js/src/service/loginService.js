@@ -1,6 +1,6 @@
-appFrontRsc.factory('loginService', function($http, $location, sessionService){
+appFrontRsc.factory('loginService', function($http, $request, $rootScope, $q, $location, sessionService){
     return{
-        login: function(user, $scope){
+        login: function($scope){
             $scope.alert.changeShow(false);
             $request.post(urlAdmin("admin-ajax.php")).addParams({
                 page: 'login',
@@ -8,6 +8,7 @@ appFrontRsc.factory('loginService', function($http, $location, sessionService){
             }).addData($scope.formLogin).load($scope.loading.getRequestLoad('Entrando no sistema...')).send(function (data) {
                 $scope.alert.responseSuccess(data.message);
                 $rootScope.formCliente = data.dados[0];
+                console.log($rootScope.formCliente);
                 $rootScope.autenticado = true;
                 var uid = data.uid;
                 if(uid){
@@ -24,24 +25,24 @@ appFrontRsc.factory('loginService', function($http, $location, sessionService){
         },
         logout: function(){
             sessionService.destroy('user');
-            $location.path('/');
+            $location.path('/login');
         },
         islogged: function(){
+            var deferred = $q.defer();
             $request.get(urlAdmin("admin-ajax.php"))
                 .addParams({
                     page: "login",
                     action: "estaLogado",
                 })
-                .load($scope.loading.getRequestLoad('Calculando a mensalidade...'))
                 .send(function (data) {
-                    $scope.mensalidade = data;
+                    deferred.resolve(data);
                 }, function (meta) {
-                    $scope.alert.responseError(meta);
-                    $scope.alert.changeType("danger");
-
+                    $rootScope.alert.responseError(meta);
+                    $rootScope.alert.changeType("danger");
+                    deferred.reject(meta);
                 });
-            var checkSession = $http.post('session.php');
-            return checkSession;
+
+            return deferred.promise;
         },
         fetchuser: function(){
             var user = $http.get('fetch.php');

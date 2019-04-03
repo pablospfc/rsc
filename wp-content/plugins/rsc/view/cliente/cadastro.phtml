@@ -244,6 +244,13 @@
                             ng-disabled="formDadosCliente.$error.required || formDadosCliente.$invalid ">
                         Avançar
                     </button>
+
+                    <button class="btn btn-danger waves-effect btn-sm"
+                            ng-if="autenticado==true"
+                            ng-click="sair()"
+                            type="submit">
+                        Sair
+                    </button>
 <!--
                     <button class="btn btn-success btn-sm"
                             type="button"

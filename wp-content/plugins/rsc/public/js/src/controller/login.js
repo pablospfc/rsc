@@ -1,7 +1,7 @@
-appFrontRsc.controller('loginController', function ($scope, $location, $document, WizardHandler, RscService) {
+appFrontRsc.controller('loginController', function ($scope, $location, $document, WizardHandler, loginService) {
 
     $scope.logar = function(){
-        RscService.autenticar($scope);
+        loginService.login($scope);
     };
 
     $scope.redirecionar = function(url){

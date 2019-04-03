@@ -51,31 +51,33 @@ appFrontRsc.config(function ($routeProvider) {
         .otherwise({redirectTo: '/login'});
 });
 
-appFrontRsc.run(function ($rootScope, bootstrap) {
+appFrontRsc.run(function ($rootScope, bootstrap, $location, loginService) {
     $rootScope.alert = bootstrap.alert();
     $rootScope.loading = bootstrap.loading();
 //prevent going to homepage if not loggedin
-    var routePermit = ['/home'];
+    var routePermit = ['/cadastro'];
     $rootScope.$on('$routeChangeStart', function(){
         if(routePermit.indexOf($location.path()) !=-1){
-            var connected = loginService.islogged();
-            connected.then(function(response){
-                if(!response.data){
+            loginService.islogged().then(function(response){
+                if(response.status == false){
                     $location.path('/');
                 }
+            },function(error){
+                console.log(error);
             });
-
         }
     });
     //prevent going back to login page if session is set
     var sessionStarted = ['/'];
     $rootScope.$on('$routeChangeStart', function(){
         if(sessionStarted.indexOf($location.path()) !=-1){
-            var cantgoback = loginService.islogged();
-            cantgoback.then(function(response){
-                if(response.data){
+            loginService.islogged().then(function(response){
+                console.log(response);
+                if(response.status == true){
                     $location.path('/home');
                 }
+            },function(error){
+                console.log(error);
             });
         }
     });

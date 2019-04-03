@@ -16,4 +16,9 @@ class Validation
             return date('Y-m-d', strtotime($newDate));
     }
 
+    public static function dateToBr($date){
+        return date("d/m/Y", strtotime($date));
+    }
+
+
 }

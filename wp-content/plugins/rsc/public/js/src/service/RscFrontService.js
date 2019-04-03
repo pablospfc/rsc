@@ -44,25 +44,6 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
         return deferred.promise;
     };
 
-    this.autenticar = function ($scope) {
-        $scope.alert.changeShow(false);
-        $request.post(urlAdmin("admin-ajax.php")).addParams({
-            page: 'login',
-            action: 'logar'
-        }).addData($scope.formLogin).load($scope.loading.getRequestLoad('Entrando no sistema...')).send(function (data) {
-            $scope.alert.responseSuccess(data.message);
-            $rootScope.formCliente = data[0];
-            $rootScope.autenticado = true;
-            $location.path("/cadastro");
-        }, function (meta) {
-            //$scope.formContrato = undefined;
-            $scope.alert.responseError(meta);
-            $scope.alert.changeType('danger');
-            $scope.alert.changeTitle('');
-        });
-
-    };
-
     this.assinarPlano = function (formulario) {
         //var deferred = $q.defer();
         $rootScope.alert.changeShow(false);

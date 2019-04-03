@@ -64,6 +64,15 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setRequiresLogin(false)
         ->setCapability("read");
 
+    $loginPage->addMbAction("sair")
+        ->setRequiresMethod("GET")
+        ->setRequiresLogin(false)
+        ->setCapability("read")
+        ->setCallback(function () {
+            $retorno = Sessao::instanciar()->destruir('user');
+            return ['status'=>$retorno];
+        });
+
     $loginPage->addMbAction("login")
         ->setRequiresMethod("GET")
         ->setCapability("read")
@@ -72,8 +81,10 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
     $loginPage->addMbAction("estaLogado")
         ->setRequiresMethod("GET")
         ->setCapability("read")
+        ->setRequiresLogin(false)
         ->setCallback(function () {
-            return Sessao::instanciar()->existe('user');
+            $retorno = Sessao::instanciar()->existe('user');
+            return ['status'=>$retorno];
         });
 
     $assinaturaPage->addMbAction("criarPlano")
@@ -219,7 +230,9 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pJsDir("src/app.js"))
         ->setJs(MbPath::pJsDir("src/controller/login.js"))
         ->setJs(MbPath::pJsDir("src/controller/cliente.js"))
-        ->setJs(MbPath::pJsDir("src/service/RscFrontService.js"));
+        ->setJs(MbPath::pJsDir("src/service/RscFrontService.js"))
+        ->setJs(MbPath::pJsDir("src/service/loginService.js"))
+        ->setJs(MbPath::pJsDir("src/service/sessionService.js"));
 
 
     $mocabonita->addMbPage($mensalidadePage);
