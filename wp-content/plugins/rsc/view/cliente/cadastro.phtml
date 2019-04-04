@@ -69,8 +69,11 @@
                                ng-model="formCliente.cpf"
                                class="form-control"
                                id="cpf"
+                               ng-cpf
+                               ui-br-cpf-mask
                                ng-required="true"
                                placeholder="CPF"/>
+                        <p ng-show="formCliente.cpf.$invalid && !formCliente.cpf.$pristine" class="help-block">O seu CPF está inválido!</p>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="rg">RG:(*)</label>

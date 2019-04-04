@@ -130,11 +130,15 @@ class Assinatura
                 $codigo = $post['notificationCode']; //Recebe o código da notificação e busca as informações de como está a assinatura
                 $response = $compra->consultarNotificacao($codigo);
 
-                $idContrato = Contrato::where('codigo_assinatura','=',$response['code'])
+                $idContrato = Contrato::where('id_cliente','=',$response['reference'])
                     ->first(['id']);
 
                 Pagamento::where('id_contrato', $idContrato->id)
-                          ->update(['id_status' => $response['status']]);
+                          ->update([
+                              'id_status' => $response['status'],
+                              'data_transacao' =>$response['lastEventDate'],
+                              'codigo_transacao' =>$response['code'],
+                          ]);
 
                 return ['message'=> 'Pagamento processado com sucesso'];
             }

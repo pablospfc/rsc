@@ -19,6 +19,8 @@ class Pagamento extends MbModel
         'id_contrato',
         'valor',
         'id_status',
+        'codigo_transacao',
+        'data_transacao',
     ];
 
     public function inserir($dados){

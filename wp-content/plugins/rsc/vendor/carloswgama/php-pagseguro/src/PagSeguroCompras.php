@@ -267,7 +267,7 @@ class PagSeguroCompras {
 		
 		if (isset($response->code)) {
 			$dados = (array) $response;
-			$dados['info'] = $this->getStatusCompra($dados['status']);
+			$dados['info'] = $dados['status'];
 			return $dados;
 		} else {
 			throw new \Exception($response);

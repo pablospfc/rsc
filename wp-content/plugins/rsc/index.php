@@ -210,7 +210,8 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pJsDir("src/service/RscFrontService.js"));
 
     //$mocabonita->addMbShortcode("cadastro_cliente", $clientePage, "cliente")
-    $mocabonita->addMbShortcode("login", $loginPage, "login")
+    //$mocabonita->addMbShortcode("login", $loginPage, "login")
+    $mocabonita->addMbShortcode("cadastro_cliente", $clientePage, "cliente")
         ->getMbAsset()
         ->setJs(MbPath::pBwDir("jquery/dist/jquery.min.js"))
         //->setCss(MbPath::pCssDir("style.css"))
@@ -227,6 +228,8 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pBwDir("angular-route/angular-route.min.js"))
         ->setJs(MbPath::pBwDir("angular-wizard/dist/angular-wizard.min.js"))
         ->setJs(MbPath::pBwDir("angular-input-masks/angular-input-masks-standalone.js"))
+        ->setJs(MbPath::pBwDir("ng-cpf-cnpj/lib/ngCpfCnpj.js"))
+        ->setJs(MbPath::pJsDir("pagseguro/pagseguro.directpayment.js"))
         ->setJs(MbPath::pJsDir("src/app.js"))
         ->setJs(MbPath::pJsDir("src/controller/login.js"))
         ->setJs(MbPath::pJsDir("src/controller/cliente.js"))

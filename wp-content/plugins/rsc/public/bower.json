@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "barbara-js": "^1.4.0"
+    "barbara-js": "^1.4.0",
+    "ng-cpf-cnpj": "^0.0.5"
   }
 }

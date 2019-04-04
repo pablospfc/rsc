@@ -6,6 +6,7 @@ var appFrontRsc = angular.module('appFrontRsc', [
     'angularModalService',
     'mgo-angular-wizard',
     'ui.utils.masks',
+    'ngCpfCnpj',
 ]);
 
 appFrontRsc.directive('ngUpdateHidden', function () {
@@ -55,7 +56,7 @@ appFrontRsc.run(function ($rootScope, bootstrap, $location, loginService) {
     $rootScope.alert = bootstrap.alert();
     $rootScope.loading = bootstrap.loading();
 //prevent going to homepage if not loggedin
-    var routePermit = ['/cadastro'];
+    var routePermit = ['/'];
     $rootScope.$on('$routeChangeStart', function(){
         if(routePermit.indexOf($location.path()) !=-1){
             loginService.islogged().then(function(response){
