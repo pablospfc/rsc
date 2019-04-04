@@ -30,11 +30,14 @@ class Login extends MbModel
             ->get()
             ->toArray();
 
-        $dados[0]['data_nascimento'] = Validation::dateToBr($dados[0]['data_nascimento']);
-        $dados[0]['data_emissao_rg'] = Validation::dateToBr($dados[0]['data_emissao_rg']);
+
 
         if (!is_array($dados) || empty($dados))
             throw new \Exception('Não foi possível realizar o login no sistema. É possível que os dados fornecidos estejam incorretos!');
+        else{
+            $dados[0]['data_nascimento'] = Validation::dateToBr($dados[0]['data_nascimento']);
+            $dados[0]['data_emissao_rg'] = Validation::dateToBr($dados[0]['data_emissao_rg']);
+        }
 
         $user = uniqid("ang_");
         Sessao::instanciar()->set('user',$user);
