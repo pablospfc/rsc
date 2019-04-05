@@ -133,12 +133,20 @@ class Assinatura
                 $idContrato = Contrato::where('id_cliente','=',$response['reference'])
                     ->first(['id']);
 
-                Pagamento::where('id_contrato', $idContrato->id)
-                          ->update([
-                              'id_status' => $response['status'],
-                              'data_transacao' =>$response['lastEventDate'],
-                              'codigo_transacao' =>$response['code'],
-                          ]);
+//                Pagamento::where('id_contrato', $idContrato->id)
+//                          ->update([
+//                              'id_status' => $response['status'],
+//                              'data_transacao' =>$response['lastEventDate'],
+//                              'codigo_transacao' =>$response['code'],
+//                          ]);
+
+                (new Pagamento())->inserir([
+                    'id_contrato' => $idContrato->id,
+                    'id_status' => $response['status'],
+                    'data_transacao' => $response['lastEventDate'],
+                    'codigo_transacao' => $response['code'],
+                    'valor' => $response['grossAmount'],
+                ]);
 
                 return ['message'=> 'Pagamento processado com sucesso'];
             }
