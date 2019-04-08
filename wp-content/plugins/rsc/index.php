@@ -19,6 +19,7 @@ use MocaBonita\tools\MbPath;
 use RSC\common\Sessao;
 use RSC\controller\AssinaturaController;
 use RSC\controller\ClienteController;
+use RSC\controller\HomeController;
 use RSC\controller\LoginController;
 use RSC\controller\MensalidadeController;
 use RSC\model\EstadoCivil;
@@ -58,6 +59,10 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
     $loginPage = MbPage::create("Login")
         ->setController(LoginController::class)
         ->setSlug("login");
+
+    $homePage = MbPage::create("Home")
+        ->setController(HomeController::class)
+        ->setSlug("home");
 
     $loginPage->addMbAction("logar")
         ->setRequiresMethod("POST")
@@ -242,5 +247,6 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
     $mocabonita->addMbPage($clientePage);
     $mocabonita->addMbPage($assinaturaPage);
     $mocabonita->addMbPage($loginPage);
+    $mocabonita->addMbPage($homePage);
 
 }, true);
