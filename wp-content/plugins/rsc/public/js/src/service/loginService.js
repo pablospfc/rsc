@@ -11,7 +11,7 @@ appFrontRsc.factory('loginService', function($http, $request, $rootScope, $q, $l
                 var uid = data.uid;
                 if(uid){
                     sessionService.set('user',uid);
-                    $location.path("/cadastro");
+                    $location.path("/areacliente");
                 }
             }, function (meta) {
                 $scope.successLogin = false;

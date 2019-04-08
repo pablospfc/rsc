@@ -49,6 +49,13 @@ appFrontRsc.config(function ($routeProvider) {
             })),
             controller: 'clienteController',
         })
+        .when('/areacliente', {
+            templateUrl: urlAdmin("admin-post.php?" + serialize({
+                page: "areacliente",
+                action: "areacliente"
+            })),
+            controller: 'areaclienteController',
+        })
         .otherwise({redirectTo: '/login'});
 });
 
@@ -56,7 +63,7 @@ appFrontRsc.run(function ($rootScope, bootstrap, $location, loginService) {
     $rootScope.alert = bootstrap.alert();
     $rootScope.loading = bootstrap.loading();
 //prevent going to homepage if not loggedin
-    var routePermit = ['/'];
+    var routePermit = ['/areacliente','cadastro'];
     $rootScope.$on('$routeChangeStart', function(){
         if(routePermit.indexOf($location.path()) !=-1){
             loginService.islogged().then(function(response){
@@ -75,7 +82,7 @@ appFrontRsc.run(function ($rootScope, bootstrap, $location, loginService) {
             loginService.islogged().then(function(response){
                 console.log(response);
                 if(response.status == true){
-                    $location.path('/home');
+                    $location.path('/');
                 }
             },function(error){
                 console.log(error);

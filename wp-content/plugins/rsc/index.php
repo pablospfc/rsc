@@ -19,7 +19,7 @@ use MocaBonita\tools\MbPath;
 use RSC\common\Sessao;
 use RSC\controller\AssinaturaController;
 use RSC\controller\ClienteController;
-use RSC\controller\HomeController;
+use RSC\controller\AreaClienteController;
 use RSC\controller\LoginController;
 use RSC\controller\MensalidadeController;
 use RSC\model\EstadoCivil;
@@ -60,9 +60,9 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setController(LoginController::class)
         ->setSlug("login");
 
-    $homePage = MbPage::create("Home")
-        ->setController(HomeController::class)
-        ->setSlug("home");
+    $areaClientePage = MbPage::create("AreaCliente")
+        ->setController(AreaClienteController::class)
+        ->setSlug("areacliente");
 
     $loginPage->addMbAction("logar")
         ->setRequiresMethod("POST")
@@ -242,11 +242,37 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pJsDir("src/service/loginService.js"))
         ->setJs(MbPath::pJsDir("src/service/sessionService.js"));
 
+    $mocabonita->addMbShortcode("area_cliente", $areaClientePage, "areacliente")
+        ->getMbAsset()
+        ->setJs(MbPath::pBwDir("jquery/dist/jquery.min.js"))
+        //->setCss(MbPath::pCssDir("style.css"))
+        //->setCss(MbPath::pBwDir("bootstrap/dist/css/bootstrap.min.css"))
+        //->setCss(MbPath::pBwDir("bootstrap/dist/css/bootstrap-grid.min.css"))
+        //->setJs(MbPath::pBwDir("bootstrap/dist/js/bootstrap.min.js"))
+        ->setJs(MbPath::pBwDir("angular/angular.min.js"))
+        ->setJs(MbPath::pBwDir("angular-sanitize/angular-sanitize.min.js"))
+        ->setJs(MbPath::pBwDir("angular-locale-pt-br/angular-locale_pt-br.js"))
+        ->setJs(MbPath::pBwDir("barbara-js/barbarajs.min.js"))
+        ->setJs(MbPath::pBwDir("angular-modal-service/dst/angular-modal-service.min.js"))
+        ->setJs(MbPath::pBwDir("angular-br-filters/release/angular-br-filters.min.js"))
+        ->setJs(MbPath::pBwDir("angular-messages/angular-messages.min.js"))
+        ->setJs(MbPath::pBwDir("angular-route/angular-route.min.js"))
+        ->setJs(MbPath::pBwDir("angular-wizard/dist/angular-wizard.min.js"))
+        ->setJs(MbPath::pBwDir("angular-input-masks/angular-input-masks-standalone.js"))
+        ->setJs(MbPath::pBwDir("ng-cpf-cnpj/lib/ngCpfCnpj.js"))
+        ->setJs(MbPath::pJsDir("pagseguro/pagseguro.directpayment.js"))
+        ->setJs(MbPath::pJsDir("src/app.js"))
+        ->setJs(MbPath::pJsDir("src/controller/login.js"))
+        ->setJs(MbPath::pJsDir("src/controller/areacliente.js"))
+        ->setJs(MbPath::pJsDir("src/service/RscFrontService.js"))
+        ->setJs(MbPath::pJsDir("src/service/loginService.js"))
+        ->setJs(MbPath::pJsDir("src/service/sessionService.js"));
+
 
     $mocabonita->addMbPage($mensalidadePage);
     $mocabonita->addMbPage($clientePage);
     $mocabonita->addMbPage($assinaturaPage);
     $mocabonita->addMbPage($loginPage);
-    $mocabonita->addMbPage($homePage);
+    $mocabonita->addMbPage($areaClientePage);
 
 }, true);

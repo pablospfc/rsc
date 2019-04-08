@@ -13,14 +13,26 @@ use MocaBonita\controller\MbController;
 use MocaBonita\tools\MbRequest;
 use MocaBonita\tools\MbResponse;
 
-class HomeController extends MbController
+class AreaClienteController extends MbController
 {
     public function indexAction(MbRequest $mbRequest, MbResponse $mbResponse)
     {
+        throw new \Exception("Action indisponível!");
+    }
+
+    public function areaClienteShortcode()
+    {
         return $this->getMbView()
-            ->setPage("home")
+            ->setPage("areacliente")
             ->setAction("index");
     }
 
+    public function areaClienteAction()
+    {
+        return $this->getMbView()
+            ->setTemplate("modal")
+            ->setPage("areacliente")
+            ->setAction("areacliente");
+    }
 
 }
