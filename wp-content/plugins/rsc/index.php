@@ -22,6 +22,7 @@ use RSC\controller\ClienteController;
 use RSC\controller\AreaClienteController;
 use RSC\controller\LoginController;
 use RSC\controller\MensalidadeController;
+use RSC\model\Cliente;
 use RSC\model\EstadoCivil;
 use RSC\model\Genero;
 use RSC\model\Log;
@@ -63,6 +64,14 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
     $areaClientePage = MbPage::create("AreaCliente")
         ->setController(AreaClienteController::class)
         ->setSlug("areacliente");
+
+    $areaClientePage->addMbAction("getDadosPessoais")
+        ->setRequiresMethod("GET")
+        ->setRequiresLogin(false)
+        ->setCapability("read")
+        ->setCallback(function () {
+            return (new Cliente())->getDadosPessoais();
+        });
 
     $loginPage->addMbAction("logar")
         ->setRequiresMethod("POST")

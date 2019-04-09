@@ -18,10 +18,6 @@ appFrontRsc.controller('clienteController', function ($scope, loginService, $roo
         });
     };
 
-    $scope.sair = function(){
-        loginService.logout();
-    };
-
     $scope.getDadosCartao = function () {
         console.log(PagSeguroDirectPayment.getSenderHash());
     };
@@ -31,7 +27,6 @@ appFrontRsc.controller('clienteController', function ($scope, loginService, $roo
         RscService.getSessao($scope).then(function (data) {
             PagSeguroDirectPayment.setSessionId(data);
         }, function (error) {
-            console.log(error);
         });
     };
 
@@ -56,14 +51,12 @@ appFrontRsc.controller('clienteController', function ($scope, loginService, $roo
             PagSeguroDirectPayment.getBrand({
                 cardBin: numero,
                 success: function (response) {
-                    console.log(response.brand.name);
                 },
                 error: function (response) {
-                    console.log(response);
                 },
             });
         }, function (error) {
-            console.log(error);
+
         });
         // PagSeguroDirectPayment.getBrand({cardBin: numero,
         //     success: function(response) {
@@ -84,7 +77,6 @@ appFrontRsc.controller('clienteController', function ($scope, loginService, $roo
             PagSeguroDirectPayment.getBrand({
                 cardBin: formulario.numero,
                 success: function (response) {
-                    console.log(response.brand.name);
 
                     PagSeguroDirectPayment.createCardToken({
                         cardNumber: formulario.numero,
@@ -93,17 +85,14 @@ appFrontRsc.controller('clienteController', function ($scope, loginService, $roo
                         expirationMonth: formulario.mes_expiracao,
                         expirationYear: formulario.ano_expiracao,
                         success: function (response) {
-                            console.log('Token: ' + response.card.token);
                             formulario.token = response.card.token;
                             RscService.assinarPlano(formulario);
                         },
                         error: function (response) {
-                            console.log(response);
                         },
                     });
                 },
                 error: function (error) {
-                    console.log(error);
                 },
             });
 

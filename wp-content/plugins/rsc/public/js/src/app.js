@@ -63,7 +63,7 @@ appFrontRsc.run(function ($rootScope, bootstrap, $location, loginService) {
     $rootScope.alert = bootstrap.alert();
     $rootScope.loading = bootstrap.loading();
 //prevent going to homepage if not loggedin
-    var routePermit = ['/areacliente','cadastro'];
+    var routePermit = ['/areacliente'];
     $rootScope.$on('$routeChangeStart', function(){
         if(routePermit.indexOf($location.path()) !=-1){
             loginService.islogged().then(function(response){
@@ -71,7 +71,6 @@ appFrontRsc.run(function ($rootScope, bootstrap, $location, loginService) {
                     $location.path('/');
                 }
             },function(error){
-                console.log(error);
             });
         }
     });
@@ -80,12 +79,11 @@ appFrontRsc.run(function ($rootScope, bootstrap, $location, loginService) {
     $rootScope.$on('$routeChangeStart', function(){
         if(sessionStarted.indexOf($location.path()) !=-1){
             loginService.islogged().then(function(response){
-                console.log(response);
                 if(response.status == true){
                     $location.path('/');
                 }
             },function(error){
-                console.log(error);
+
             });
         }
     });

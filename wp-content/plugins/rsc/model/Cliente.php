@@ -13,6 +13,7 @@ namespace RSC\model;
 use MocaBonita\tools\eloquent\MbDatabase;
 use MocaBonita\tools\eloquent\MbModel;
 use RSC\common\Encryption;
+use RSC\common\Sessao;
 use RSC\common\Validation;
 
 class Cliente extends  MbModel
@@ -81,6 +82,17 @@ class Cliente extends  MbModel
             MbDatabase::rollBack();
             Log::createFromException($e);
             throw new \Exception("Não foi possível fazer o seu cadastro. Por favor tente novamente!");
+        }
+    }
+
+    public function getDadosPessoais(){
+        try {
+            $dados = Sessao::instanciar()->get('user');
+
+            return $dados;
+        }catch(\Exception $e){
+            Log::createFromException($e);
+            throw new \Exception("Erro ao carregar dados!");
         }
     }
 

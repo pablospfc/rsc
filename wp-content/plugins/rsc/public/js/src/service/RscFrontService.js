@@ -23,6 +23,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
         return deferred.promise;
     };
 
+
     this.cadastrarContrato = function (formulario) {
         var deferred = $q.defer();
         $rootScope.alert.changeShow(false);
@@ -129,8 +130,6 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
             .load($scope.loading.getRequestLoad('Iniciando Sessao...'))
             .send(function (data) {
                 //$scope.id_sessao = data[0][0];
-                deferred.resolve(data[0][0]);
-                //console.log($scope.id_sessao);
             }, function (meta) {
                 $scope.alert.responseError(meta);
                 $scope.alert.changeType("danger");
@@ -254,6 +253,27 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
                 $scope.listFaturamentos= undefined;
                 $scope.alert.responseError(meta);
                 $scope.alert.changeType("danger");
+            });
+    };
+
+    this.getDadosPessoais = function ($scope) {
+        $scope.alert.changeShow(false);
+        $scope.mensalidade =undefined;
+        $request.get(urlAdmin("admin-ajax.php"))
+            .addParams({
+                page: "areacliente",
+                action: "getDadosPessoais",
+            })
+            .load($scope.loading.getRequestLoad('Carregando dados pessoais...'))
+            .send(function (data) {
+                $scope.formCliente = data[0];
+                $scope.formCliente.id_sexo= data[0].id_sexo;
+                console.log($scope.formCliente.id_sexo);
+                console.log(data[0].id_sexo);
+            }, function (meta) {
+                $scope.alert.responseError(meta);
+                $scope.alert.changeType("danger");
+
             });
     };
 

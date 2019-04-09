@@ -12,6 +12,7 @@ namespace RSC\controller;
 use MocaBonita\controller\MbController;
 use MocaBonita\tools\MbRequest;
 use MocaBonita\tools\MbResponse;
+use RSC\model\Cliente;
 
 class AreaClienteController extends MbController
 {
@@ -33,6 +34,10 @@ class AreaClienteController extends MbController
             ->setTemplate("modal")
             ->setPage("areacliente")
             ->setAction("areacliente");
+    }
+
+    public function getDadosPessoaisAction(){
+        return (new Cliente())->getDadosPessoais();
     }
 
 }

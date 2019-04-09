@@ -18,7 +18,7 @@ class Login extends MbModel
     public $timestamps = true;
 
     public function autenticar($dados){
-
+        Sessao::instanciar()->destruir('user');
         $dados = self::select(
             "cli.*",
             "usu.login"
@@ -40,7 +40,7 @@ class Login extends MbModel
         }
 
         $user = uniqid("ang_");
-        Sessao::instanciar()->set('user',$user);
+        Sessao::instanciar()->set('user',$dados);
 
         return ['dados' => $dados,'uid' => $user];
     }
