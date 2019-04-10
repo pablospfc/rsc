@@ -4,7 +4,7 @@
             <a class="navbar-brand" href="#">Área do Cliente</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a ng-click="abrirDadosPessoais()" href="">Dados Pessoais</a></li>
+            <li><a ng-click="abrirDadosPessoais()" href="">Dados Pessoais</a></li>
             <li><a ng-click="abrirPagamentos()" href="">Pagamentos</a></li>
             <li><a ng-click="abrirDocumentos()" href="#">Documentos</a></li>
             <li><a ng-click="abrirPlano()" href="#">Plano</a></li>
@@ -12,6 +12,13 @@
         </ul>
     </div>
 </nav>
+
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <div alert-bootstrap></div>
+        <div loading-bootstrap></div>
+    </div>
+</div>
 
 <div class="col-sm-10 col-sm-offset-1" ng-if="formCliente">
     <form name="formDadosCliente"
@@ -46,7 +53,7 @@
                 <select name="genero"
                         id="genero"
                         ng-model="formCliente.id_sexo"
-                        ng-options="genero.id as genero.nome for genero in listaGeneros"
+                        ng-options="genero as genero.nome for genero in listaGeneros track by genero.id"
                         ng-required="true"
                         class="form-control">
                 </select>

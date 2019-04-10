@@ -267,9 +267,9 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
             .load($scope.loading.getRequestLoad('Carregando dados pessoais...'))
             .send(function (data) {
                 $scope.formCliente = data[0];
-                $scope.formCliente.id_sexo= data[0].id_sexo;
+                $scope.formCliente.id_sexo.id = data[0].id_sexo;
                 console.log($scope.formCliente.id_sexo);
-                console.log(data[0].id_sexo);
+                //console.log(data[0].id_sexo);
             }, function (meta) {
                 $scope.alert.responseError(meta);
                 $scope.alert.changeType("danger");
