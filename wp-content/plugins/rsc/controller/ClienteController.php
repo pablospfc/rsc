@@ -27,6 +27,11 @@ class ClienteController extends MbController
         return (new Cliente())->inserir($mbRequest->inputSource());
     }
 
+    public function atualizarClienteAction(MbRequest $mbRequest)
+    {
+        return (new Cliente())->atualizar($mbRequest->inputSource());
+    }
+
     public function cadastrarContratoAction(MbRequest $mbRequest)
     {
         return (new Contrato())->inserir($mbRequest->inputSource());

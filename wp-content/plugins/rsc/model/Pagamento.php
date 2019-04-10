@@ -10,6 +10,7 @@ namespace RSC\model;
 
 
 use MocaBonita\tools\eloquent\MbModel;
+use RSC\common\Sessao;
 
 class Pagamento extends MbModel
 {
@@ -37,7 +38,37 @@ class Pagamento extends MbModel
             Log::createFromException($e);
             throw new \Exception("Não foi possível cadastrar pagamento no sistema.");
         }
+    }
 
+    public function listarTransacoes(){
+        $idCliente = Sessao::instanciar()->get('user')[0]['id'];
+        $dados = self::select(
+            "pag.valor",
+            "pag.data_transacao",
+            "sta.nome as status",
+            "cli.nome as nome",
+            "men.socios_minimo",
+            "men.socios_maximo",
+            "men.funcionarios_minimo",
+            "men.funcionarios_maximo",
+            "tpe.nome as tipo_empresa",
+            "fpg.nome as forma_pagamento"
+        )
+            ->from("rsc_pagamento as pag")
+            ->join("rsc_forma_pagamento as fpg","fpg.id","=","pag.id_forma_pagamento")
+            ->join("rsc_contrato as con","con.id","=","pag.id_contrato")
+            ->join("rsc_cliente as cli","cli.id","=","con.id_cliente")
+            ->join("rsc_status as sta","sta.id","=","pag.id_status")
+            ->join("rsc_mensalidade as men","men.id","=","con.id_mensalidade")
+            ->join("rsc_tipo_empresa as tpe","tpe.id","=","men.id_tipo_empresa")
+            ->where("cli.id","=",$idCliente)
+            ->get()
+            ->toArray();
+
+        if (!is_array($dados) || empty($dados))
+            throw new \Exception('Não foi possível listar suas transações!');
+
+        return $dados;
 
     }
 

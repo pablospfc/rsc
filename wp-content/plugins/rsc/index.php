@@ -22,6 +22,7 @@ use RSC\controller\ClienteController;
 use RSC\controller\AreaClienteController;
 use RSC\controller\LoginController;
 use RSC\controller\MensalidadeController;
+use RSC\controller\PagamentoController;
 use RSC\model\Cliente;
 use RSC\model\EstadoCivil;
 use RSC\model\Genero;
@@ -49,6 +50,10 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setController(MensalidadeController::class)
         ->setSlug("mensalidade");
 
+    $pagamentoPage = MbPage::create("Pagamento")
+        ->setController(PagamentoController::class)
+        ->setSlug("pagamento");
+
     $clientePage = MbPage::create("Cliente")
         ->setController(ClienteController::class)
         ->setSlug("cliente");
@@ -61,6 +66,11 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setController(LoginController::class)
         ->setSlug("login");
 
+    $pagamentoPage->addMbAction("listarTransacoes")
+        ->setRequiresMethod("GET")
+        ->setRequiresLogin(false)
+        ->setCapability("read");
+
     $areaClientePage = MbPage::create("AreaCliente")
         ->setController(AreaClienteController::class)
         ->setSlug("areacliente");
@@ -72,6 +82,11 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setCallback(function () {
             return (new Cliente())->getDadosPessoais();
         });
+
+    $areaClientePage->addMbAction("atualizarCliente")
+        ->setRequiresMethod("POST")
+        ->setRequiresLogin(false)
+        ->setCapability("read");
 
     $loginPage->addMbAction("logar")
         ->setRequiresMethod("POST")
@@ -283,5 +298,6 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
     $mocabonita->addMbPage($assinaturaPage);
     $mocabonita->addMbPage($loginPage);
     $mocabonita->addMbPage($areaClientePage);
+    $mocabonita->addMbPage($pagamentoPage);
 
 }, true);

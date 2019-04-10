@@ -1,5 +1,9 @@
 appFrontRsc.service('RscService', function ($request, $location, WizardHandler, $rootScope, $q) {
 
+    var getFromArray = function(array,id) {
+        var result = $.grep(array, function(e){ return e.id == id; });
+        return result[0];
+    };
     this.cadastrarCliente = function ($scope) {
         var deferred = $q.defer();
         $rootScope.alert.changeShow(false);
@@ -21,6 +25,24 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
         });
 
         return deferred.promise;
+    };
+
+    this.atualizarCliente = function ($scope) {
+        $scope.alert.changeShow(false);
+        $request.post(urlAdmin("admin-ajax.php")).addParams({
+            page: 'cliente',
+            action: 'atualizarCliente'
+        }).addData($scope.formCliente).load($scope.loading.getRequestLoad('Atualizando seus dados...')).send(function (data) {
+            $scope.alert.responseSuccess(data.message);
+            $scope.processando = false;
+            //$scope.formCliente = data;
+        }, function (meta) {
+            //$scope.formCliente = data;
+            $scope.alert.responseError(meta);
+            $scope.alert.changeType('danger');
+            $scope.alert.changeTitle('');
+        });
+
     };
 
 
@@ -116,6 +138,23 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
                 $scope.alert.responseError(meta);
                 $scope.alert.changeType("danger");
 
+            });
+    };
+
+    this.listarTransacoes = function ($scope) {
+        $scope.formCliente = undefined;
+        $scope.alert.changeShow(false);
+        $request.get(urlAdmin("admin-ajax.php"))
+            .addParams({
+                page: "pagamento",
+                action: "listarTransacoes",
+            })
+            .load($scope.loading.getRequestLoad('Listando Transações...'))
+            .send(function (data) {
+                $scope.listaTransacoes = data;
+            }, function (meta) {
+                $scope.alert.responseError(meta);
+                $scope.alert.changeType("danger");
             });
     };
 
@@ -257,6 +296,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
     };
 
     this.getDadosPessoais = function ($scope) {
+        $scope.listaTransacoes = undefined;
         $scope.alert.changeShow(false);
         $scope.mensalidade =undefined;
         $request.get(urlAdmin("admin-ajax.php"))
@@ -267,9 +307,8 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
             .load($scope.loading.getRequestLoad('Carregando dados pessoais...'))
             .send(function (data) {
                 $scope.formCliente = data[0];
-                $scope.formCliente.id_sexo.id = data[0].id_sexo;
-                console.log($scope.formCliente.id_sexo);
-                //console.log(data[0].id_sexo);
+                $scope.formCliente.id_sexo = getFromArray($scope.listaGeneros,$scope.formCliente.id_sexo);
+                $scope.formCliente.id_estado_civil = getFromArray($scope.listaEstadosCivis,$scope.formCliente.id_estado_civil);
             }, function (meta) {
                 $scope.alert.responseError(meta);
                 $scope.alert.changeType("danger");

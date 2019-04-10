@@ -29,7 +29,6 @@ class Mensalidade extends MbModel
 
     public function getMensalidade($socios,$funcionarios,$idFaturamento,$idTipoEmpresa)
     {
-
             $dados = self::select(
                         "id",
                                  "mensalidade"

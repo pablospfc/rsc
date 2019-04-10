@@ -8,8 +8,12 @@ appFrontRsc.controller('areaclienteController', function ($scope, RscService,log
         RscService.getDadosPessoais($scope);
     };
 
-    $scope.abrirPagamentos = function(){
+    $scope.atualizarCliente = function(){
+       RscService.atualizarCliente($scope);
+    };
 
+    $scope.abrirPagamentos = function(){
+        RscService.listarTransacoes($scope);
     };
 
     $scope.abrirDocumentos = function(){

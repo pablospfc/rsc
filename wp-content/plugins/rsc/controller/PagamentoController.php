@@ -25,4 +25,8 @@ class PagamentoController extends MbController
        return (new Pagamento())->inserir($request->inputSource('notificationCode'),$request->inputSource());
     }
 
+    public function listarTransacoesAction(){
+        return (new Pagamento())->listarTransacoes();
+    }
+
 }
