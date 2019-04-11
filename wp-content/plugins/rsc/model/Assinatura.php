@@ -11,7 +11,9 @@ namespace RSC\model;
 use CWG\PagSeguro\PagSeguroAssinaturas;
 use CWG\PagSeguro\PagSeguroCompras;
 use MocaBonita\tools\eloquent\MbDatabase;
+use RSC\common\Sessao;
 use RSC\model\Contrato;
+
 class Assinatura
 {
     private $email = "claudiopablosilva@hotmail.com";
@@ -69,7 +71,7 @@ class Assinatura
 
     public function assinar($dados)
     {
-        $data = implode("/",array_reverse(explode("-",$dados['data_nascimento'])));
+        $data = implode("/", array_reverse(explode("-", $dados['data_nascimento'])));
         //Nome do comprador igual a como esta no CARTÂO
         $this->pagseguro->setNomeCliente($dados['nome']);
         //Email do comprovador
@@ -114,7 +116,7 @@ class Assinatura
     public function cancelar($codePagSeguro)
     {
         try {
-            print_r($this->pagseguro->cancelarAssinatura($codePagSeguro));
+            return $this->pagseguro->cancelarAssinatura($codePagSeguro);
         } catch (\Exception $e) {
             Log::createFromException($e);
             throw new \Exception('Não foi possível cancelar sua assinatura.');
@@ -125,35 +127,68 @@ class Assinatura
     {
         header("access-control-allow-origin: https://sandbox.pagseguro.uol.com.br");
         try {
-            $compra = new PagSeguroCompras($this->email,$this->token,$this->sandbox);
+            $compra = new PagSeguroCompras($this->email, $this->token, $this->sandbox);
             if ($post['notificationType'] == 'transaction') {
                 $codigo = $post['notificationCode']; //Recebe o código da notificação e busca as informações de como está a assinatura
                 $response = $compra->consultarNotificacao($codigo);
 
-                $idContrato = Contrato::where('id_cliente','=',$response['reference'])
+                $idContrato = Contrato::where('id_cliente', '=', $response['reference'])
                     ->first(['id']);
-
-//                Pagamento::where('id_contrato', $idContrato->id)
-//                          ->update([
-//                              'id_status' => $response['status'],
-//                              'data_transacao' =>$response['lastEventDate'],
-//                              'codigo_transacao' =>$response['code'],
-//                          ]);
 
                 (new Pagamento())->inserir([
                     'id_contrato' => $idContrato->id,
                     'id_status' => $response['status'],
                     'data_transacao' => $response['lastEventDate'],
                     'codigo_transacao' => $response['code'],
+                    'id_forma_pagamento' => 1,
                     'valor' => $response['grossAmount'],
                 ]);
 
-                return ['message'=> 'Pagamento processado com sucesso'];
+                return ['message' => 'Pagamento processado com sucesso'];
+
+            } elseif ($post['notificationType'] == 'preApproval') {
+                $codigo = $post['notificationCode']; //Recebe o código da notificação e busca as informações de como está a assinatura
+                $response = $this->pagseguro->consultarNotificacao($codigo);
+                Contrato::where('codigo_assinatura', $response['code'])
+                    ->update(['id_status_assinatura' => $this->setStatusAssinatura($response['status'])]);
+
+                return ['message' => 'Assinatura atualizada com sucesso'];
             }
+            return;
         } catch (\Exception $e) {
             Log::createFromException($e);
             throw new \Exception("Não foi possível atualizar o pagamento");
         }
+    }
+
+    public function getDadosAssinatura()
+    {
+        $idCliente = Sessao::instanciar()->get('user')[0]['id'];
+        $dados = Contrato::select(
+            "cli.nome as nome",
+            "men.socios_minimo",
+            "men.socios_maximo",
+            "men.funcionarios_minimo",
+            "men.funcionarios_maximo",
+            "tpe.nome as tipo_empresa",
+            "men.mensalidade as valor",
+            "fat.nome as faturamento",
+            "sta.nome as status"
+        )
+            ->from("rsc_contrato as con")
+            ->join("rsc_cliente as cli", "cli.id", "=", "con.id_cliente")
+            ->join("rsc_mensalidade as men", "men.id", "=", "con.id_mensalidade")
+            ->join("rsc_tipo_empresa as tpe", "tpe.id", "=", "men.id_tipo_empresa")
+            ->join("rsc_faturamento as fat", "fat.id", "=", "men.id_faturamento")
+            ->join("rsc_status_assinatura as sta","sta.id","=","con.id_status_assinatura")
+            ->where("cli.id", "=", $idCliente)
+            ->get()
+            ->toArray();
+
+        if (!is_array($dados) || empty($dados))
+            throw new \Exception('Não foi possível abrir sua assinatura!');
+
+        return $dados;
     }
 
     private function setStatusAssinatura($status)
@@ -191,7 +226,6 @@ class Assinatura
 
         return $newStatus;
     }
-
 
 
 }

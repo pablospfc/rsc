@@ -20,8 +20,8 @@ appFrontRsc.controller('areaclienteController', function ($scope, RscService,log
 
     };
 
-    $scope.abrirPlano = function(){
-
+    $scope.abrirAssinatura = function(){
+      RscService.getDadosAssinatura($scope);
     };
 
     $scope.sair = function(){

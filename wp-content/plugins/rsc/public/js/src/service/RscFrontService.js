@@ -143,6 +143,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
 
     this.listarTransacoes = function ($scope) {
         $scope.formCliente = undefined;
+        $scope.listaAssinaturas = undefined;
         $scope.alert.changeShow(false);
         $request.get(urlAdmin("admin-ajax.php"))
             .addParams({
@@ -244,6 +245,24 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
             });
     };
 
+    this.getDadosAssinatura = function ($scope) {
+        $scope.listaTransacoes = undefined;
+        $scope.formCliente = undefined
+        $scope.alert.changeShow(false);
+        $request.get(urlAdmin("admin-ajax.php"))
+            .addParams({
+                page: "assinatura",
+                action: "getDadosAssinatura",
+            })
+            .load($scope.loading.getRequestLoad('Gerando dados da assinatura...'))
+            .send(function (data) {
+                $scope.listaAssinaturas = data;
+            }, function (meta) {
+                $scope.alert.responseError(meta);
+                $scope.alert.changeType("danger");
+            });
+    };
+
     this.getEstadosCivis = function ($scope) {
         $scope.alert.changeShow(false);
         $request.get(urlAdmin("admin-ajax.php"))
@@ -297,6 +316,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
 
     this.getDadosPessoais = function ($scope) {
         $scope.listaTransacoes = undefined;
+        $scope.listaAssinaturas = undefined;
         $scope.alert.changeShow(false);
         $scope.mensalidade =undefined;
         $request.get(urlAdmin("admin-ajax.php"))

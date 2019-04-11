@@ -22,6 +22,7 @@ class Pagamento extends MbModel
         'id_status',
         'codigo_transacao',
         'data_transacao',
+        'id_forma_pagamento',
     ];
 
     public function inserir($dados){
@@ -32,6 +33,7 @@ class Pagamento extends MbModel
                 'id_status'        => $dados['id_status'],
                 'codigo_transacao' => $dados['codigo_transacao'],
                 'data_transacao'   => $dados['data_transacao'],
+                'id_forma_pagamento' => $dados['id_forma_pagamento'],
             ]);
             return ['message'=>'Pagamento realizado com sucesso','id'=>$pagamento->id];
         }catch(\Exception $e){
@@ -62,6 +64,7 @@ class Pagamento extends MbModel
             ->join("rsc_mensalidade as men","men.id","=","con.id_mensalidade")
             ->join("rsc_tipo_empresa as tpe","tpe.id","=","men.id_tipo_empresa")
             ->where("cli.id","=",$idCliente)
+            ->where("sta.id","=",3)
             ->get()
             ->toArray();
 

@@ -126,6 +126,11 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setCapability("read")
         ->setRequiresLogin(false);
 
+    $assinaturaPage->addMbAction("getDadosAssinatura")
+        ->setRequiresMethod("GET")
+        ->setCapability("read")
+        ->setRequiresLogin(false);
+
     $assinaturaPage->addMbAction("assinar")
         ->setRequiresMethod("POST")
         ->setRequiresLogin(false)
