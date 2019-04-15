@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: RSC
- * Plugin URI: http://www.rsccontabilidade.com.br
+ * Plugin URI: https://www.rsccontabilidade.com.br
  * Description: RSC Contabilidade
  * Version: 2.0
  * Author: Pablo Santos
@@ -87,6 +87,11 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setRequiresMethod("POST")
         ->setRequiresLogin(false)
         ->setCapability("read");
+
+    $areaClientePage->addMbAction("areacliente")
+        ->setRequiresMethod("GET")
+        ->setCapability("read")
+        ->setRequiresLogin(false);
 
     $loginPage->addMbAction("logar")
         ->setRequiresMethod("POST")
@@ -222,9 +227,8 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
             return Faturamento::getFaturamentoBySociosFuncionarios($mbRequest->query('socios'), $mbRequest->query('funcionarios'));
         });
 
-    $mocabonita->addMbShortcode("mensalidade_calc", $mensalidadePage, "mensalidade");
-
-    $mensalidadePage->getMbAsset()
+    $mocabonita->addMbShortcode("mensalidade_calc", $mensalidadePage, "mensalidade")
+        ->getMbAsset()
         ->setJs(MbPath::pBwDir("jquery/dist/jquery.min.js"))
         ->setCss(MbPath::pCssDir("style.css"))
         //->setCss(MbPath::pBwDir("bootstrap/dist/css/bootstrap.min.css"))
@@ -232,15 +236,21 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         //->setJs(MbPath::pBwDir("bootstrap/dist/js/bootstrap.min.js"))
         ->setJs(MbPath::pBwDir("angular/angular.min.js"))
         ->setJs(MbPath::pBwDir("angular-sanitize/angular-sanitize.min.js"))
-        ->setJs(MbPath::pBwDir("angular-i18n/angular-locale_pt-br.js"))
+        //->setJs(MbPath::pBwDir("angular-i18n/angular-locale_pt-br.js"))
         ->setJs(MbPath::pBwDir("barbara-js/barbarajs.min.js"))
         ->setJs(MbPath::pBwDir("angular-modal-service/dst/angular-modal-service.min.js"))
         ->setJs(MbPath::pBwDir("angular-br-filters/release/angular-br-filters.min.js"))
         ->setJs(MbPath::pBwDir("angular-messages/angular-messages.min.js"))
         ->setJs(MbPath::pBwDir("angular-route/angular-route.min.js"))
+        ->setJs(MbPath::pBwDir("angular-wizard/dist/angular-wizard.min.js"))
+        ->setJs(MbPath::pBwDir("angular-input-masks/angular-input-masks-standalone.js"))
+        ->setJs(MbPath::pBwDir("ng-cpf-cnpj/lib/ngCpfCnpj.js"))
         ->setJs(MbPath::pJsDir("src/app.js"))
+        ->setJs(MbPath::pJsDir("src/controller/login.js"))
         ->setJs(MbPath::pJsDir("src/controller/mensalidade.js"))
         ->setJs(MbPath::pJsDir("src/controller/mensalidade-modal.js"))
+        ->setJs(MbPath::pJsDir("src/service/loginService.js"))
+        ->setJs(MbPath::pJsDir("src/service/sessionService.js"))
         ->setJs(MbPath::pJsDir("src/service/RscFrontService.js"));
 
     //$mocabonita->addMbShortcode("cadastro_cliente", $clientePage, "cliente")

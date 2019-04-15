@@ -1,4 +1,4 @@
-appFrontRsc.controller('mensalidadeController', function ($scope,$document,RscService, ModalService) {
+appFrontRsc.controller('mensalidadeController', function ($scope, $timeout,$document,RscService, ModalService) {
 
     $scope.showFormMensalidadeModal = function () {
         ModalService.showModal({

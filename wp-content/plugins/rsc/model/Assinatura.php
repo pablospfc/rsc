@@ -105,6 +105,9 @@ class Assinatura
                 'id_status' => 1,
             ]);
 
+            Cliente::where('id', $dados['id_cliente'])
+                ->update(['completou' => true]);
+
             return ['message' => 'O seu pagamento está sendo processado...'];
 
         } catch (\Exception $e) {

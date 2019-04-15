@@ -9,9 +9,13 @@ appFrontRsc.factory('loginService', function($http, $request, $rootScope, $q, $l
                 $scope.alert.responseSuccess(data.message);
                 $rootScope.autenticado = true;
                 var uid = data.uid;
+                var completou = data.dados[0].completou;
                 if(uid){
                     sessionService.set('user',uid);
-                    $location.path("/areacliente");
+                    if (completou == 1)
+                        $location.path("/areacliente");
+                    else
+                        $location.path("/cadastro");
                 }
             }, function (meta) {
                 $scope.successLogin = false;

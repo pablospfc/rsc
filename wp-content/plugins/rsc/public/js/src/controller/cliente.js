@@ -71,13 +71,15 @@ appFrontRsc.controller('clienteController', function ($scope, loginService, $roo
 
 
     $scope.assinarCartao = function (formulario) {
+        console.log(formulario);
         RscService.getSessao($scope).then(function (data) {
+            console.log("chegou aqui sessao");
             PagSeguroDirectPayment.setSessionId(data);
             formulario.hash = PagSeguroDirectPayment.getSenderHash();
             PagSeguroDirectPayment.getBrand({
                 cardBin: formulario.numero,
                 success: function (response) {
-
+                    console.log("chegou aqui segundo");
                     PagSeguroDirectPayment.createCardToken({
                         cardNumber: formulario.numero,
                         brand: response.brand.name,
@@ -86,18 +88,21 @@ appFrontRsc.controller('clienteController', function ($scope, loginService, $roo
                         expirationYear: formulario.ano_expiracao,
                         success: function (response) {
                             formulario.token = response.card.token;
+                            console.log("chegou aqui ultimo");
                             RscService.assinarPlano(formulario);
                         },
                         error: function (response) {
+                            console.log(response);
                         },
                     });
                 },
                 error: function (error) {
+                    console.log(error);
                 },
             });
 
         }, function (error) {
-
+            console.log(error);
         });
 
         /*
