@@ -174,7 +174,8 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
             .load($scope.loading.getRequestLoad('Iniciando Sessao...'))
             .send(function (data) {
                 //$scope.id_sessao = data[0][0];
-                deferred.resolve([0][0]);
+                deferred.resolve(data[0][0]);
+                console.log(data[0][0]);
             }, function (meta) {
                 console.log(meta);
                 $scope.alert.responseError(meta);

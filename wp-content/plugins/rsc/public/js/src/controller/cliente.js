@@ -45,12 +45,13 @@ appFrontRsc.controller('clienteController', function ($scope, loginService, $roo
     };
 
     $scope.getBandeiraCartao = function (numero) {
-        //this.iniciaSessao();
+        console.log("chegou aqui");
         RscService.getSessao($scope).then(function (data) {
             PagSeguroDirectPayment.setSessionId(data);
             PagSeguroDirectPayment.getBrand({
                 cardBin: numero,
                 success: function (response) {
+                    console.log(response);
                 },
                 error: function (response) {
                 },
