@@ -68,8 +68,6 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
     };
 
     this.assinarPlano = function (formulario) {
-        console.log("metodo assinar plano");
-        console.log(formulario);
         //var deferred = $q.defer();
         $rootScope.alert.changeShow(false);
         $request.post(urlAdmin("admin-ajax.php")).addParams({
@@ -78,8 +76,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
         }).addData(formulario).load($rootScope.loading.getRequestLoad('Processando Pagamento...')).send(function (data) {
             $rootScope.alert.responseSuccess(data.message);
             $rootScope.formAssinatura = undefined;
-            //deferred.resolve(data);
-            console.log("assinado com sucesso");
+            WizardHandler.wizard().next();
         }, function (meta) {
             //$scope.formContrato = undefined;
             console.log("erro ao assinar");
@@ -175,7 +172,6 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
             .send(function (data) {
                 //$scope.id_sessao = data[0][0];
                 deferred.resolve(data[0][0]);
-                console.log(data[0][0]);
             }, function (meta) {
                 console.log(meta);
                 $scope.alert.responseError(meta);

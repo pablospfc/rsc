@@ -13,39 +13,26 @@
     </div>
     <wz-step wz-title="Dados Pessoais">
         <div class="col-sm-10 col-sm-offset-1">
-<!--
-            <h2> Campos Obrigatórios </h2>
-            <p>Número do Cartão</p>
-            <input type="text" id="pagseguro_cartao_numero" value="4111111111111111"/>
-
-            <p>CVV do cartão</p>
-            <input type="text" id="pagseguro_cartao_cvv" value="123"/>
-
-            <p>Mês de expiração do Cartao</p>
-            <input type="text" id="pagseguro_cartao_mes" value="12"/>
-
-            <p>Ano de Expiração do Cartão</p>
-            <input type="text" id="pagseguro_cartao_ano" value="2030"/>
-
-            <input type="button" value="Bandeira" ng-click="getBandeiraCartao('4111111111111111')">-->
-
             <form name="formDadosCliente"
                   method="post"
                   ng-submit="salvarCliente()"
                   autocomplete="off"
                   novalidate>
 
-
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="active"><a href="#">Home</a></li>
+                    <li role="presentation"><a href="#">Profile</a></li>
+                    <li role="presentation"><a href="#">Messages</a></li>
+                </ul>
 
                 <h5 class="page-header">Dados do Cliente</h5>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="nome">Nome Completo:(*)</label>
-                        <input type="text"
+                        <input type="nome"
                                ng-model="formCliente.nome"
                                class="form-control"
                                id="nome"
-                               ng-required="true"
                                placeholder="Nome"/>
                     </div>
                     <div class="form-group col-md-3">
@@ -389,18 +376,12 @@
 
     <wz-step wz-title="Pagamento">
         <div class="col-sm-10 col-sm-offset-1">
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="/#cartao" data-toggle="tab">Cartão de Crédito</a></li>
-                <li><a href="/#boleto" data-toggle="tab">Boleto Bancário</a></li>
-            </ul>
 
-            <div class="tab-content">
-                <div class="tab-pane active in" id="cartao">
-                    <form name="formDadosAssinatura" method="post" ng-submit="assinarCartao(formAssinatura)">
+
+                    <form name="formDadosAssibnatura" method="post" ng-submit="assinarCartao(formAssinatura)">
                         <div class="form-group">
                             <label for="numero_cartao">Número do Cartão:(*)</label>
                             <input type="text"
-                                   name="numero"
                                    ng-model="formAssinatura.numero"
                                    class="form-control"
                                    id="numero_cartao"
@@ -410,7 +391,6 @@
                         <div class="form-group">
                             <label for="cvv">CVV:(*)</label>
                             <input type="text"
-                                   name="cvv"
                                    ng-model="formAssinatura.cvv"
                                    class="form-control"
                                    id="cvv"
@@ -420,7 +400,6 @@
                         <div class="form-group">
                             <label for="mes_expiracao">Mês de Expiração:(*)</label>
                             <input type="text"
-                                   name="mes_expiracao"
                                    ng-model="formAssinatura.mes_expiracao"
                                    class="form-control"
                                    id="mes_expiracao"
@@ -430,7 +409,6 @@
                         <div class="form-group">
                             <label for="ano_expiracao">Ano de Expiração:(*)</label>
                             <input type="text"
-                                   name="ano_expiracao"
                                    ng-model="formAssinatura.ano_expiracao"
                                    class="form-control"
                                    id="ano_expiracao"
@@ -448,16 +426,20 @@
 
                             <button class="btn btn-info waves-effect btn-sm"
                                     type="submit"
-                                    ng-disabled="formDadosAssinatura.$error.required">
+                                    ng-disabled="formDadosAssibnatura.$error.required">
                                 Realizar Pagamento
                             </button>
 
                         </div>
                     </form>
-                </div>
-                <div class="tab-pane" id="second-tab">
-                    <p>Em desenvolvimento.</p>
-                </div>
+
+        </div>
+    </wz-step>
+
+    <wz-step wz-title="Finalização">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="alert alert-info" role="alert">
+                O seu pagamento está sendo processado pelo PagSeguro. Você irá receber no seu e-mail, uma notificação de pagamento. Você pode consultar o status da sua transação acessando a área do cliente no nosso site. Obrigado por escolher a RSC Contabilidade.
             </div>
         </div>
     </wz-step>
