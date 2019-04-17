@@ -1,7 +1,7 @@
 {
     "require": {
         "jhorlima/wp-mocabonita": "3.3.6.10",
-        "pagseguro/pagseguro-php-sdk": "^4.2",
-        "carloswgama/php-pagseguro": "2.*"
+        "carloswgama/php-pagseguro": "2.*",
+        "sounoob/pagseguro-php-sdk" : ">=1.0"
     }
 }

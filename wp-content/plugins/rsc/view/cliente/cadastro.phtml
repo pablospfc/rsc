@@ -389,14 +389,12 @@
 
     <wz-step wz-title="Pagamento">
         <div class="col-sm-10 col-sm-offset-1">
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="/#cartao" data-toggle="tab">Cartão de Crédito</a></li>
-                <li><a href="/#boleto" data-toggle="tab">Boleto Bancário</a></li>
-            </ul>
 
-            <div class="tab-content">
-                <div class="tab-pane active in" id="cartao">
-                    <form name="formDadosAssinatura" method="post" ng-submit="assinarCartao(formAssinatura)">
+                <a href="" ng-click="habilitaCartao()" data-toggle="tab">Cartão de Crédito</a>
+                <a href="" ng-click="habilitaBoleto()" data-toggle="tab">Boleto Bancário</a>
+
+
+                    <form ng-if="cartao" name="formDadosAssinatura" method="post" ng-submit="assinarCartao(formAssinatura)">
                         <div class="form-group">
                             <label for="numero_cartao">Número do Cartão:(*)</label>
                             <input type="text"
@@ -454,11 +452,11 @@
 
                         </div>
                     </form>
-                </div>
-                <div class="tab-pane" id="second-tab">
-                    <p>Em desenvolvimento.</p>
-                </div>
+            <div ng-if="boleto">
+                Em desenvolviemnto
+
             </div>
+
         </div>
     </wz-step>
 </wizard>
