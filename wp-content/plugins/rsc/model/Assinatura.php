@@ -16,9 +16,9 @@ use RSC\model\Contrato;
 
 class Assinatura
 {
-    private $email = "claudiopablosilva@hotmail.com";
-    private $token = "2382B416442D464CADC943D232AD6045";
-    private $sandbox = true;
+    private $email = "benidia@rsccontabilidade.com.br";
+    private $token = "66eb507d-d0bf-4020-a6d8-dbf77c43064cedfb35ca406a9f05b8b8d4ba636f4ae3d6f7-60ad-4585-9698-62d638bd30e9";
+    private $sandbox = false;
     private $pagseguro = null;
 
     function __construct()
@@ -30,18 +30,30 @@ class Assinatura
     {
         $id = $this->pagseguro->iniciaSessao();
         return [$id];
+
     }
 
-    public function criarPlano()
+    public function criarPlanoPagseguro(){
+        $dados = (new Mensalidade())->getPlanos();
+
+        foreach($dados as $dado){
+            $plano['referencia'] = $dado['tipo_empresa'];
+            $plano['descricao'] = "Libera o acesso aos serviços de abertuda de empresa do(a) ".$dado['tipo_empresa']." com sócios mínimo de ".$dado['socios_minimo']." e sócios máximo de ".$dado['socios_maximo'].", funcionários mínimo de ".$dado['funcionarios_minimo']." e funcionários máximo de ".$dado['funcionarios_maximo']." com faturamento de ".$dado['faturamento'];
+            $plano['valor'] = $dado['valor'];
+            $this->criarPlano($plano);
+        }
+    }
+
+    public function criarPlano($dados)
     {
         //Cria um nome para o plano
-        $this->pagseguro->setReferencia('LUCRO PRESUMIDO - SERVIÇO');
+        $this->pagseguro->setReferencia($dados['referencia']);
 
 //Cria uma descrição para o plano
-        $this->pagseguro->setDescricao('Libera o acesso mensalmente aos serviços de abertura de empresa lucro presumido de serviço com 1 sócio e nenhum funcionário da RSC Contabilidade');
+        $this->pagseguro->setDescricao($dados['descricao']);
 
 //Valor a ser cobrado a cada renovação
-        $this->pagseguro->setValor('180.00');
+        $this->pagseguro->setValor($dados['valor']);
 
 //De quanto em quanto tempo será realizado uma nova cobrança (MENSAL, BIMESTRAL, TRIMESTRAL, SEMESTRAL, ANUAL)
         $this->pagseguro->setPeriodicidade(PagSeguroAssinaturas::MENSAL);

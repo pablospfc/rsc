@@ -34,7 +34,6 @@ class Boleto extends MbModel
                 'codigo_barras' => $dados['codigo_barras'],
                 'data_vencimento' => $dados['data_vencimento'],
                 'link' => $dados['link'],
-                'senha' => Encryption::encrypt($dados['senha']),
             ]);
                return['message'=> 'Boleto gerados com sucesso'];
 

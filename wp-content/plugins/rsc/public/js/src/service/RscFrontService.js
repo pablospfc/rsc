@@ -89,6 +89,27 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
         //return deferred.promise;
     };
 
+    this.getBoletos = function (formulario) {
+        //var deferred = $q.defer();
+        $rootScope.alert.changeShow(false);
+        $request.post(urlAdmin("admin-ajax.php")).addParams({
+            page: 'assinatura',
+            action: 'gerarBoletos'
+        }).addData(formulario).load($rootScope.loading.getRequestLoad('Gerando Boletos...')).send(function (data) {
+            $rootScope.alert.responseSuccess(data.message);
+            $rootScope.boletos = data;
+            WizardHandler.wizard().next();
+        }, function (meta) {
+            //$scope.formContrato = undefined;
+            $rootScope.alert.responseError(meta);
+            $rootScope.alert.changeType('danger');
+            $rootScope.alert.changeTitle('');
+            //deferred.reject(meta);
+        });
+
+        //return deferred.promise;
+    };
+
 
     this.getDadosPorCep = function($scope){
         var requestLink = function(cep){

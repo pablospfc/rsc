@@ -20,15 +20,19 @@ appFrontRsc.controller('clienteController', function ($scope, loginService, $roo
 
     $scope.habilitaCartao = function(){
       $scope.cartao =true;
+      $scope.boleto = false;
     };
 
     $scope.habilitaBoleto = function(){
         $scope.boleto = true;
+        $scope.cartao = false;
     };
 
     $scope.getDadosCartao = function () {
         console.log(PagSeguroDirectPayment.getSenderHash());
     };
+
+
 
 
     $scope.iniciaSessao = function () {
@@ -121,6 +125,10 @@ appFrontRsc.controller('clienteController', function ($scope, loginService, $roo
 
                 })
                 */
+    };
+
+    $scope.gerarBoletos = function(formulario){
+      RscService.getBoletos(formulario);
     };
 
 

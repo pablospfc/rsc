@@ -13,6 +13,7 @@ use MocaBonita\controller\MbController;
 use MocaBonita\tools\MbRequest;
 use MocaBonita\tools\MbResponse;
 use RSC\model\Assinatura;
+use RSC\model\BoletoPagseguro;
 use RSC\model\Contrato;
 
 class AssinaturaController extends MbController
@@ -23,7 +24,7 @@ class AssinaturaController extends MbController
     }
 
     public function criarPlanoAction(){
-        return (new Assinatura())->criarPlano();
+        return (new Assinatura())->criarPlanoPagseguro();
     }
 
     public function cancelarAction(){
@@ -48,6 +49,10 @@ class AssinaturaController extends MbController
 
     public function getNotificacaoAction(MbRequest $request){
         return (new Assinatura())->getNotificacao($request->inputSource());
+    }
+
+    public function gerarBoletosAction(MbRequest $request){
+        return (new BoletoPagseguro())->gerarBoletos($request->inputSource());
     }
 
 }
