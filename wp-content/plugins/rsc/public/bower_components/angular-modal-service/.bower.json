@@ -1,6 +1,6 @@
 {
   "name": "angular-modal-service",
-  "version": "0.15.1",
+  "version": "0.15.2",
   "homepage": "https://github.com/dwmkerr/angular-modal-service",
   "authors": [
     "Dave Kerr (github.com/dwmkerr)"
@@ -29,19 +29,18 @@
     "*.yml"
   ],
   "dependencies": {
-    "angular": "1.5.0 - 1.6.x"
+    "angular": "1.5.0 - 1.7.x"
   },
   "devDependencies": {
-    "angular-mocks": "1.5.0 - 1.6.x"
+    "angular-mocks": "1.5.0 - 1.7.x"
   },
-  "_release": "0.15.1",
+  "_release": "0.15.2",
   "_resolution": {
     "type": "version",
-    "tag": "v0.15.1",
-    "commit": "78ad97a4a96bef4863e1dffe66ceb11aa2c106a2"
+    "tag": "v0.15.2",
+    "commit": "4c830de5f270da04255c1c2c3e60d94585548f96"
   },
   "_source": "https://github.com/dwmkerr/angular-modal-service.git",
   "_target": "^0.15.1",
-  "_originalSource": "angular-modal-service",
-  "_direct": true
+  "_originalSource": "angular-modal-service"
 }

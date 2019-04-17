@@ -18,6 +18,14 @@ appFrontRsc.controller('clienteController', function ($scope, loginService, $roo
         });
     };
 
+    $scope.habilitaCartao = function(){
+      $scope.cartao =true;
+    };
+
+    $scope.habilitaBoleto = function(){
+        $scope.boleto = true;
+    };
+
     $scope.getDadosCartao = function () {
         console.log(PagSeguroDirectPayment.getSenderHash());
     };

@@ -8,11 +8,10 @@ class ComposerStaticInit32749367af15bdb4df301759eec80524
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
-        '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
-        '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
+        '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -28,11 +27,13 @@ class ComposerStaticInit32749367af15bdb4df301759eec80524
             'Symfony\\Component\\Finder\\' => 25,
             'Symfony\\Component\\EventDispatcher\\' => 34,
             'Symfony\\Component\\Debug\\' => 24,
+            'Sounoob\\pagseguro\\' => 18,
         ),
         'P' => 
         array (
+            'Psr\\SimpleCache\\' => 16,
             'Psr\\Log\\' => 8,
-            'PagSeguro\\' => 10,
+            'Psr\\Container\\' => 14,
         ),
         'M' => 
         array (
@@ -48,6 +49,10 @@ class ComposerStaticInit32749367af15bdb4df301759eec80524
             'Illuminate\\Database\\' => 20,
             'Illuminate\\Contracts\\' => 21,
             'Illuminate\\Container\\' => 21,
+        ),
+        'D' => 
+        array (
+            'Doctrine\\Common\\Inflector\\' => 26,
         ),
         'C' => 
         array (
@@ -96,13 +101,24 @@ class ComposerStaticInit32749367af15bdb4df301759eec80524
         array (
             0 => __DIR__ . '/..' . '/symfony/debug',
         ),
+        'Sounoob\\pagseguro\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sounoob/pagseguro-php-sdk/source',
+            1 => __DIR__ . '/..' . '/sounoob/pagseguro-php-sdk-boleto/source',
+            2 => __DIR__ . '/..' . '/sounoob/pagseguro-php-sdk-core/source',
+            3 => __DIR__ . '/..' . '/sounoob/pagseguro-php-sdk-search-transaction/source',
+        ),
+        'Psr\\SimpleCache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
+        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
-        'PagSeguro\\' => 
+        'Psr\\Container\\' => 
         array (
-            0 => __DIR__ . '/..' . '/pagseguro/pagseguro-php-sdk/source',
+            0 => __DIR__ . '/..' . '/psr/container/src',
         ),
         'MocaBonita\\' => 
         array (
@@ -140,6 +156,10 @@ class ComposerStaticInit32749367af15bdb4df301759eec80524
         array (
             0 => __DIR__ . '/..' . '/illuminate/container',
         ),
+        'Doctrine\\Common\\Inflector\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
+        ),
         'CWG\\PagSeguro\\' => 
         array (
             0 => __DIR__ . '/..' . '/carloswgama/php-pagseguro/src',
@@ -148,16 +168,6 @@ class ComposerStaticInit32749367af15bdb4df301759eec80524
 
     public static $fallbackDirsPsr4 = array (
         0 => __DIR__ . '/..' . '/nesbot/carbon/src',
-    );
-
-    public static $prefixesPsr0 = array (
-        'D' => 
-        array (
-            'Doctrine\\Common\\Inflector\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/inflector/lib',
-            ),
-        ),
     );
 
     public static $classMap = array (
@@ -176,7 +186,6 @@ class ComposerStaticInit32749367af15bdb4df301759eec80524
             $loader->prefixLengthsPsr4 = ComposerStaticInit32749367af15bdb4df301759eec80524::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit32749367af15bdb4df301759eec80524::$prefixDirsPsr4;
             $loader->fallbackDirsPsr4 = ComposerStaticInit32749367af15bdb4df301759eec80524::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit32749367af15bdb4df301759eec80524::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit32749367af15bdb4df301759eec80524::$classMap;
 
         }, null, ClassLoader::class);
