@@ -1,4 +1,4 @@
-appFrontRsc.controller('mensalidadeModalController', function ($scope, $window, close, RscService) {
+appFrontRsc.controller('simuladorModalController', function ($scope, $window, close, RscService) {
 
     RscService.getUnidades($scope);
     RscService.getTiposEmpresa($scope);
@@ -8,7 +8,7 @@ appFrontRsc.controller('mensalidadeModalController', function ($scope, $window, 
     };
 
     $scope.calculaMensalidade = function(formulario){
-        RscService.getMensalidade($scope,formulario);
+        RscService.getPlano($scope,formulario);
     };
 
     $scope.listarFaturamentos = function(formulario){

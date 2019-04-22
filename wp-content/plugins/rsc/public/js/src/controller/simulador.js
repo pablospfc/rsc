@@ -1,9 +1,9 @@
-appFrontRsc.controller('mensalidadeController', function ($scope, $timeout,$document,RscService, ModalService) {
+appFrontRsc.controller('simuladorController', function ($scope, $timeout,$document,RscService, ModalService) {
 
-    $scope.showFormMensalidadeModal = function () {
+    $scope.showFormSimuladorModal = function () {
         ModalService.showModal({
-            templateUrl: './wp-content/plugins/rsc/view/mensalidade/modal_calculo.phtml',
-            controller: "mensalidadeModalController",
+            templateUrl: './wp-content/plugins/rsc/view/simulador/modal_calculo.phtml',
+            controller: "simuladorModalController",
         }).then(function (modal) {
             modal.element.show();
             modal.close.then(function (result) {

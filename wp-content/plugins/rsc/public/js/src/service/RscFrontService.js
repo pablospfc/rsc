@@ -140,13 +140,13 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
                 $scope.formCliente.onRequest = false;
             });
     };
-    this.getMensalidade = function ($scope,formulario) {
+    this.getPlano = function ($scope,formulario) {
         $scope.alert.changeShow(false);
         $scope.mensalidade =undefined;
         $request.get(urlAdmin("admin-ajax.php"))
             .addParams({
-                page: "mensalidade",
-                action: "getMensalidade",
+                page: "simulador",
+                action: "getPlano",
                 socios: formulario.socios,
                 funcionarios: formulario.funcionarios,
                 id_faturamento: formulario.id_faturamento,
@@ -223,7 +223,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
         $scope.alert.changeShow(false);
         $request.get(urlAdmin("admin-ajax.php"))
             .addParams({
-                page: "mensalidade",
+                page: "simulador",
                 action: "getUnidades",
             })
             .load($scope.loading.getRequestLoad('Listando Unidades...'))
@@ -240,7 +240,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
         $scope.alert.changeShow(false);
         $request.get(urlAdmin("admin-ajax.php"))
             .addParams({
-                page: "mensalidade",
+                page: "simulador",
                 action: "getTiposEmpresas",
             })
             .load($scope.loading.getRequestLoad('Listando Tipos de Empresas...'))
@@ -257,7 +257,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
         $scope.alert.changeShow(false);
         $request.get(urlAdmin("admin-ajax.php"))
             .addParams({
-                page: "mensalidade",
+                page: "simulador",
                 action: "getFaturamentos",
             })
             .load($scope.loading.getRequestLoad('Listando Faturamentos...'))
@@ -323,7 +323,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
         $scope.alert.changeShow(false);
         $request.get(urlAdmin("admin-ajax.php"))
             .addParams({
-                page: "mensalidade",
+                page: "simulador",
                 action: "getFaturamentosByFuncionarioESocio",
                 socios: formulario.socios,
                 funcionarios: formulario.funcionarios,

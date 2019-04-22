@@ -37,10 +37,10 @@ appFrontRsc.config(function ($routeProvider) {
         })
         .when('/simulador', {
             templateUrl: urlAdmin("admin-post.php?" + serialize({
-                page: "mensalidade",
+                page: "simulador",
                 action: "formulario_calculo"
             })),
-            controller: 'mensalidadeController',
+            controller: 'simuladorController',
         })
         .when('/cadastro', {
             templateUrl: urlAdmin("admin-post.php?" + serialize({

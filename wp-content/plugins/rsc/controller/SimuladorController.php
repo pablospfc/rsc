@@ -10,23 +10,23 @@ namespace RSC\controller;
 use MocaBonita\tools\MbRequest;
 use MocaBonita\tools\MbResponse;
 use MocaBonita\controller\MbController;
-use RSC\model\Mensalidade;
+use RSC\model\Plano;
 
-class MensalidadeController extends MbController
+class SimuladorController extends MbController
 {
     public function indexAction(MbRequest $mbRequest, MbResponse $mbResponse)
     {
         throw new \Exception("Action indisponível!");
     }
 
-    public function getMensalidadeAction(MbRequest $mbRequest){
-        return (new Mensalidade())->getMensalidade($mbRequest->query('socios'),$mbRequest->query('funcionarios'),$mbRequest->query('id_faturamento'),$mbRequest->query('id_tipo_empresa'));
+    public function getPlanoAction(MbRequest $mbRequest){
+        return (new Plano())->getPlano($mbRequest->query('socios'),$mbRequest->query('funcionarios'),$mbRequest->query('id_faturamento'),$mbRequest->query('id_tipo_empresa'));
     }
 
-    public function mensalidadeShortcode()
+    public function simuladorShortcode()
     {
         return $this->getMbView()
-            ->setPage("mensalidade")
+            ->setPage("simulador")
             ->setAction("index");
     }
 
@@ -34,7 +34,7 @@ class MensalidadeController extends MbController
     {
         return $this->getMbView()
             ->setTemplate("modal")
-            ->setPage("mensalidade")
+            ->setPage("simulador")
             ->setAction("formulario_calculo");
     }
 

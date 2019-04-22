@@ -10,10 +10,10 @@ namespace RSC\model;
 use MocaBonita\tools\eloquent\MbDatabase;
 use MocaBonita\tools\eloquent\MbModel;
 
-class Mensalidade extends MbModel
+class Plano extends MbModel
 {
 
-    protected $table = "rsc_mensalidade";
+    protected $table = "rsc_plano";
 
     public $timestamps = false;
 
@@ -23,17 +23,17 @@ class Mensalidade extends MbModel
         "socios_maximo",
         "funcionarios_minimo",
         "funcionarios_maximo",
-        "mensalidade",
+        "valor",
         "faturamento",
     ];
 
-    public function getMensalidade($socios,$funcionarios,$idFaturamento,$idTipoEmpresa)
+    public function getPlano($socios,$funcionarios,$idFaturamento,$idTipoEmpresa)
     {
             $dados = self::select(
                         "id",
-                                 "mensalidade"
+                                 "valor"
             )
-                ->from("rsc_mensalidade")
+                ->from("rsc_plano")
                 ->where("id_tipo_empresa", $idTipoEmpresa)
                 ->where("id_faturamento", $idFaturamento)
                 ->where("socios_minimo", "<=", $socios)
@@ -44,7 +44,7 @@ class Mensalidade extends MbModel
                 ->toArray();
 
            if (!is_array($dados) || empty($dados))
-               throw new \Exception('Não oferecemos mensalidade para os dados fornecidos. Por favor entre em contato conosco enviando um email para cadastro@rsccontabilidade.com.br.');
+               throw new \Exception('Não oferecemos plano para os dados fornecidos. Por favor entre em contato conosco enviando um email para cadastro@rsccontabilidade.com.br.');
 
             return $dados;
 
@@ -52,7 +52,7 @@ class Mensalidade extends MbModel
 
     public function getPlanos(){
         $dados = self::select(
-            "pla.mensalidade as valor",
+            "pla.valor as valor",
             "tpe.nome as tipo_empresa",
             "fat.nome as faturamento",
             "pla.socios_minimo",
@@ -60,14 +60,14 @@ class Mensalidade extends MbModel
             "pla.funcionarios_minimo",
             "pla.funcionarios_maximo"
         )
-            ->from("rsc_mensalidade as pla")
+            ->from("rsc_plano as pla")
             ->join("rsc_tipo_empresa as tpe","tpe.id","=","pla.id_tipo_empresa")
             ->join("rsc_faturamento as fat","fat.id","=","pla.id_faturamento")
             ->get()
             ->toArray();
 
         if (!is_array($dados) || empty($dados))
-            throw new \Exception('Não oferecemos mensalidade para os dados fornecidos. Por favor entre em contato conosco enviando um email para cadastro@rsccontabilidade.com.br.');
+            throw new \Exception('Não oferecemos plano para os dados fornecidos. Por favor entre em contato conosco enviando um email para cadastro@rsccontabilidade.com.br.');
 
         return $dados;
 

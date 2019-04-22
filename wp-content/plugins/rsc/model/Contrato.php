@@ -56,14 +56,14 @@ class Contrato extends MbModel
             "cli.cep",
             "cli.data_nascimento",
             "con.id as id_contrato",
-            "pla.mensalidade",
+            "pla.valor",
             "pla.codigo_pagseguro",
             "fat.nome as faturamento",
             "tip.nome as tipo_empresa"
         )
             ->from("rsc_contrato as con")
             ->join("rsc_cliente as cli","cli.id","=","con.id_cliente")
-            ->join("rsc_mensalidade as pla","pla.id","con.id_mensalidade")
+            ->join("rsc_plano as pla","pla.id","con.id_mensalidade")
             ->join("rsc_faturamento as fat","fat.id","=","pla.id_faturamento")
             ->join("rsc_tipo_empresa as tip","tip.id","=","pla.id_tipo_empresa")
             ->where("con.id", "=", $idContrato)

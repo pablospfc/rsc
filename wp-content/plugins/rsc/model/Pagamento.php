@@ -49,10 +49,10 @@ class Pagamento extends MbModel
             "pag.data_transacao",
             "sta.nome as status",
             "cli.nome as nome",
-            "men.socios_minimo",
-            "men.socios_maximo",
-            "men.funcionarios_minimo",
-            "men.funcionarios_maximo",
+            "pla.socios_minimo",
+            "pla.socios_maximo",
+            "pla.funcionarios_minimo",
+            "pla.funcionarios_maximo",
             "tpe.nome as tipo_empresa",
             "fpg.nome as forma_pagamento"
         )
@@ -61,8 +61,8 @@ class Pagamento extends MbModel
             ->join("rsc_contrato as con","con.id","=","pag.id_contrato")
             ->join("rsc_cliente as cli","cli.id","=","con.id_cliente")
             ->join("rsc_status as sta","sta.id","=","pag.id_status")
-            ->join("rsc_mensalidade as men","men.id","=","con.id_mensalidade")
-            ->join("rsc_tipo_empresa as tpe","tpe.id","=","men.id_tipo_empresa")
+            ->join("rsc_plano as pla","pla.id","=","con.plano")
+            ->join("rsc_tipo_empresa as tpe","tpe.id","=","pla.id_tipo_empresa")
             ->where("cli.id","=",$idCliente)
             ->where("sta.id","=",3)
             ->get()

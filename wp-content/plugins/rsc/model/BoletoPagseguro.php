@@ -26,7 +26,7 @@ class BoletoPagseguro
     public function gerarBoletos($dados){
         try {
             $this->config->setAccountCredentials('claudiopablosilva@hotmail.com', '2382B416442D464CADC943D232AD6045');
-            $this->boleto->setAmount($dados['mensalidade']);
+            $this->boleto->setAmount($dados['valor']);
 //Descrição do boleto
             $this->boleto->setDescription('Assinatura');
 //O CPF do comprador

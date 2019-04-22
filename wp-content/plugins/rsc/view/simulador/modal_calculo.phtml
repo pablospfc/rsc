@@ -25,7 +25,7 @@
                     <div class="price-box">
                         <div class="row">
                             <div class="col-sm-6">
-                                <form name="formMensalidade" class="form-horizontal form-pricing" role="form">
+                                <form name="formSimulador" class="form-horizontal form-pricing" role="form">
 
                                     <div class="price-slider">
                                         <h4 class="great">Localidade</h4>
@@ -116,7 +116,7 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <!-- <p class="price lead" id="total"></p> -->
-                                                <input class="price lead" name="totalprice"  type="text" id="total" disabled="disabled" style="min-width:170px;" value="{{mensalidade ? 'R$ '+mensalidade[0].mensalidade : 'R$ 0,00'}}" />
+                                                <input class="price lead" name="totalprice"  type="text" id="total" disabled="disabled" style="min-width:170px;" value="{{mensalidade ? 'R$ '+mensalidade[0].valor : 'R$ 0,00'}}" />
                                             </div>
                                         </div>
 
@@ -126,7 +126,7 @@
 
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <button type="button" class="btn btn-primary btn-lg btn-block" ng-disabled="formMensalidade.$error.required" ng-click="calculaMensalidade(formulario)" class="btn btn-primary">
+                                            <button type="button" class="btn btn-primary btn-lg btn-block" ng-disabled="formSimulador.$error.required" ng-click="calculaMensalidade(formulario)" class="btn btn-primary">
                                                 Calcular
                                                 <span class="glyphicon glyphicon-chevron-right"></span>
                                             </button>

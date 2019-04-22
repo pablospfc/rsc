@@ -21,7 +21,7 @@ use RSC\controller\AssinaturaController;
 use RSC\controller\ClienteController;
 use RSC\controller\AreaClienteController;
 use RSC\controller\LoginController;
-use RSC\controller\MensalidadeController;
+use RSC\controller\SimuladorController;
 use RSC\controller\PagamentoController;
 use RSC\model\Cliente;
 use RSC\model\EstadoCivil;
@@ -46,9 +46,9 @@ MocaBonita::active(function () {
 
 
 MocaBonita::plugin(function (MocaBonita $mocabonita) {
-    $mensalidadePage = MbPage::create("Mensalidade")
-        ->setController(MensalidadeController::class)
-        ->setSlug("mensalidade");
+    $simuladorPage = MbPage::create("Simulador")
+        ->setController(SimuladorController::class)
+        ->setSlug("simulador");
 
     $pagamentoPage = MbPage::create("Pagamento")
         ->setController(PagamentoController::class)
@@ -194,18 +194,18 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setRequiresLogin(false)
         ->setCapability("read");
 
-    $mensalidadePage->addMbAction("formulario_calculo")
+    $simuladorPage->addMbAction("formulario_calculo")
         ->setRequiresMethod("GET")
         ->setCapability("read")
         ->setRequiresLogin(false);
 
-    $mensalidadePage->addMbAction("getMensalidade")
+    $simuladorPage->addMbAction("getPlano")
         ->setRequiresMethod("GET")
         ->setRequiresAjax()
         ->setRequiresLogin(false)
         ->setCapability("read");
 
-    $mensalidadePage->addMbAction("getTiposEmpresas")
+    $simuladorPage->addMbAction("getTiposEmpresas")
         ->setRequiresMethod("GET")
         ->setRequiresAjax()
         ->setCapability("read")
@@ -214,7 +214,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
             return TipoEmpresa::all();
         });
 
-    $mensalidadePage->addMbAction("getUnidades")
+    $simuladorPage->addMbAction("getUnidades")
         ->setRequiresMethod("GET")
         ->setRequiresAjax()
         ->setCapability("read")
@@ -223,7 +223,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
             return Unidade::all();
         });
 
-    $mensalidadePage->addMbAction("getFaturamentosByFuncionarioESocio")
+    $simuladorPage->addMbAction("getFaturamentosByFuncionarioESocio")
         ->setRequiresMethod("GET")
         ->setRequiresAjax()
         ->setCapability("read")
@@ -232,7 +232,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
             return Faturamento::getFaturamentoBySociosFuncionarios($mbRequest->query('socios'), $mbRequest->query('funcionarios'));
         });
 
-    $mocabonita->addMbShortcode("mensalidade_calc", $mensalidadePage, "mensalidade")
+    $mocabonita->addMbShortcode("simulador_calc", $simuladorPage, "simulador")
         ->getMbAsset()
         ->setJs(MbPath::pBwDir("jquery/dist/jquery.min.js"))
         ->setCss(MbPath::pCssDir("style.css"))
@@ -252,8 +252,8 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pBwDir("ng-cpf-cnpj/lib/ngCpfCnpj.js"))
         ->setJs(MbPath::pJsDir("src/app.js"))
         ->setJs(MbPath::pJsDir("src/controller/login.js"))
-        ->setJs(MbPath::pJsDir("src/controller/mensalidade.js"))
-        ->setJs(MbPath::pJsDir("src/controller/mensalidade-modal.js"))
+        ->setJs(MbPath::pJsDir("src/controller/simulador.js"))
+        ->setJs(MbPath::pJsDir("src/controller/simulador-modal.js"))
         ->setJs(MbPath::pJsDir("src/service/loginService.js"))
         ->setJs(MbPath::pJsDir("src/service/sessionService.js"))
         ->setJs(MbPath::pJsDir("src/service/RscFrontService.js"));
@@ -313,7 +313,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pJsDir("src/service/sessionService.js"));
 
 
-    $mocabonita->addMbPage($mensalidadePage);
+    $mocabonita->addMbPage($simuladorPage);
     $mocabonita->addMbPage($clientePage);
     $mocabonita->addMbPage($assinaturaPage);
     $mocabonita->addMbPage($loginPage);
