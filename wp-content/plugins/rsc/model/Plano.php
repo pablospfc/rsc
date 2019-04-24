@@ -5,6 +5,7 @@
  * Date: 17/02/2019
  * Time: 11:27
  */
+
 namespace RSC\model;
 
 use MocaBonita\tools\eloquent\MbDatabase;
@@ -27,31 +28,34 @@ class Plano extends MbModel
         "faturamento",
     ];
 
-    public function getPlano($socios,$funcionarios,$idFaturamento,$idTipoEmpresa)
+    public function getPlano($socios, $funcionarios, $idFaturamento, $idTipoEmpresa)
     {
-            $dados = self::select(
-                        "id",
-                                 "valor"
-            )
-                ->from("rsc_plano")
-                ->where("id_tipo_empresa", $idTipoEmpresa)
-                ->where("id_faturamento", $idFaturamento)
-                ->where("socios_minimo", "<=", $socios)
-                ->where("socios_maximo", ">=", $socios)
-                ->where("funcionarios_minimo", "<=", $funcionarios)
-                ->where("funcionarios_maximo", ">=", $funcionarios)
-                ->get()
-                ->toArray();
+        $dados = self::select(
+            "id",
+            "valor"
+        )
+            ->from("rsc_plano")
+            ->where("id_tipo_empresa", $idTipoEmpresa)
+            ->where("id_faturamento", $idFaturamento)
+            ->where("socios_minimo", "<=", $socios)
+            ->where("socios_maximo", ">=", $socios)
+            ->where("funcionarios_minimo", "<=", $funcionarios)
+            ->where("funcionarios_maximo", ">=", $funcionarios)
+            ->get()
+            ->toArray();
 
-           if (!is_array($dados) || empty($dados))
-               throw new \Exception('Não oferecemos plano para os dados fornecidos. Por favor entre em contato conosco enviando um email para cadastro@rsccontabilidade.com.br.');
+        if (!is_array($dados) || empty($dados))
+            throw new \Exception('Não oferecemos plano para os dados fornecidos. Por favor entre em contato conosco enviando um email para cadastro@rsccontabilidade.com.br.');
 
-            return $dados;
+        return $dados;
 
     }
 
-    public function getPlanos(){
+    public function getPlanos()
+    {
+
         $dados = self::select(
+            "pla.id",
             "pla.valor as valor",
             "tpe.nome as tipo_empresa",
             "fat.nome as faturamento",
@@ -61,16 +65,18 @@ class Plano extends MbModel
             "pla.funcionarios_maximo"
         )
             ->from("rsc_plano as pla")
-            ->join("rsc_tipo_empresa as tpe","tpe.id","=","pla.id_tipo_empresa")
-            ->join("rsc_faturamento as fat","fat.id","=","pla.id_faturamento")
+            ->join("rsc_tipo_empresa as tpe", "tpe.id", "=", "pla.id_tipo_empresa")
+            ->join("rsc_faturamento as fat", "fat.id", "=", "pla.id_faturamento")
+            ->where("pla.valor", "<>", "0.00")
+            ->whereNull("pla.codigo_pagseguro")
             ->get()
             ->toArray();
 
         if (!is_array($dados) || empty($dados))
-            throw new \Exception('Não oferecemos plano para os dados fornecidos. Por favor entre em contato conosco enviando um email para cadastro@rsccontabilidade.com.br.');
+            throw new \Exception("Não foi possível listar dados de planos!");
+
 
         return $dados;
-
     }
 
 

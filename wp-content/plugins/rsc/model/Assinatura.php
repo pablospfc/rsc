@@ -34,14 +34,26 @@ class Assinatura
     }
 
     public function criarPlanoPagseguro(){
-        $dados = (new Mensalidade())->getPlanos();
+        try {
+            $dados = (new Plano())->getPlanos();
+            $plano = [];
 
-        foreach($dados as $dado){
-            $plano['referencia'] = $dado['tipo_empresa'];
-            $plano['descricao'] = "Libera o acesso aos serviços de abertuda de empresa do(a) ".$dado['tipo_empresa']." com sócios mínimo de ".$dado['socios_minimo']." e sócios máximo de ".$dado['socios_maximo'].", funcionários mínimo de ".$dado['funcionarios_minimo']." e funcionários máximo de ".$dado['funcionarios_maximo']." com faturamento de ".$dado['faturamento'];
-            $plano['valor'] = $dado['valor'];
-            $this->criarPlano($plano);
+            foreach ($dados as $dado) {
+                $plano['referencia'] = $dado['tipo_empresa'];
+                $plano['descricao'] = "Libera o acesso aos serviços de abertura de empresa do(a) " . $dado['tipo_empresa'] . " com sócios mínimo de " . $dado['socios_minimo'] . " e sócios máximo de " . $dado['socios_maximo'] . ", funcionários mínimo de " . $dado['funcionarios_minimo'] . " e funcionários máximo de " . $dado['funcionarios_maximo'] . " com faturamento de " . $dado['faturamento'];
+                $plano['valor'] = $dado['valor'];
+                $codigo = $this->criarPlano($plano);
+                Plano::where('id', $dado['id'])
+                    ->update(['codigo_pagseguro' => $codigo['codigo']]);
+            }
+
+            return ['message'=> 'Plano cadastrado com sucesso'];
+
+        }catch(\Exception $e){
+            Log::createFromException($e);
+            throw new \Exception("Erro ao cadastrar código de plano no sistema.");
         }
+
     }
 
     public function criarPlano($dados)
@@ -69,11 +81,11 @@ class Assinatura
         //$this->pagseguro->setRedirectURL('http://carloswgama.com.br/pagseguro/not/assinando.php');
 
 //Máximo de pessoas que podem usar esse plano. Exemplo 10.000 pessoas podem usar esse plano
-        $this->pagseguro->setMaximoUsuariosNoPlano(10000);
+        //$this->pagseguro->setMaximoUsuariosNoPlano(10000);
 
         try {
             $codigoPlano = $this->pagseguro->criarPlano();
-            return ['message' => 'Plano com código ' . $codigoPlano . ' criado com sucesso'];
+            return ['codigo' => $codigoPlano];
         } catch (\Exception $e) {
             Log::createFromException($e);
             throw new \Exception('Não foi possível criar o plano.' . $e->getMessage());
