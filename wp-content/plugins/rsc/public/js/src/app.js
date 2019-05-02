@@ -7,6 +7,7 @@ var appFrontRsc = angular.module('appFrontRsc', [
     'mgo-angular-wizard',
     'ui.utils.masks',
     'ngCpfCnpj',
+    'ui.mask'
 ]);
 
 appFrontRsc.directive('ngUpdateHidden', function () {

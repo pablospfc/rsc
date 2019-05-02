@@ -92,13 +92,14 @@ appFrontRsc.controller('clienteController', function ($scope, loginService, $roo
             PagSeguroDirectPayment.getBrand({
                 cardBin: formulario.numero,
                 success: function (response) {
+                    var array = formulario.expiracao.split("/");
                     console.log("chegou aqui segundo");
                     PagSeguroDirectPayment.createCardToken({
                         cardNumber: formulario.numero,
                         brand: response.brand.name,
                         cvv: formulario.cvv,
-                        expirationMonth: formulario.mes_expiracao,
-                        expirationYear: formulario.ano_expiracao,
+                        expirationMonth: array[0],
+                        expirationYear: array[1],
                         success: function (response) {
                             formulario.token = response.card.token;
                             console.log("chegou aqui ultimo");
