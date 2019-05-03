@@ -18,16 +18,18 @@ class Contrato extends MbModel
 
     protected $fillable= [
         'id_cliente',
-        'id_mensalidade',
+        'id_plano',
+        'id_status_assinatura',
         'codigo_assinatura',
     ];
 
     public function inserir($dados){
         try{
             $contrato=  Contrato::updateOrCreate([
-                'id_cliente'        => $dados['id_cliente'],
-                'id_mensalidade'    => $dados['id_mensalidade'],
-                'codigo_assinatura' => $dados['codigo_assinatura'],
+                'id_cliente'           => $dados['id_cliente'],
+                'id_plano'             => $dados['id_plano'],
+                'id_status_assinatura' => 1,
+                'codigo_assinatura'    => $dados['codigo_assinatura'],
             ]);
 
             return ['message'=>'Contrato cadastrado com sucesso','id'=> $contrato->id];
@@ -63,7 +65,7 @@ class Contrato extends MbModel
         )
             ->from("rsc_contrato as con")
             ->join("rsc_cliente as cli","cli.id","=","con.id_cliente")
-            ->join("rsc_plano as pla","pla.id","con.id_mensalidade")
+            ->join("rsc_plano as pla","pla.id","con.id_plano")
             ->join("rsc_faturamento as fat","fat.id","=","pla.id_faturamento")
             ->join("rsc_tipo_empresa as tip","tip.id","=","pla.id_tipo_empresa")
             ->where("con.id", "=", $idContrato)

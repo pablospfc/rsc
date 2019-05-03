@@ -92,7 +92,8 @@ class Cliente extends MbModel
 
     public function atualizar($dados){
         try {
-            $data = ['nome' => $dados['nome'],
+            $data = [
+                'nome' => $dados['nome'],
                 'data_nascimento' => Validation::dateToMysql($dados['data_nascimento']),
                 'id_sexo' => $dados['id_sexo']['id'],
                 'id_estado_civil' => $dados['id_estado_civil']['id'],

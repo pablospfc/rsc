@@ -14,8 +14,11 @@ appFrontRsc.factory('loginService', function($http, $request, $rootScope, $q, $l
                     sessionService.set('user',uid);
                     if (completou == 1)
                         $location.path("/areacliente");
-                    else
+                    else{
+                        //$scope.formCliente = data[0];
                         $location.path("/cadastro");
+                    }
+
                 }
             }, function (meta) {
                 $scope.successLogin = false;

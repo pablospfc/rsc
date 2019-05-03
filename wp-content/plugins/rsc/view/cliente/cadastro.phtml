@@ -21,7 +21,7 @@
                   novalidate>
 
 
-                <h5 class="page-header">Dados do Cliente</h5>
+                <h4>Dados do Cliente</h4>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="nome">Nome Completo:(*)</label>
@@ -72,17 +72,19 @@
                         <label for="rg">CPF:(*)</label>
                         <input type="text"
                                ng-model="formCliente.cpf"
+                               name="cpf"
                                class="form-control"
                                id="cpf"
                                ng-cpf
                                ui-br-cpf-mask
                                ng-required="true"
                                placeholder="CPF"/>
-                        <p ng-show="formCliente.cpf.$invalid && !formCliente.cpf.$pristine" class="help-block">O seu CPF está inválido!</p>
+                        <p style="color:red" ng-show ="formDadosCliente.cpf.$invalid && !formDadosCliente.cpf.$pristine ">O seu CPF está inválido!</p>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="rg">RG:(*)</label>
                         <input type="text"
+                               name="rg"
                                ng-model="formCliente.rg"
                                class="form-control"
                                id="rg"
@@ -115,11 +117,13 @@
                     <div class="form-group col-md-3">
                         <label for="cep">CEP:(*)</label>
                         <input type="text"
+                               name="cep"
                                ng-model="formCliente.cep"
                                class="form-control"
                                id="cep"
                                ng-required="true"
                                ng-blur="buscarCep(formCliente)"
+                               numeric-only
                                placeholder="CEP"/>
                     </div>
 
@@ -187,40 +191,54 @@
                     <div class="form-group col-md-2">
                         <label for="ddd">DDD:</label>
                         <input type="text"
+                               name="ddd"
                                ng-model="formCliente.ddd"
                                class="form-control"
                                id="ddd"
+                               numeric-only
+                               ui-mask="99"
+                               ui-mask-placeholder
                                placeholder="DDD"/>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="telefoneResidencial">Telefone Residencial:</label>
                         <input type="text"
+                               name="telefone_residencial"
                                ng-model="formCliente.telefone_residencial"
                                class="form-control"
                                id="telefoneResidencial"
+                               numeric-only
+                               ui-mask="99999999"
+                               ui-mask-placeholder
                                placeholder="Telefone Residencial"/>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="telefoneCelular">Telefone Celular:(*)</label>
                         <input type="text"
+                               name="telefone_celular"
                                ng-blur="tratarData(formCliente)"
                                ng-model="formCliente.telefone_celular"
                                class="form-control"
                                id="telefoneCelular"
                                ng-required="true"
+                               numeric-only
+                               ui-mask="999999999"
+                               ui-mask-placeholder
                                placeholder="Telefone Celular"/>
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="email">E-mail:(*)</label>
                         <input type="email"
+                               name="email"
                                ng-model="formCliente.email"
                                class="form-control"
                                id="email"
                                ng-required="true"
                                placeholder="Email"/>
+                        <span style="color:red" ng-show="formDadosCliente.email.$error.email && formDadosCliente.email.$dirty">Endereço de E-Mail inválido.</span>
                     </div>
                 </div>
                 <h5 class="page-header">Usuário</h5>
@@ -241,7 +259,11 @@
                                class="form-control"
                                id="confirma_senha"
                                ng-required="true"
+                               match-password="formCliente.senha"
                                placeholder="Confirma Senha"/>
+                        <div ng-if="formDadosCliente.confirma_senha.$touched">
+                            <p style="color:red" ng-show="formDadosCliente.confirma_senha.$error.matchPassword && !formDadosCliente.confirma_senha.$error.required">As senhas não coincidem</p>
+                        </div>
                     </div>
                 </div>
 
@@ -341,7 +363,7 @@
                         </select>
                     </div>
                     <input type="hidden" name="id_mensalidade" ng-model="formContrato.id_mensalidade"
-                           ng-value="formContrato.id_mensalidade = mensalidade[0].id"/>
+                           ng-value="formContrato.id_plano = mensalidade[0].id"/>
                 </div>
 
                 <div class="col-sm-12 text-center" ng-if="mensalidade">
@@ -379,7 +401,7 @@
                 <div class="row">
                     <!-- You can make it whatever width you want. I'm making it full width
                     on <= small devices and 4/12 page width on >= medium devices -->
-                    <div class="col-xs-12 col-md-4">
+                    <div class="col-xs-12 col-md-8">
                         <!-- CREDIT CARD FORM STARTS HERE -->
                         <div class="panel panel-default credit-card-box">
                             <div class="panel-heading display-table" >
@@ -395,13 +417,13 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="form-group">
-                                                <label for="numero">Número de Cartão</label>
+                                                <label for="numero_cartao">Número de Cartão</label>
                                                 <div class="input-group">
                                                     <input
                                                             type="tel"
                                                             class="form-control"
-                                                            name="numero"
-                                                            ng-model="formAssinatura.numero"
+                                                            name="numero_cartao"
+                                                            ng-model="formAssinatura.numero_cartao"
                                                             placeholder="Número de Cartão"
                                                             autocomplete="cc-number"
                                                             required autofocus
@@ -468,7 +490,7 @@
 
                 </div>
             </div>
-
+<!--
             <form name="formDadosAssinatura" method="post" ng-submit="assinarCartao(formAssinatura)">
                 <div class="form-group">
                     <label for="numero_cartao">Número do Cartão:(*)</label>
@@ -530,7 +552,7 @@
                     Gerar Boletos
                 </button>
                 </form>
-
+-->
             </div>
 
 

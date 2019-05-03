@@ -43,7 +43,7 @@ appFrontRsc.controller('clienteController', function ($scope, loginService, $roo
     };
 
     $scope.calculaMensalidade = function (formulario) {
-        RscService.getMensalidade($scope, formulario);
+        RscService.getPlano($scope, formulario);
     };
 
     $scope.salvarContrato = function (formulario) {
@@ -93,9 +93,11 @@ appFrontRsc.controller('clienteController', function ($scope, loginService, $roo
                 cardBin: formulario.numero,
                 success: function (response) {
                     var array = formulario.expiracao.split("/");
-                    console.log("chegou aqui segundo");
+                    console.log(array);
+                    console.log(array[0]);
+                    console.log(array[1]);
                     PagSeguroDirectPayment.createCardToken({
-                        cardNumber: formulario.numero,
+                        cardNumber: formulario.numero_cartao,
                         brand: response.brand.name,
                         cvv: formulario.cvv,
                         expirationMonth: array[0],
