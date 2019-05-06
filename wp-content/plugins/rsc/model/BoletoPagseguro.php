@@ -23,20 +23,20 @@ class BoletoPagseguro
 
     }
 
-    public function gerarBoletos($dados){
+    public function gerarBoletos(){
         try {
-            $this->config->setAccountCredentials('claudiopablosilva@hotmail.com', '2382B416442D464CADC943D232AD6045');
-            $this->boleto->setAmount($dados['valor']);
+            $this->config->setAccountCredentials('claudiopablosilva@hotmail.com', 'D3DED06B26A044AAA4A6F4E09A48B097');
+            $this->boleto->setAmount('300.50');
 //Descrição do boleto
-            $this->boleto->setDescription('Assinatura');
+            $this->boleto->setDescription('Assinatura para compra do plano');
 //O CPF do comprador
-            $this->boleto->setCustomerCPF('01234567890');//Se for CNPJ use $boleto->setCustomerCNPJ('33085736000169');
+            $this->boleto->setCustomerCPF('56766247444');//Se for CNPJ use $boleto->setCustomerCNPJ('33085736000169');
 //Nome do comprador
-            $this->boleto->setCustomerName($dados['nome']);
+            $this->boleto->setCustomerName('Jorge José de Vázquez');
 //Email do comprador
-            $this->boleto->setCustomerEmail($dados['email']);
+            $this->boleto->setCustomerEmail('jose@gmail.com');
 //Telefone do comprador
-            $this->boleto->setCustomerPhone($dados['ddd'], $dados['telefone']);
+            $this->boleto->setCustomerPhone('11', '987651098');
             /*
              * Campos opcionais
              */
@@ -45,26 +45,28 @@ class BoletoPagseguro
 //Esse é o numero de boletos a ser gerado.
             $this->boleto->setNumberOfPayments(12);
 //Uma referência de quem é o boleto (note que terá multiplos boletos com a mesma referência)
-            $this->boleto->setReference($dados['id_cliente']);//**
+            $this->boleto->setReference(19);//**
 //Instruções para quem irá receber o pagamento
             $this->boleto->setInstructions('Faça o pagamento até o dia do vencimento');
 //CEP do comprador
-            $this->boleto->setCustomerAddressPostalCode($dados['cep']);
+            $this->boleto->setCustomerAddressPostalCode('65046660');
 //Endereço do comprador
-            $this->boleto->setCustomerAddress($dados['rua'], $dados['numero']);
+            $this->boleto->setCustomerAddress('Avenida México', '12');
 //Bairro do comprador
-            $this->boleto->setCustomerAddressDistrict($dados['bairro']);
+            $this->boleto->setCustomerAddressDistrict('Jardim Primavera');
 //Cidade do comprador
-            $this->boleto->setCustomerAddressCity($dados['cidade']);
+            $this->boleto->setCustomerAddressCity('São Paulo');
 //Estado do comprador
-            $this->boleto->setCustomerAddressState($dados['estado']);
+            $this->boleto->setCustomerAddressState('SP');
 //Executa a conexão e captura a resposta do PagSeguro.
             $data = $this->boleto->send();
+
+            error_log(var_export($data,true));
 //Você terá uma array de objeto, precisará de uma estrutura de laço para percorrer um a um.
             foreach ($data->boletos as $row) {
                 //\RSC\model\Boleto
                 $boletos[] = [
-                    'id_contrato' => $dados['id_contrato'],
+                    'id_contrato' => 18,
                     'codigo_transacao' => $row->code,
                     'codigo_barras' => $row->barcode,
                     'data_vencimento' => $row->dueDate,
@@ -81,7 +83,7 @@ class BoletoPagseguro
 
             MbDatabase::table('rsc_boletos')->insert($boletos);
 
-            return ['message'=>'Boletos gerados com sucesso','boletos'=>$boletos];
+            return ['message'=>'Boletos gerados com sucesso','boletos'=>$data->boletos];
 
         }catch(\Exception $e){
             Log::createFromException($e);

@@ -95,10 +95,11 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
         $request.post(urlAdmin("admin-ajax.php")).addParams({
             page: 'assinatura',
             action: 'gerarBoletos'
-        }).addData(formulario).load($rootScope.loading.getRequestLoad('Gerando Boletos...')).send(function (data) {
+        }).addData(formulario).load($rootScope.loading.getRequestLoad('Gerando Boletos. Por favor aguarde e não feche esta tela.')).send(function (data) {
             $rootScope.alert.responseSuccess(data.message);
-            $rootScope.boletos = data;
-            WizardHandler.wizard().next();
+            $rootScope.boletos = data.boletos;
+            console.log($rootScope.boletos);
+            //WizardHandler.wizard().next();
         }, function (meta) {
             //$scope.formContrato = undefined;
             $rootScope.alert.responseError(meta);

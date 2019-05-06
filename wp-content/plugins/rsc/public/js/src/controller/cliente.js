@@ -90,18 +90,16 @@ appFrontRsc.controller('clienteController', function ($scope, loginService, $roo
             PagSeguroDirectPayment.setSessionId(data);
             formulario.hash = PagSeguroDirectPayment.getSenderHash();
             PagSeguroDirectPayment.getBrand({
-                cardBin: formulario.numero,
+                cardBin: formulario.numero_cartao,
                 success: function (response) {
-                    var array = formulario.expiracao.split("/");
-                    console.log(array);
-                    console.log(array[0]);
-                    console.log(array[1]);
+                    var mes = formulario.expiracao.substring(0,2);
+                    var ano = formulario.expiracao.substring(2,6);
                     PagSeguroDirectPayment.createCardToken({
                         cardNumber: formulario.numero_cartao,
                         brand: response.brand.name,
                         cvv: formulario.cvv,
-                        expirationMonth: array[0],
-                        expirationYear: array[1],
+                        expirationMonth: mes,
+                        expirationYear: ano,
                         success: function (response) {
                             formulario.token = response.card.token;
                             console.log("chegou aqui ultimo");
