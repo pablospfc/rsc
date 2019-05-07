@@ -12,10 +12,10 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
             action: 'cadastrarCliente'
         }).addData($scope.formCliente).load($rootScope.loading.getRequestLoad('Cadastrando cliente...')).send(function (data) {
             $rootScope.alert.responseSuccess(data.message);
-            deferred.resolve(data);
             $scope.processando = false;
             $scope.id_cliente = data.id;
-            $scope.formCliente = data;
+            $rootScope.formCliente = data;
+            deferred.resolve(data);
         }, function (meta) {
             $scope.formCliente = undefined;
             $rootScope.alert.responseError(meta);

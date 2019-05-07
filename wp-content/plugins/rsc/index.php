@@ -250,6 +250,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pBwDir("angular-wizard/dist/angular-wizard.min.js"))
         ->setJs(MbPath::pBwDir("angular-input-masks/angular-input-masks-standalone.js"))
         ->setJs(MbPath::pBwDir("ng-cpf-cnpj/lib/ngCpfCnpj.js"))
+        ->setJs(MbPath::pBwDir("angular-ui-mask/dist/mask.js"))
         ->setJs(MbPath::pJsDir("src/app.js"))
         ->setJs(MbPath::pJsDir("src/controller/login.js"))
         ->setJs(MbPath::pJsDir("src/controller/simulador.js"))
