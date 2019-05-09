@@ -13,7 +13,51 @@
     </div>
 
     <wz-step wz-title="Dados Pessoais">
-
+<!--
+        <div class="row">
+            <div class="text-center">
+                <h1>Assinatura</h1>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Plano</th>
+                    <th class="text-center">Preço</th>
+                    <th class="text-center">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="col-md-9"><em>SIMPLES NACIONAL - COMÉRCIO</em></td>
+                    <td class="col-md-1 text-center">R$ 100,00 </td>
+                    <td class="col-md-1 text-center">R$ 100,00</td>
+                </tr>
+                <tr>
+                    <td>   </td>
+                    <td class="text-right">
+                        <p>
+                            <strong>Subtotal: </strong>
+                        </p>
+                        <p>
+                            <strong>Taxa: </strong>
+                        </p></td>
+                    <td class="text-center">
+                        <p>
+                            <strong>R$ 100,00</strong>
+                        </p>
+                        <p>
+                            <strong>R$ 0,00</strong>
+                        </p></td>
+                </tr>
+                <tr>
+                    <td>   </td>
+                    <td class="text-right"><h4><strong>Total: </strong></h4></td>
+                    <td class="text-center text-danger"><h4><strong>R$ 100,00</strong></h4></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+-->
         <div class="col-sm-10 col-sm-offset-1">
             <form name="formDadosCliente"
                   method="post"
@@ -368,10 +412,48 @@
                            ng-value="formContrato.id_plano = mensalidade[0].id"/>
                 </div>
 
-                <div class="col-sm-12 text-center" ng-if="mensalidade">
-                    <label>Valor Pago: {{mensalidade ? 'R$ '+mensalidade[0].mensalidade : 'R$ 0,00'}}</label>
-                    <label>Cliente: {{id_cliente}}</label>
-                    <label>Plano: {{mensalidade[0].id}}</label>
+                <div class="row" ng-if="mensalidade">
+                    <div class="text-center">
+                        <h1>Assinatura</h1>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Plano</th>
+                            <th class="text-center">Preço</th>
+                            <th class="text-center">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="col-md-9"><em>{{mensalidade[0].tipo_empresa}}</em></td>
+                            <td class="col-md-1 text-center">{{mensalidade ? 'R$ '+mensalidade[0].valor : 'R$ 0,00'}}</td>
+                            <td class="col-md-1 text-center">{{mensalidade ? 'R$ '+mensalidade[0].valor : 'R$ 0,00'}}</td>
+                        </tr>
+                        <tr>
+                            <td>   </td>
+                            <td class="text-right">
+                                <p>
+                                    <strong>Subtotal: </strong>
+                                </p>
+                                <p>
+                                    <strong>Taxa: </strong>
+                                </p></td>
+                            <td class="text-center">
+                                <p>
+                                    <strong>{{mensalidade ? 'R$ '+mensalidade[0].mensalidade : 'R$ 0,00'}}</strong>
+                                </p>
+                                <p>
+                                    <strong>R$ 0,00</strong>
+                                </p></td>
+                        </tr>
+                        <tr>
+                            <td>   </td>
+                            <td class="text-right"><h4><strong>Total: </strong></h4></td>
+                            <td class="text-center text-danger"><h4><strong>{{mensalidade ? 'R$ '+mensalidade[0].mensalidade : 'R$ 0,00'}}</strong></h4></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <div class="form-group col-sm-12 text-center">

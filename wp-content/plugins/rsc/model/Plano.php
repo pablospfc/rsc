@@ -31,16 +31,24 @@ class Plano extends MbModel
     public function getPlano($socios, $funcionarios, $idFaturamento, $idTipoEmpresa)
     {
         $dados = self::select(
-            "id",
-            "valor"
+            "pla.id",
+            "pla.valor as valor",
+            "tpe.nome as tipo_empresa",
+            "fat.nome as faturamento",
+            "pla.socios_minimo",
+            "pla.socios_maximo",
+            "pla.funcionarios_minimo",
+            "pla.funcionarios_maximo"
         )
-            ->from("rsc_plano")
-            ->where("id_tipo_empresa", $idTipoEmpresa)
-            ->where("id_faturamento", $idFaturamento)
-            ->where("socios_minimo", "<=", $socios)
-            ->where("socios_maximo", ">=", $socios)
-            ->where("funcionarios_minimo", "<=", $funcionarios)
-            ->where("funcionarios_maximo", ">=", $funcionarios)
+            ->from("rsc_plano as pla")
+            ->join("rsc_tipo_empresa as tpe", "tpe.id", "=", "pla.id_tipo_empresa")
+            ->join("rsc_faturamento as fat", "fat.id", "=", "pla.id_faturamento")
+            ->where("pla.id_tipo_empresa", $idTipoEmpresa)
+            ->where("pla.id_faturamento", $idFaturamento)
+            ->where("pla.socios_minimo", "<=", $socios)
+            ->where("pla.socios_maximo", ">=", $socios)
+            ->where("pla.funcionarios_minimo", "<=", $funcionarios)
+            ->where("pla.funcionarios_maximo", ">=", $funcionarios)
             ->get()
             ->toArray();
 
@@ -50,6 +58,7 @@ class Plano extends MbModel
         return $dados;
 
     }
+
 
     public function getPlanos()
     {

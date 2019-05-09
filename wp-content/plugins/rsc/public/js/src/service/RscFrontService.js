@@ -221,6 +221,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
     };
 
     this.getUnidades = function ($scope) {
+        /*
         $scope.alert.changeShow(false);
         $request.get(urlAdmin("admin-ajax.php"))
             .addParams({
@@ -235,9 +236,136 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
                 $scope.alert.changeType("danger");
 
             });
+            */
+        $scope.listUnidades = unidades;
     };
 
+    var unidades =[
+        {
+            id: 1,
+            nome: "SÃO JOÃO DOS PATOS",
+        },
+        {
+            id:2,
+            nome:"PARAIBANO"
+        },
+        {
+            id:3,
+            nome:"BARÃO DE GRAJAÚ"
+        },
+        {
+            id:4,
+            nome:"PASSAGEM FRANCA"
+        },
+        {
+            id:5,
+            nome:"BURITI BRAVO"
+        },
+        {
+            id:6,
+            nome:"SUCUPIRA RIACHÃO"
+        },
+        {
+            id:7,
+            nome:"SUCUPIRA DO NORTE"
+        },
+        {
+            id:8,
+            nome:"COLINAS"
+        },
+        {
+            id:9,
+            nome:"SÃO DOMINGOS DO MARANHÃO"
+        },
+        {
+            id:10,
+            nome:"SÃO DOMINGO DO AZEITÃO"
+        },
+        {
+            id:11,
+            nome:"PRESIDENTE DUTRA"
+        },
+        {
+            id:13,
+            nome:"SÃO RAIMUNDO DAS MANGABEIRAS"
+        },
+        {
+            id:14,
+            nome:"SÃO LUÍS"
+        },
+        {
+            id:15,
+            nome:"SÃO JOSÉ DE RIBAMAR"
+        },
+        {
+            id:16,
+            nome:"RAPOSA"
+        },
+        {
+            id:17,
+            nome:"PAÇO DO LUMIAR"
+        },
+        {
+            id:18,
+            nome:"BALSAS"
+        },
+    ];
+
+    var tiposEmpresa = [
+        {
+            id: 1,
+            nome: "SIMPLES NACIONAL - COMÉRCIO"
+        },
+        {
+            id: 2,
+            nome: "SIMPLES NACIONAL - SERVIÇO"
+        },
+        {
+            id: 3,
+            nome: "LUCRO PRESUMIDO - COMÉRCIO"
+        },
+        {
+            id: 4,
+            nome: "LUCRO PRESUMIDO - SERVIÇO"
+        }
+    ];
+
+    var estadosCivis = [
+        {
+            id: 1,
+            nome: "Solteiro(a)"
+        },
+        {
+            id: 2,
+            nome: "Casado(a)",
+        },
+        {
+            id: 3,
+            nome: "Divorciado(a)"
+        },
+        {
+            id: 4,
+            nome: "Viúvo(a)"
+        }
+    ];
+
+    var generos = [
+        {
+            id: 1,
+            nome: "Masculino"
+        },
+        {
+            id: 2,
+            nome: "Feminino"
+        },
+        {
+            id: 3,
+            nome: "Outro"
+        }
+    ];
+
     this.getTiposEmpresa = function ($scope) {
+        /*
         $scope.alert.changeShow(false);
         $request.get(urlAdmin("admin-ajax.php"))
             .addParams({
@@ -252,6 +380,8 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
                 $scope.alert.changeType("danger");
 
             });
+            */
+        $scope.listTiposEmpresas = tiposEmpresa;
     };
 
     this.getFaturamentos = function ($scope) {
@@ -289,6 +419,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
     };
 
     this.getEstadosCivis = function ($scope) {
+        /*
         $scope.alert.changeShow(false);
         $request.get(urlAdmin("admin-ajax.php"))
             .addParams({
@@ -302,9 +433,12 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
                 $scope.alert.responseError(meta);
                 $scope.alert.changeType("danger");
             });
+            */
+        $scope.listaEstadosCivis = estadosCivis;
     };
 
     this.getGeneros = function ($scope) {
+        /*
         $scope.alert.changeShow(false);
         $request.get(urlAdmin("admin-ajax.php"))
             .addParams({
@@ -318,6 +452,8 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
                 $scope.alert.responseError(meta);
                 $scope.alert.changeType("danger");
             });
+            */
+        $scope.listaGeneros = generos;
     };
 
     this.getFaturamentosByFuncionarioESocio = function ($scope,formulario) {
