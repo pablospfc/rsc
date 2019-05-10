@@ -441,7 +441,7 @@
                                 </p></td>
                             <td class="text-center">
                                 <p>
-                                    <strong>{{mensalidade ? 'R$ '+mensalidade[0].mensalidade : 'R$ 0,00'}}</strong>
+                                    <strong>{{subTotal ? 'R$ '+subTotal : 'R$ 0,00'}}</strong>
                                 </p>
                                 <p>
                                     <strong>R$ 0,00</strong>
@@ -450,7 +450,7 @@
                         <tr>
                             <td>   </td>
                             <td class="text-right"><h4><strong>Total: </strong></h4></td>
-                            <td class="text-center text-danger"><h4><strong>{{mensalidade ? 'R$ '+mensalidade[0].mensalidade : 'R$ 0,00'}}</strong></h4></td>
+                            <td class="text-center text-danger"><h4><strong>{{valorTotal ? 'R$ '+valorTotal : 'R$ 0,00'}}</strong></h4></td>
                         </tr>
                         </tbody>
                     </table>

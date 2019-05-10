@@ -157,6 +157,8 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
             .load($scope.loading.getRequestLoad('Calculando a mensalidade...'))
             .send(function (data) {
                 $scope.mensalidade = data;
+                $scope.subTotal = data[0].valor;
+                $scope.valorTotal = data[0].valor;
             }, function (meta) {
                 $scope.alert.responseError(meta);
                 $scope.alert.changeType("danger");
