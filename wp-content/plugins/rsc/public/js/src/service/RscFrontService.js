@@ -99,7 +99,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
             $rootScope.alert.responseSuccess(data.message);
             $rootScope.boletos = data.boletos;
             console.log($rootScope.boletos);
-            //WizardHandler.wizard().next();
+            WizardHandler.wizard().next();
         }, function (meta) {
             //$scope.formContrato = undefined;
             $rootScope.alert.responseError(meta);
