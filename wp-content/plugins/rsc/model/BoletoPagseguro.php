@@ -23,41 +23,43 @@ class BoletoPagseguro
 
     }
 
-    public function gerarBoletos(){
+    public function gerarBoletos($dados){
         try {
+            //$this->config->setAccountCredentials('benidia@rsccontabilidade.com.br', '66eb507d-d0bf-4020-a6d8-dbf77c43064cedfb35ca406a9f05b8b8d4ba636f4ae3d6f7-60ad-4585-9698-62d638bd30e9');
             $this->config->setAccountCredentials('claudiopablosilva@hotmail.com', 'D3DED06B26A044AAA4A6F4E09A48B097');
-            $this->boleto->setAmount('300.50');
+
+            $this->boleto->setAmount($dados['valor']);
 //Descrição do boleto
             $this->boleto->setDescription('Assinatura para compra do plano');
 //O CPF do comprador
-            $this->boleto->setCustomerCPF('56766247444');//Se for CNPJ use $boleto->setCustomerCNPJ('33085736000169');
+            $this->boleto->setCustomerCPF($dados['cpf']);//Se for CNPJ use $boleto->setCustomerCNPJ('33085736000169');
 //Nome do comprador
-            $this->boleto->setCustomerName('Jorge José de Vázquez');
+            $this->boleto->setCustomerName($dados['nome']);
 //Email do comprador
-            $this->boleto->setCustomerEmail('jose@gmail.com');
+            $this->boleto->setCustomerEmail($dados['email']);
 //Telefone do comprador
-            $this->boleto->setCustomerPhone('11', '987651098');
+            $this->boleto->setCustomerPhone($dados['ddd'], $dados['telefone']);
             /*
              * Campos opcionais
              */
 //Data de vencimento do boleto no formato de Ano-Mês-Dia. Essa data precisa ser no futuro, e no máximo 30 dias apatir do dia atual.
             $this->boleto->setFirstDueDate(date("Y-m-d", strtotime("+3 days", time())));
 //Esse é o numero de boletos a ser gerado.
-            $this->boleto->setNumberOfPayments(12);
+            $this->boleto->setNumberOfPayments(2);
 //Uma referência de quem é o boleto (note que terá multiplos boletos com a mesma referência)
-            $this->boleto->setReference(19);//**
+            $this->boleto->setReference($dados['id_cliente']);//**
 //Instruções para quem irá receber o pagamento
             $this->boleto->setInstructions('Faça o pagamento até o dia do vencimento');
 //CEP do comprador
-            $this->boleto->setCustomerAddressPostalCode('65046660');
+            $this->boleto->setCustomerAddressPostalCode($dados['cep']);
 //Endereço do comprador
-            $this->boleto->setCustomerAddress('Avenida México', '12');
+            $this->boleto->setCustomerAddress($dados['rua'], $dados['numero']);
 //Bairro do comprador
-            $this->boleto->setCustomerAddressDistrict('Jardim Primavera');
+            $this->boleto->setCustomerAddressDistrict($dados['bairro']);
 //Cidade do comprador
-            $this->boleto->setCustomerAddressCity('São Paulo');
+            $this->boleto->setCustomerAddressCity($dados['cidade']);
 //Estado do comprador
-            $this->boleto->setCustomerAddressState('SP');
+            $this->boleto->setCustomerAddressState($dados['estado']);
 //Executa a conexão e captura a resposta do PagSeguro.
             $data = $this->boleto->send();
 
@@ -66,7 +68,7 @@ class BoletoPagseguro
             foreach ($data->boletos as $row) {
                 //\RSC\model\Boleto
                 $boletos[] = [
-                    'id_contrato' => 18,
+                    'id_contrato' => $dados['id_contrato'],
                     'codigo_transacao' => $row->code,
                     'codigo_barras' => $row->barcode,
                     'data_vencimento' => $row->dueDate,

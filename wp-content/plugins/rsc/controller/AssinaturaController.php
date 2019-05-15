@@ -52,7 +52,7 @@ class AssinaturaController extends MbController
     }
 
     public function gerarBoletosAction(MbRequest $request){
-        return (new BoletoPagseguro())->gerarBoletos();
+        return (new BoletoPagseguro())->gerarBoletos($request->inputSource());
     }
 
 }
