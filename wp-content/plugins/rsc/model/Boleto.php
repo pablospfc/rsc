@@ -10,6 +10,7 @@ namespace RSC\model;
 
 
 use MocaBonita\tools\eloquent\MbModel;
+use RSC\common\Sessao;
 
 class Boleto extends MbModel
 {
@@ -40,6 +41,27 @@ class Boleto extends MbModel
         }catch(\Exception $e){
             throw new \Exception("Não foi possível cadastrar os boletos");
         }
+    }
+
+    public function getBoletos(){
+        $idCliente = Sessao::instanciar()->get('user')[0]['id'];
+
+        $dados = self::select(
+            "bol.*",
+            "pla.valor"
+        )
+            ->from("rsc_boletos as bol")
+            ->join("rsc_contrato as con","con.id","=","bol.id_contrato")
+            ->join("rsc_cliente as cli","cli.id","=","con.id_cliente")
+            ->join("rsc_plano as pla", "pla.id", "=","con.id_plano")
+            ->where("cli.id","=",$idCliente)
+            ->get()
+            ->toArray();
+
+        if (!is_array($dados) || empty($dados))
+            throw new \Exception('Não foi possível listar os boletos!');
+
+        return $dados;
     }
 
 }

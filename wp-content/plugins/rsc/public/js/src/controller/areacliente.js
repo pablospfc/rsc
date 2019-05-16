@@ -16,8 +16,8 @@ appFrontRsc.controller('areaclienteController', function ($scope, RscService,log
         RscService.listarTransacoes($scope);
     };
 
-    $scope.abrirDocumentos = function(){
-
+    $scope.abrirBoletos = function(){
+      RscService.listarBoletos($scope);
     };
 
     $scope.abrirAssinatura = function(){

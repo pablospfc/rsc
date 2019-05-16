@@ -18,6 +18,7 @@ use MocaBonita\tools\MbPage;
 use MocaBonita\tools\MbPath;
 use RSC\common\Sessao;
 use RSC\controller\AssinaturaController;
+use RSC\controller\BoletoController;
 use RSC\controller\ClienteController;
 use RSC\controller\AreaClienteController;
 use RSC\controller\LoginController;
@@ -53,6 +54,10 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
     $pagamentoPage = MbPage::create("Pagamento")
         ->setController(PagamentoController::class)
         ->setSlug("pagamento");
+
+    $boletoPage = MbPage::create("Boleto")
+        ->setController(BoletoController::class)
+        ->setSlug("boleto");
 
     $clientePage = MbPage::create("Cliente")
         ->setController(ClienteController::class)
@@ -120,6 +125,11 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
             $retorno = Sessao::instanciar()->existe('user');
             return ['status'=>$retorno];
         });
+
+    $boletoPage->addMbAction("listarBoletos")
+        ->setRequiresMethod("GET")
+        ->setCapability("read")
+        ->setRequiresLogin(false);
 
     $assinaturaPage->addMbAction("criarPlano")
         ->setRequiresMethod("GET")
@@ -291,7 +301,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
     $mocabonita->addMbShortcode("area_cliente", $areaClientePage, "areacliente")
         ->getMbAsset()
         ->setJs(MbPath::pBwDir("jquery/dist/jquery.min.js"))
-        //->setCss(MbPath::pCssDir("style.css"))
+        ->setCss(MbPath::pCssDir("area-cliente.css"))
         //->setCss(MbPath::pBwDir("bootstrap/dist/css/bootstrap.min.css"))
         //->setCss(MbPath::pBwDir("bootstrap/dist/css/bootstrap-grid.min.css"))
         //->setJs(MbPath::pBwDir("bootstrap/dist/js/bootstrap.min.js"))
@@ -306,10 +316,12 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pBwDir("angular-wizard/dist/angular-wizard.min.js"))
         ->setJs(MbPath::pBwDir("angular-input-masks/angular-input-masks-standalone.js"))
         ->setJs(MbPath::pBwDir("ng-cpf-cnpj/lib/ngCpfCnpj.js"))
+        ->setJs(MbPath::pBwDir("angular-ui-mask/dist/mask.js"))
         ->setJs(MbPath::pJsDir("pagseguro/pagseguro.directpayment.js"))
         ->setJs(MbPath::pJsDir("src/app.js"))
         ->setJs(MbPath::pJsDir("src/controller/login.js"))
         ->setJs(MbPath::pJsDir("src/controller/areacliente.js"))
+        ->setJs(MbPath::pJsDir("src/controller/cliente.js"))
         ->setJs(MbPath::pJsDir("src/service/RscFrontService.js"))
         ->setJs(MbPath::pJsDir("src/service/loginService.js"))
         ->setJs(MbPath::pJsDir("src/service/sessionService.js"));
@@ -321,5 +333,6 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
     $mocabonita->addMbPage($loginPage);
     $mocabonita->addMbPage($areaClientePage);
     $mocabonita->addMbPage($pagamentoPage);
+    $mocabonita->addMbPage($boletoPage);
 
 }, true);

@@ -169,6 +169,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
     this.listarTransacoes = function ($scope) {
         $scope.formCliente = undefined;
         $scope.listaAssinaturas = undefined;
+        $scope.listaBoletos = undefined;
         $scope.alert.changeShow(false);
         $request.get(urlAdmin("admin-ajax.php"))
             .addParams({
@@ -178,6 +179,25 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
             .load($scope.loading.getRequestLoad('Listando Transações...'))
             .send(function (data) {
                 $scope.listaTransacoes = data;
+            }, function (meta) {
+                $scope.alert.responseError(meta);
+                $scope.alert.changeType("danger");
+            });
+    };
+
+    this.listarBoletos = function ($scope) {
+        $scope.formCliente = undefined;
+        $scope.listaAssinaturas = undefined;
+        $scope.listaTransacoes = undefined;
+        $scope.alert.changeShow(false);
+        $request.get(urlAdmin("admin-ajax.php"))
+            .addParams({
+                page: "boleto",
+                action: "listarBoletos",
+            })
+            .load($scope.loading.getRequestLoad('Listando Boletos...'))
+            .send(function (data) {
+                $scope.listaBoletos = data;
             }, function (meta) {
                 $scope.alert.responseError(meta);
                 $scope.alert.changeType("danger");
@@ -404,7 +424,8 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
 
     this.getDadosAssinatura = function ($scope) {
         $scope.listaTransacoes = undefined;
-        $scope.formCliente = undefined
+        $scope.formCliente = undefined;
+        $scope.listaBoletos = undefined;
         $scope.alert.changeShow(false);
         $request.get(urlAdmin("admin-ajax.php"))
             .addParams({
@@ -480,6 +501,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
     this.getDadosPessoais = function ($scope) {
         $scope.listaTransacoes = undefined;
         $scope.listaAssinaturas = undefined;
+        $scope.listaBoletos = undefined;
         $scope.alert.changeShow(false);
         $scope.mensalidade =undefined;
         $request.get(urlAdmin("admin-ajax.php"))

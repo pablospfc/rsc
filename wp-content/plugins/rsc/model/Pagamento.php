@@ -61,7 +61,7 @@ class Pagamento extends MbModel
             ->join("rsc_contrato as con","con.id","=","pag.id_contrato")
             ->join("rsc_cliente as cli","cli.id","=","con.id_cliente")
             ->join("rsc_status as sta","sta.id","=","pag.id_status")
-            ->join("rsc_plano as pla","pla.id","=","con.plano")
+            ->join("rsc_plano as pla","pla.id","=","con.id_plano")
             ->join("rsc_tipo_empresa as tpe","tpe.id","=","pla.id_tipo_empresa")
             ->where("cli.id","=",$idCliente)
             ->where("sta.id","=",3)
