@@ -326,7 +326,6 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pJsDir("src/service/loginService.js"))
         ->setJs(MbPath::pJsDir("src/service/sessionService.js"));
 
-
     $mocabonita->addMbPage($simuladorPage);
     $mocabonita->addMbPage($clientePage);
     $mocabonita->addMbPage($assinaturaPage);

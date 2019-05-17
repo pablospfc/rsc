@@ -8,6 +8,7 @@ appFrontRsc.factory('loginService', function($http, $request, $rootScope, $q, $l
             }).addData($scope.formLogin).load($scope.loading.getRequestLoad('Entrando no sistema...')).send(function (data) {
                 $scope.alert.responseSuccess(data.message);
                 $rootScope.autenticado = true;
+                $rootScope.dadosUsuario = data.dados[0];
                 var uid = data.uid;
                 var completou = data.dados[0].completou;
                 if(uid){
