@@ -8,7 +8,6 @@
 
 namespace RSC\controller;
 
-
 use MocaBonita\controller\MbController;
 use MocaBonita\tools\MbRequest;
 use MocaBonita\tools\MbResponse;

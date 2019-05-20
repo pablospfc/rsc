@@ -23,10 +23,11 @@ class BoletoPagseguro
 
     }
 
-    public function gerarBoletos($dados){
+    public function gerarBoletos($dados)
+    {
         try {
-            //$this->config->setAccountCredentials('benidia@rsccontabilidade.com.br', '66eb507d-d0bf-4020-a6d8-dbf77c43064cedfb35ca406a9f05b8b8d4ba636f4ae3d6f7-60ad-4585-9698-62d638bd30e9');
-            $this->config->setAccountCredentials('claudiopablosilva@hotmail.com', 'D3DED06B26A044AAA4A6F4E09A48B097');
+            $this->config->setAccountCredentials('benidia@rsccontabilidade.com.br', '66eb507d-d0bf-4020-a6d8-dbf77c43064cedfb35ca406a9f05b8b8d4ba636f4ae3d6f7-60ad-4585-9698-62d638bd30e9');
+           // $this->config->setAccountCredentials('claudiopablosilva@hotmail.com', 'D3DED06B26A044AAA4A6F4E09A48B097');
 
             $this->boleto->setAmount($dados['valor']);
 //Descrição do boleto
