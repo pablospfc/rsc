@@ -83,7 +83,7 @@ class Cliente extends MbModel
                 ]);
 
             MbDatabase::commit();
-            return ['message' => 'O seu cadastro básico foi realizado com sucesso! Por favor, avance para a epata de contratação.', 'id' => $cliente->id];
+            return ['message' => 'O seu cadastro básico foi realizado com sucesso! Por favor, preencha os dados da sua contratação.', 'id' => $cliente->id];
 
         } catch (\Exception $e) {
             MbDatabase::rollBack();
