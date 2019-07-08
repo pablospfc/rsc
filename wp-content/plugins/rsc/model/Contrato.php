@@ -44,7 +44,7 @@ class Contrato extends MbModel
         $dados = self::select(
             "cli.id as id_cliente",
             "cli.nome as nome",
-            "cli.cpf as cpf",
+            "cli.cpf_cnpj as cpf_cnpj",
             "cli.email as email",
             "cli.ddd as ddd",
             "cli.telefone_residencial as telefone",

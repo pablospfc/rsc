@@ -68,18 +68,46 @@
 
                 <h5 class="page-header">Documentos</h5>
                 <div class="row">
-                    <div class="form-group col-md-3">
+
+
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" ng-model="formCliente.tipo" ng-required="!formCliente.tipo" value="fisica" name="tipo" ng-change="selecionaPessoa('fisica')">Pessoa Física
+                    </label>
+                </div>
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" ng-model="formCliente.tipo" ng-required="!formCliente.tipo" value="juridica" name="tipo" ng-change="selecionaPessoa('juridica')">Pessoa Jurídica
+                    </label>
+                </div>
+                </div>
+                <div class="row">
+
+                    <div class="form-group col-md-3" ng-if="fisica==true">
                         <label for="rg">CPF:(*)</label>
                         <input type="text"
-                               ng-model="formCliente.cpf"
-                               name="cpf"
+                               ng-model="formCliente.cpf_cnpj"
+                               name="cpf_cnpj"
                                class="form-control"
-                               id="cpf"
+                               id="cpf_cnpj"
                                ng-cpf
                                ui-br-cpf-mask
                                ng-required="true"
                                placeholder="CPF"/>
-                        <p style="color:red" ng-show ="formDadosCliente.cpf.$invalid && !formDadosCliente.cpf.$pristine">O seu CPF está inválido!</p>
+                        <p style="color:red" ng-show ="formDadosCliente.cpf_cnpj.$invalid && !formDadosCliente.cpf_cnpj.$pristine">O seu CPF está inválido!</p>
+                    </div>
+                    <div class="form-group col-md-3" ng-if="fisica==false">
+                        <label for="cpf_cnpj">CNPJ:(*)</label>
+                        <input type="text"
+                               ng-model="formCliente.cpf_cnpj"
+                               name="cpf_cnpj"
+                               class="form-control"
+                               id="cpf_cnpj"
+                               ng-cnpj
+                               ui-br-cnpj-mask
+                               ng-required="true"
+                               placeholder="CNPJ"/>
+                        <p style="color:red" ng-show ="formDadosCliente.cpf_cnpj.$invalid && !formDadosCliente.cpf_cnpj.$pristine">O seu CNPJ está inválido!</p>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="rg">RG:(*)</label>

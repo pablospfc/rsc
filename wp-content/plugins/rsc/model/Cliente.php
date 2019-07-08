@@ -26,7 +26,7 @@ class Cliente extends MbModel
         "id_sexo",
         "id_estado_civil",
         "data_nascimento",
-        "cpf",
+        "cpf_cnpj",
         "rg",
         "orgao_rg",
         "data_emissao_rg",
@@ -50,9 +50,9 @@ class Cliente extends MbModel
             MbDatabase::beginTransaction();
             $usuario = Usuario::updateOrCreate(
                 [
-                    'login' => $dados['cpf']
+                    'login' => $dados['cpf_cnpj']
                 ], [
-                'login' => $dados['cpf'],
+                'login' => $dados['cpf_cnpj'],
                 'senha' => Encryption::encrypt($dados['senha']),
             ]);
 
@@ -65,7 +65,7 @@ class Cliente extends MbModel
                     'data_nascimento' => Validation::dateToMysql($dados['data_nascimento']),
                     'id_sexo' => $dados['id_sexo'],
                     'id_estado_civil' => $dados['id_estado_civil'],
-                    'cpf' => $dados['cpf'],
+                    'cpf_cnpj' => $dados['cpf_cnpj'],
                     'rg' => $dados['rg'],
                     'orgao_rg' => $dados['orgao_rg'],
                     'data_emissao_rg' => Validation::dateToMysql($dados['data_emissao_rg']),
@@ -99,7 +99,7 @@ class Cliente extends MbModel
                 'data_nascimento' => Validation::dateToMysql($dados['data_nascimento']),
                 'id_sexo' => $dados['id_sexo']['id'],
                 'id_estado_civil' => $dados['id_estado_civil']['id'],
-                'cpf' => $dados['cpf'],
+                'cpf_cnpj' => $dados['cpf_cnpj'],
                 'rg' => $dados['rg'],
                 'orgao_rg' => $dados['orgao_rg'],
                 'data_emissao_rg' => Validation::dateToMysql($dados['data_emissao_rg']),

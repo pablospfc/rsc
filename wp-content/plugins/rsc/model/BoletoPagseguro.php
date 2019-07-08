@@ -33,7 +33,10 @@ class BoletoPagseguro
 //Descrição do boleto
             $this->boleto->setDescription('Assinatura para compra do plano');
 //O CPF do comprador
-            $this->boleto->setCustomerCPF($dados['cpf']);//Se for CNPJ use $boleto->setCustomerCNPJ('33085736000169');
+            if (strlen($dados['cpf_cnpj']) >11)
+                $this->boleto->setCustomerCNPJ($dados['cpf_cnpj']);
+            else
+                $this->boleto->setCustomerCPF($dados['cpf_cnpj']);//Se for CNPJ use $boleto->setCustomerCNPJ('33085736000169');
 //Nome do comprador
             $this->boleto->setCustomerName($dados['nome']);
 //Email do comprador

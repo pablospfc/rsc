@@ -32,8 +32,12 @@ appFrontRsc.controller('clienteController', function ($scope, loginService, $roo
         console.log(PagSeguroDirectPayment.getSenderHash());
     };
 
-
-
+    $scope.selecionaPessoa = function(tipo){
+        if (tipo == 'fisica')
+            $scope.fisica = true;
+        else
+            $scope.fisica = false;
+    };
 
     $scope.iniciaSessao = function () {
         RscService.getSessao($scope).then(function (data) {
