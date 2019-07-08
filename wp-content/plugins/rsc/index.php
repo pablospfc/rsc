@@ -88,7 +88,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
             return (new Cliente())->getDadosPessoais();
         });
 
-    $areaClientePage->addMbAction("atualizarCliente")
+    $clientePage->addMbAction("atualizarCliente")
         ->setRequiresMethod("POST")
         ->setRequiresLogin(false)
         ->setCapability("read");

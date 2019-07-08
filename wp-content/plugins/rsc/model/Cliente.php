@@ -25,6 +25,7 @@ class Cliente extends MbModel
         "id_usuario",
         "id_sexo",
         "id_estado_civil",
+        "id_tipo_pessoa",
         "data_nascimento",
         "cpf_cnpj",
         "rg",
@@ -65,7 +66,8 @@ class Cliente extends MbModel
                     'data_nascimento' => Validation::dateToMysql($dados['data_nascimento']),
                     'id_sexo' => $dados['id_sexo'],
                     'id_estado_civil' => $dados['id_estado_civil'],
-                    'cpf_cnpj' => $dados['cpf_cnpj'],
+                    'id_tipo_pessoa' => $dados['id_tipo_pessoa'],
+                    'cpf_cnpj' => ($dados['id_tipo_pessoa'] == 1) ? $dados['cpf'] : $dados['cnpj'],
                     'rg' => $dados['rg'],
                     'orgao_rg' => $dados['orgao_rg'],
                     'data_emissao_rg' => Validation::dateToMysql($dados['data_emissao_rg']),
@@ -99,7 +101,8 @@ class Cliente extends MbModel
                 'data_nascimento' => Validation::dateToMysql($dados['data_nascimento']),
                 'id_sexo' => $dados['id_sexo']['id'],
                 'id_estado_civil' => $dados['id_estado_civil']['id'],
-                'cpf_cnpj' => $dados['cpf_cnpj'],
+                'id_tipo_pessoa' => $dados['id_tipo_pessoa'],
+                'cpf_cnpj' => ($dados['id_tipo_pessoa'] == 1) ? $dados['cpf'] : $dados['cnpj'],
                 'rg' => $dados['rg'],
                 'orgao_rg' => $dados['orgao_rg'],
                 'data_emissao_rg' => Validation::dateToMysql($dados['data_emissao_rg']),
@@ -118,10 +121,10 @@ class Cliente extends MbModel
             Cliente::where('id', $dados['id'])
                      ->update($data);
 
-            return ['message' => "Os seus dados foram atualizados co sucesso"];
+            return ['message' => "Os seus dados foram atualizados com sucesso"];
         }catch(\Exception $e){
             Log::createFromException($e);
-            throw new \Exception('Erro ao atualizar seus dados. Por favor tente novamente!'.$e);
+            throw new \Exception('Erro ao atualizar seus dados. Por favor tente novamente!');
         }
     }
 
@@ -132,6 +135,10 @@ class Cliente extends MbModel
             $cliente = Cliente::where('id','=',$dados[0]['id'])->get();
             $cliente[0]['data_nascimento'] = Validation::dateToBr($cliente[0]['data_nascimento']);
             $cliente[0]['data_emissao_rg'] = Validation::dateToBr($cliente[0]['data_emissao_rg']);
+            if (strlen($cliente[0]['cpf_cnpj']) > 11)
+                $cliente[0]['cnpj'] = $cliente[0]['cpf_cnpj'];
+            else
+                $cliente[0]['cpf'] = $cliente[0]['cpf_cnpj'];
 
             return $cliente;
 

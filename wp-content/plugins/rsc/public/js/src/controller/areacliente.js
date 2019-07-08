@@ -12,6 +12,10 @@ appFrontRsc.controller('areaclienteController', function ($scope, RscService,log
        RscService.atualizarCliente($scope);
     };
 
+    $scope.selecionaTipo = function(tipo){
+        $scope.tipo = tipo;
+    };
+
     $scope.abrirPagamentos = function(){
         RscService.listarTransacoes($scope);
     };

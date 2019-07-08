@@ -72,12 +72,12 @@
 
                 <div class="radio-inline">
                     <label>
-                        <input type="radio" ng-model="formCliente.tipo" ng-required="!formCliente.tipo" value="fisica" name="tipo" ng-change="selecionaPessoa('fisica')">Pessoa Física
+                        <input type="radio" ng-model="formCliente.id_tipo_pessoa" ng-required="!formCliente.id_tipo_pessoa" ng-value="1" name="tipo" ng-change="selecionaPessoa('fisica')">Pessoa Física
                     </label>
                 </div>
                 <div class="radio-inline">
                     <label>
-                        <input type="radio" ng-model="formCliente.tipo" ng-required="!formCliente.tipo" value="juridica" name="tipo" ng-change="selecionaPessoa('juridica')">Pessoa Jurídica
+                        <input type="radio" ng-model="formCliente.id_tipo_pessoa" ng-required="!formCliente.id_tipo_pessoa" ng-value="2" name="tipo" ng-change="selecionaPessoa('juridica')">Pessoa Jurídica
                     </label>
                 </div>
                 </div>
