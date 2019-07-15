@@ -21,6 +21,7 @@ use RSC\controller\AssinaturaController;
 use RSC\controller\BoletoController;
 use RSC\controller\ClienteController;
 use RSC\controller\AreaClienteController;
+use RSC\controller\DocumentoCliente;
 use RSC\controller\LoginController;
 use RSC\controller\SimuladorController;
 use RSC\controller\PagamentoController;
@@ -71,14 +72,18 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setController(LoginController::class)
         ->setSlug("login");
 
+    $areaClientePage = MbPage::create("AreaCliente")
+        ->setController(AreaClienteController::class)
+        ->setSlug("areacliente");
+
+    $documentoClientePage = MbPage::create("DocumentoCliente")
+        ->setController(DocumentoCliente::class)
+        ->setSlug("documentocliente");
+
     $pagamentoPage->addMbAction("listarTransacoes")
         ->setRequiresMethod("GET")
         ->setRequiresLogin(false)
         ->setCapability("read");
-
-    $areaClientePage = MbPage::create("AreaCliente")
-        ->setController(AreaClienteController::class)
-        ->setSlug("areacliente");
 
     $areaClientePage->addMbAction("getDadosPessoais")
         ->setRequiresMethod("GET")
@@ -175,6 +180,24 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setRequiresMethod("GET")
         ->setCapability("read")
         ->setRequiresLogin(false);
+
+    $documentoClientePage->addMbAction("documentos")
+        ->setRequiresMethod("GET")
+        ->setCapability("read")
+        ->setFunctionName("documentos");
+
+    $documentoClientePage->addMbAction("clientes")
+        ->setRequiresMethod("GET")
+        ->setCapability("read")
+        ->setFunctionName("clientes");
+
+    $documentoClientePage->addMbAction("clientes")
+        ->setRequiresMethod("GET")
+        ->setCapability("read")
+        ->setFunctionName("clientes")
+        ->setCallback(function () {
+            return Cliente::getClientes();
+        });
 
     $clientePage->addMbAction("getGeneros")
         ->setRequiresMethod("GET")
@@ -326,6 +349,28 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pJsDir("src/service/loginService.js"))
         ->setJs(MbPath::pJsDir("src/service/sessionService.js"));
 
+    $documentoClientePage
+        ->getMbAsset()
+        ->setJs(MbPath::pBwDir("jquery/dist/jquery.min.js"))
+        ->setCss(MbPath::pBwDir("bootstrap/dist/css/bootstrap.min.css"))
+        ->setCss(MbPath::pBwDir("bootstrap/dist/css/bootstrap-grid.min.css"))
+        ->setJs(MbPath::pBwDir("bootstrap/dist/js/bootstrap.min.js"))
+        ->setJs(MbPath::pBwDir("angular/angular.min.js"))
+        ->setJs(MbPath::pBwDir("angular-sanitize/angular-sanitize.min.js"))
+        ->setJs(MbPath::pBwDir("angular-locale-pt-br/angular-locale_pt-br.js"))
+        ->setJs(MbPath::pBwDir("barbara-js/barbarajs.min.js"))
+        ->setJs(MbPath::pBwDir("angular-modal-service/dst/angular-modal-service.min.js"))
+        ->setJs(MbPath::pBwDir("angular-br-filters/release/angular-br-filters.min.js"))
+        ->setJs(MbPath::pBwDir("angular-messages/angular-messages.min.js"))
+        ->setJs(MbPath::pBwDir("angular-route/angular-route.min.js"))
+        ->setJs(MbPath::pBwDir("angular-wizard/dist/angular-wizard.min.js"))
+        ->setJs(MbPath::pBwDir("angular-input-masks/angular-input-masks-standalone.js"))
+        ->setJs(MbPath::pBwDir("angular-ui-mask/dist/mask.js"))
+        ->setJs(MbPath::pJsDir("src/app.js"))
+        ->setJs(MbPath::pJsDir("src/controller/documento-cliente.js"))
+        ->setJs(MbPath::pJsDir("src/service/RscBackService.js"));
+
+
     $mocabonita->addMbPage($simuladorPage);
     $mocabonita->addMbPage($clientePage);
     $mocabonita->addMbPage($assinaturaPage);
@@ -333,5 +378,6 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
     $mocabonita->addMbPage($areaClientePage);
     $mocabonita->addMbPage($pagamentoPage);
     $mocabonita->addMbPage($boletoPage);
+    $mocabonita->addMbPage($documentoClientePage);
 
 }, true);

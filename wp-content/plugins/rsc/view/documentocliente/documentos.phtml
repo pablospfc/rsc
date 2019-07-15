@@ -1,0 +1,29 @@
+<h4>Documento do Cliente</h4>
+<div class="form-group col-md-12">
+    <form>
+        <div class="form-group col-md-3">
+            <label for="cliente">Cliente</label>
+            <select class="form-control">
+                <option>Pablo</option>
+                <option>Santos</option>
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="tipo_documento">Tipo de Documento</label>
+            <select class="form-control">
+                <option>Cadastro</option>
+                <option>Fiscal - PGDAS</option>
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="exampleInputFile">Arquivo</label>
+            <input type="file"
+                   id="exampleInputFile"
+                   ngf-select
+                   ngf-accept="'image/*'"
+                   ngf-keep="true"
+            >
+        </div>
+        <button type="button" class="btn btn-primary">Adicionar</button>
+    </form>
+</div>

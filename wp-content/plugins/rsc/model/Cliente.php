@@ -148,4 +148,42 @@ class Cliente extends MbModel
         }
     }
 
+    public static function getClientes(){
+        try {
+            $dados = self::select(
+                "cli.id as id_cliente",
+                "cli.nome as nome",
+                "cli.cpf_cnpj as cpf_cnpj",
+                "cli.email as email",
+                "cli.ddd as ddd",
+                "cli.telefone_residencial as telefone",
+                "cli.telefone_celular as celular",
+                "cli.rua",
+                "cli.numero",
+                "cli.complemento",
+                "cli.bairro",
+                "cli.cidade",
+                "cli.estado",
+                "cli.cep",
+                "cli.data_nascimento",
+                "con.id as id_contrato",
+                "pla.valor",
+                "fat.nome as faturamento",
+                "tip.nome as tipo_empresa"
+            )
+                ->from("rsc_contrato as con")
+                ->join("rsc_cliente as cli","cli.id","=","con.id_cliente")
+                ->join("rsc_plano as pla","pla.id","con.id_plano")
+                ->join("rsc_faturamento as fat","fat.id","=","pla.id_faturamento")
+                ->join("rsc_tipo_empresa as tip","tip.id","=","pla.id_tipo_empresa")
+                ->get()
+                ->toArray();
+
+            return $dados;
+
+        }catch(\Exception $e){
+            throw new \Exception("Não foi possível listar os clientes.");
+        }
+    }
+
 }

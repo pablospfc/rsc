@@ -125,3 +125,24 @@ appFrontRsc.run(function ($rootScope, bootstrap, $location, loginService) {
         }
     });
 });
+
+var appBackRsc = angular.module('appBackRsc', [
+    'Barbara-Js',
+    'idf.br-filters',
+    'ngRoute',
+    'ngMessages',
+    'angularModalService',
+    'ui.utils.masks',
+    'ui.mask'
+]);
+
+appBackRsc.run(function ($rootScope, bootstrap) {
+    $rootScope.alert   = bootstrap.alert();
+    $rootScope.loading = bootstrap.loading();
+});
+
+appBackRsc.constant('PATHS', {
+    PATH_DOC  : './admin.php?page=documentocliente',
+    PATH_ARQUIVOS: 'http://localhost/pra/wp-content/uploads'
+});
+
