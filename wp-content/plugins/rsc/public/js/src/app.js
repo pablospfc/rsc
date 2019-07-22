@@ -143,6 +143,6 @@ appBackRsc.run(function ($rootScope, bootstrap) {
 
 appBackRsc.constant('PATHS', {
     PATH_DOC  : './admin.php?page=documentocliente',
-    PATH_ARQUIVOS: 'http://localhost/pra/wp-content/uploads'
+    PATH_ARQUIVOS: 'http://localhost/rsc/wp-content/uploads'
 });
 

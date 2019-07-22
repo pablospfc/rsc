@@ -18,7 +18,8 @@ class ClienteController extends MbController
 {
     public function indexAction(MbRequest $mbRequest, MbResponse $mbResponse)
     {
-        throw new \Exception("Action indisponível!");
+        //throw new \Exception("Action indisponível!");
+        return $this->getMbView()->setAction('clientes');
     }
 
     public function cadastrarClienteAction(MbRequest $mbRequest)
@@ -41,6 +42,14 @@ class ClienteController extends MbController
         return $this->getMbView()
             ->setPage("cliente")
             ->setAction("index");
+    }
+
+    public function docentesAction()
+    {
+        return $this->getMbView()
+            ->setTemplate("index")
+            ->setPage("cliente")
+            ->setAction("clientes");
     }
 
     public function cadastroAction()
