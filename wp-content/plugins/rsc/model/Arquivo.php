@@ -13,7 +13,7 @@ class Arquivo
 {
     protected $table;
     private $permanentName;
-    private $path;
+    public $path;
     private $uploadDirPath;
     private $directoryName;
     private $extension;
@@ -32,9 +32,8 @@ class Arquivo
     }
 
     public function saveFileInDisk($file) {
-        $this->generateFileNameMd5($file['name']);
-        $this->setExtension($file['name']);
-
+        $this->generateFileNameMd5($file['name'][0]);
+        $this->setExtension($file['name'][0]);
         $this->path = '/'
             . $this->directoryName
             . '/'
@@ -43,8 +42,7 @@ class Arquivo
             . $this->extension;
 
         $pathDisk = $this->uploadDirPath . $this->path;
-
-        move_uploaded_file($file['tmp_name'], $pathDisk);
+        move_uploaded_file($file['tmp_name'][0], $pathDisk);
         return $this->path;
     }
 

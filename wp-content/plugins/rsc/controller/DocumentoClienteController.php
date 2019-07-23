@@ -12,8 +12,9 @@ namespace RSC\controller;
 use MocaBonita\controller\MbController;
 use MocaBonita\tools\MbRequest;
 use MocaBonita\tools\MbResponse;
+use RSC\model\DocumentoCliente;
 
-class DocumentoCliente extends MbController
+class DocumentoClienteController extends MbController
 {
     public function indexAction(MbRequest $mbRequest, MbResponse $mbResponse)
     {
@@ -29,7 +30,11 @@ class DocumentoCliente extends MbController
     }
 
     public function getDocumentosAction(MbRequest $request){
-        return (new \RSC\model\DocumentoCliente())->getDocumentos($request->query('id_contrato'));
+        return (new DocumentoCliente())->getDocumentos($request->query('id_contrato'));
+    }
+
+    public function enviarDocumentoAction(MbRequest $request){
+        return (new DocumentoCliente())->salvar($request->inputSource(),$_FILES['arquivo']);
     }
 
 

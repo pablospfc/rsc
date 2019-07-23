@@ -2,20 +2,19 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button"
-                        class="close"
-                        data-dismiss="modal"
-                        ng-click="close('cancel')"
-                        name="button">
-                    <i class="glyphicon glyphicon-remove"></i>
-                </button>
                 <h4 class="modal-title">
-                    {{documento.id ? 'Atualizar documento' : 'Cadastrar documento'}}
+                    {{documento.id_contrato ? 'Atualizar documento' : 'Cadastrar documento'}}
                 </h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-
-                <form name="formDocumento" novalidate>
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1">
+                        <div alert-bootstrap></div>
+                        <div loading-bootstrap></div>
+                    </div>
+                </div>
+                <form name="formDocumento" ng-submit="salvarDocumento()" novalidate>
                     <div class="row">
                         <div class="form-group col-md-12">
                             <div class="input-group" id="documento">
@@ -24,46 +23,38 @@
                                            {{documento.arquivo ? ( documento.arquivo.name | limitTo: 15 ) + '...' : 'Escolher Imagem...' }}
                                           <input ngf-select
                                                  type="file"
-                                                 ngf-accept="'image/*'"
+                                                 ngf-pattern="'application/pdf'"
                                                  ngf-keep="true"
                                                  ng-model="documento.arquivo"
-                                                 ng-required="documento.id ? false : true"
+                                                 ng-required="documento.id_contrato ? false : true"
                                           >
                                       </span>
-                                    <p ng-show="!documento.id && formDocumento.cmpTipoArquivo.$invalid && !formDocumento.cmpTipoArquivo.$pristine">
-                                        Este campo é obrigatório.
-                                    </p>
                                 </span>
                                 <select class="form-control"
                                         id="tipoDocumento"
                                         name="tipoDocumento"
-                                        ng-options="tipoArquivo as tipoArquivo.descricao for tipoArquivo in tiposArquivo track by tipoArquivo.id"
+                                        ng-options="tipoDocumento as tipoDocumento.nome for tipoDocumento in listaDocumentos track by tipoDocumento.id"
                                         ng-model="documento.id_tipo_documento"
                                         ng-required="true"
                                 >
                                     <option value="">Escolha o tipo de documento...</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-12">
-                                <div alert-bootstrap></div>
-                                <div loading-bootstrap></div>
-                            </div>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                                class="btn btn-default"
+                                ng-click="close('cancel')"
+                                data-dismiss="modal">Cancelar
+                        </button>
+                        <button type="submit"
+                                class="btn btn-success">{{!documento.id ? 'Enviar' : 'Atualizar'}}
+                        </button>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button"
-                        class="btn btn-default"
-                        ng-click="close('cancel')"
-                        data-dismiss="modal">Cancelar
-                </button>
-                <button type="button"
-                        ng-disabled="formDocumento.$invalid"
-                        ng-click="!formDocumento.$invalid && save()"
-                        class="btn btn-success">{{!documento.id ? 'Enviar' : 'Atualizar'}}
-                </button>
-            </div>
+
         </div>
     </div>
 </div>

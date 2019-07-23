@@ -21,7 +21,7 @@ use RSC\controller\AssinaturaController;
 use RSC\controller\BoletoController;
 use RSC\controller\ClienteController;
 use RSC\controller\AreaClienteController;
-use RSC\controller\DocumentoCliente;
+use RSC\controller\DocumentoClienteController;
 use RSC\controller\LoginController;
 use RSC\controller\SimuladorController;
 use RSC\controller\PagamentoController;
@@ -77,7 +77,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setSlug("areacliente");
 
     $documentoClientePage = MbPage::create("DocumentoCliente")
-        ->setController(DocumentoCliente::class)
+        ->setController(DocumentoClienteController::class)
         ->setSlug("documentocliente");
 
     $pagamentoPage->addMbAction("listarTransacoes")
@@ -185,6 +185,9 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setRequiresMethod("GET")
         ->setCapability("read");
 
+    $documentoClientePage->addMbAction("enviarDocumento")
+        ->setRequiresMethod("POST")
+        ->setCapability("read");
 
     $clientePage->addMbAction("clientes")
         ->setRequiresMethod("GET")
@@ -361,6 +364,8 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pBwDir("angular-wizard/dist/angular-wizard.min.js"))
         ->setJs(MbPath::pBwDir("angular-input-masks/angular-input-masks-standalone.js"))
         ->setJs(MbPath::pBwDir("angular-ui-mask/dist/mask.js"))
+        ->setJs(MbPath::pBwDir("ng-file-upload/ng-file-upload-shim.min.js"))
+        ->setJs(MbPath::pBwDir("ng-file-upload/ng-file-upload.min.js"))
         ->setJs(MbPath::pJsDir("src/app.js"))
         ->setJs(MbPath::pJsDir("src/controller/documento-cliente.js"))
         ->setJs(MbPath::pJsDir("src/controller/documento-modal-controller.js"))
@@ -383,6 +388,8 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pBwDir("angular-wizard/dist/angular-wizard.min.js"))
         ->setJs(MbPath::pBwDir("angular-input-masks/angular-input-masks-standalone.js"))
         ->setJs(MbPath::pBwDir("angular-ui-mask/dist/mask.js"))
+        ->setJs(MbPath::pBwDir("ng-file-upload/ng-file-upload-shim.min.js"))
+        ->setJs(MbPath::pBwDir("ng-file-upload/ng-file-upload.min.js"))
         ->setJs(MbPath::pJsDir("src/app.js"))
         ->setJs(MbPath::pJsDir("src/controller/cliente-back-controller.js"))
         ->setJs(MbPath::pJsDir("src/service/RscBackService.js"));

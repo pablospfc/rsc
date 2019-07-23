@@ -133,6 +133,7 @@ var appBackRsc = angular.module('appBackRsc', [
     'ngMessages',
     'angularModalService',
     'ui.utils.masks',
+    'ngFileUpload',
     'ui.mask'
 ]);
 
@@ -140,9 +141,14 @@ appBackRsc.run(function ($rootScope, bootstrap) {
     $rootScope.alert   = bootstrap.alert();
     $rootScope.loading = bootstrap.loading();
 });
-
+/*
+appBackRsc.config(['$qProvider', function ($qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
+}]);
+*/
 appBackRsc.constant('PATHS', {
     PATH_DOC  : './admin.php?page=documentocliente',
-    PATH_ARQUIVOS: 'http://localhost/rsc/wp-content/uploads'
+    PATH_ARQUIVOS: 'http://localhost/rsc/wp-content/uploads',
+    PATH_UPLOAD: './admin-ajax.php'
 });
 
