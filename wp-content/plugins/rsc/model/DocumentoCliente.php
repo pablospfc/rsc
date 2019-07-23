@@ -38,9 +38,6 @@ class DocumentoCliente extends MbModel
             ->get()
             ->toArray();
 
-        if (!is_array($dados) || empty($dados))
-            throw new \Exception('Não foi possível listar documentos!');
-
         return $dados;
     }
 

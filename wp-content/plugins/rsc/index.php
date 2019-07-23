@@ -50,14 +50,17 @@ MocaBonita::active(function () {
 MocaBonita::plugin(function (MocaBonita $mocabonita) {
     $simuladorPage = MbPage::create("Simulador")
         ->setController(SimuladorController::class)
+        ->setHideMenu(true)
         ->setSlug("simulador");
 
     $pagamentoPage = MbPage::create("Pagamento")
         ->setController(PagamentoController::class)
+        ->setHideMenu(true)
         ->setSlug("pagamento");
 
     $boletoPage = MbPage::create("Boleto")
         ->setController(BoletoController::class)
+        ->setHideMenu(true)
         ->setSlug("boleto");
 
     $clientePage = MbPage::create("Cliente")
@@ -66,14 +69,17 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
 
     $assinaturaPage = MbPage::create("Assinatura")
         ->setController(AssinaturaController::class)
+        ->setHideMenu(true)
         ->setSlug("assinatura");
 
     $loginPage = MbPage::create("Login")
         ->setController(LoginController::class)
+        ->setHideMenu(true)
         ->setSlug("login");
 
     $areaClientePage = MbPage::create("AreaCliente")
         ->setController(AreaClienteController::class)
+        ->setHideMenu(true)
         ->setSlug("areacliente");
 
     $documentoClientePage = MbPage::create("DocumentoCliente")
