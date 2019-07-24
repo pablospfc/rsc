@@ -13,6 +13,7 @@ use MocaBonita\controller\MbController;
 use MocaBonita\tools\MbRequest;
 use MocaBonita\tools\MbResponse;
 use RSC\model\Cliente;
+use RSC\model\DocumentoCliente;
 
 class AreaClienteController extends MbController
 {
@@ -38,6 +39,10 @@ class AreaClienteController extends MbController
 
     public function getDadosPessoaisAction(){
         return (new Cliente())->getDadosPessoais();
+    }
+
+    public function getDocumentosAction(MbRequest $request){
+        return (new DocumentoCliente())->getDocumentos($request->query('id_contrato'));
     }
 
 }

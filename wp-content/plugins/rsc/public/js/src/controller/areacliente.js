@@ -1,4 +1,4 @@
-appFrontRsc.controller('areaclienteController', function ($scope, RscService,loginService) {
+appFrontRsc.controller('areaclienteController', function ($scope, PATHS, $window, RscService,loginService) {
 
 
 
@@ -8,8 +8,16 @@ appFrontRsc.controller('areaclienteController', function ($scope, RscService,log
         RscService.getDadosPessoais($scope);
     };
 
+    $scope.abrirDocumentos = function(){
+      RscService.getDocumentos($scope);
+    };
+
     $scope.atualizarCliente = function(){
        RscService.atualizarCliente($scope);
+    };
+
+    $scope.visualizarDocumento = function(documento){
+        $window.open(PATHS.PATH_ARQUIVOS + documento.caminho, '_blank');
     };
 
     $scope.selecionaTipo = function(tipo){

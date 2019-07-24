@@ -37,5 +37,9 @@ class DocumentoClienteController extends MbController
         return (new DocumentoCliente())->salvar($request->inputSource(),$_FILES['arquivo']);
     }
 
+    public function removerDocumentoAction(MbRequest $request){
+        return (new DocumentoCliente())->remover($request->inputSource());
+    }
+
 
 }

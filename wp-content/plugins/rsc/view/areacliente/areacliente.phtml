@@ -46,7 +46,7 @@
         <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="" ng-click="abrirDadosPessoais()"><i class="fa fa-address-card"></i> Dados Pessoais</a></li>
         <li><a href="" ng-click="abrirPagamentos()"><i class="fa fa-money"></i> Pagamentos</a></li>
-        <li><a href="" ng-click=""><i class="fa fa-file"></i> Documentos</a></li>
+        <li><a href="" ng-click="abrirDocumentos()"><i class="fa fa-file"></i> Documentos</a></li>
         <li><a href="" ng-click="abrirBoletos()"><i class="fa fa-barcode"></i> Boletos</a></li>
         <li><a href="" ng-click="abrirAssinatura()"><i class="fa fa-handshake-o"></i> Assinatura</a></li>
 
@@ -405,6 +405,37 @@
                         Renovar
                     </a>
                     -->
+                </td>
+            </tr>
+            <tr class="animate-repeat" ng-if="listaAssinaturas.length == 0">
+                <td colspan="8" class="text-center">
+                    <em>
+                        Nenhum resultado foi encontrado.
+                    </em>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="col-sm-10 col-sm-offset-1" ng-if="listDocumentos">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+                <th class="center">Tipo de Documento</th>
+                <th class="center">Documento</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="documento in listDocumentos">
+                <td class="center">{{documento.tipo_documento}}</td>
+                <td class="center">
+                    <button type="button"
+                            class="btn btn-default btn-xs"
+                            ng-click="visualizarDocumento(documento)">
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                    </button>
                 </td>
             </tr>
             <tr class="animate-repeat" ng-if="listaAssinaturas.length == 0">

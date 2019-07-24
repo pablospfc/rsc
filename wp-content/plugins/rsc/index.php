@@ -65,6 +65,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
 
     $clientePage = MbPage::create("Cliente")
         ->setController(ClienteController::class)
+        ->setCapability("read")
         ->setSlug("cliente");
 
     $assinaturaPage = MbPage::create("Assinatura")
@@ -84,6 +85,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
 
     $documentoClientePage = MbPage::create("DocumentoCliente")
         ->setController(DocumentoClienteController::class)
+        ->setCapability("read")
         ->setSlug("documentocliente");
 
     $pagamentoPage->addMbAction("listarTransacoes")
@@ -98,6 +100,11 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setCallback(function () {
             return (new Cliente())->getDadosPessoais();
         });
+
+    $areaClientePage->addMbAction("getDocumentos")
+        ->setRequiresMethod("GET")
+        ->setRequiresLogin(false)
+        ->setCapability("read");
 
     $clientePage->addMbAction("atualizarCliente")
         ->setRequiresMethod("POST")
@@ -192,6 +199,10 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setCapability("read");
 
     $documentoClientePage->addMbAction("enviarDocumento")
+        ->setRequiresMethod("POST")
+        ->setCapability("read");
+
+    $documentoClientePage->addMbAction("removerDocumento")
         ->setRequiresMethod("POST")
         ->setCapability("read");
 
@@ -314,8 +325,8 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pBwDir("angular-messages/angular-messages.min.js"))
         ->setJs(MbPath::pBwDir("angular-route/angular-route.min.js"))
         ->setJs(MbPath::pBwDir("angular-wizard/dist/angular-wizard.min.js"))
-        ->setJs(MbPath::pBwDir("angular-input-masks/angular-input-masks-standalone.js"))
         ->setJs(MbPath::pBwDir("ng-cpf-cnpj/lib/ngCpfCnpj.js"))
+        ->setJs(MbPath::pBwDir("angular-input-masks/angular-input-masks-standalone.js"))
         ->setJs(MbPath::pBwDir("angular-ui-mask/dist/mask.js"))
         ->setJs(MbPath::pJsDir("pagseguro/pagseguro.directpayment.js"))
         ->setJs(MbPath::pJsDir("src/app.js"))
@@ -373,6 +384,9 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pBwDir("angular-ui-mask/dist/mask.js"))
         ->setJs(MbPath::pBwDir("ng-file-upload/ng-file-upload-shim.min.js"))
         ->setJs(MbPath::pBwDir("ng-file-upload/ng-file-upload.min.js"))
+        ->setJs(MbPath::pBwDir("bootbox/dist/bootbox.min.js"))
+        ->setJs(MbPath::pBwDir("ngBootbox/dist/ngBootbox.min.js"))
+        ->setJs(MbPath::pBwDir("ng-cpf-cnpj/lib/ngCpfCnpj.js"))
         ->setJs(MbPath::pJsDir("src/app.js"))
         ->setJs(MbPath::pJsDir("src/controller/documento-cliente.js"))
         ->setJs(MbPath::pJsDir("src/controller/documento-modal-controller.js"))
@@ -380,7 +394,6 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
 
     $clientePage
         ->getMbAsset()
-
         ->setJs(MbPath::pBwDir("jquery/dist/jquery.min.js"))
         ->setCss(MbPath::pBwDir("bootstrap/dist/css/bootstrap.min.css"))
         ->setCss(MbPath::pBwDir("bootstrap/dist/css/bootstrap-grid.min.css"))
@@ -398,9 +411,16 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pBwDir("angular-ui-mask/dist/mask.js"))
         ->setJs(MbPath::pBwDir("ng-file-upload/ng-file-upload-shim.min.js"))
         ->setJs(MbPath::pBwDir("ng-file-upload/ng-file-upload.min.js"))
+        ->setJs(MbPath::pBwDir("bootbox/dist/bootbox.min.js"))
+        ->setJs(MbPath::pBwDir("ngBootbox/dist/ngBootbox.min.js"))
+        //->setJs(MbPath::pBwDir("ng-cpf-cnpj/lib/ngCpfCnpj.js"))
         ->setJs(MbPath::pJsDir("src/app.js"))
+        //->setJs(MbPath::pJsDir("src/controller/cliente.js"))
         ->setJs(MbPath::pJsDir("src/controller/cliente-back-controller.js"))
+        //->setJs(MbPath::pJsDir("src/service/RscFrontService.js"))
         ->setJs(MbPath::pJsDir("src/service/RscBackService.js"));
+        //->setJs(MbPath::pJsDir("src/service/loginService.js"))
+        //->setJs(MbPath::pJsDir("src/service/sessionService.js"));
 
 
     $mocabonita->addMbPage($simuladorPage);

@@ -47,6 +47,11 @@
                         ng-click="showModalDocumentos(documento)">
                     <i class="fa fa-edit" aria-hidden="true"></i>
                 </button>
+                <button type="button"
+                        class="btn btn-default btn-xs"
+                        ng-click="remover(documento.id)">
+                    <i class="fa fa-remove" aria-hidden="true"></i>
+                </button>
             </td>
         </tr>
         <tr class="animate-repeat" ng-if="listaDocumentos.length == 0">

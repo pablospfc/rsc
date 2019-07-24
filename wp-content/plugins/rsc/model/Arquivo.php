@@ -24,7 +24,7 @@ class Arquivo
     }
 
     private function generateFileNameMd5($name) {
-        $this->permanentName = md5($name);
+        $this->permanentName = md5($name.date('Y-m-d h:m:s'));
     }
 
     public function setExtension($valueName) {

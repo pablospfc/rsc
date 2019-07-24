@@ -9,7 +9,9 @@ var appFrontRsc = angular.module('appFrontRsc', [
     'ngCpfCnpj',
     'ui.mask'
 ]);
-
+appFrontRsc.constant('PATHS', {
+    PATH_ARQUIVOS: 'http://localhost/rsc/wp-content/uploads',
+});
 appFrontRsc.directive('ngUpdateHidden', function () {
     return function (scope, el, attr) {
         var model = attr['ngModel'];
@@ -134,6 +136,7 @@ var appBackRsc = angular.module('appBackRsc', [
     'angularModalService',
     'ui.utils.masks',
     'ngFileUpload',
+    'ngBootbox',
     'ui.mask'
 ]);
 
@@ -151,4 +154,6 @@ appBackRsc.constant('PATHS', {
     PATH_ARQUIVOS: 'http://localhost/rsc/wp-content/uploads',
     PATH_UPLOAD: './admin-ajax.php'
 });
+
+
 

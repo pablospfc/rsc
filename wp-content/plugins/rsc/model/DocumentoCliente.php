@@ -10,6 +10,7 @@ namespace RSC\model;
 
 
 use MocaBonita\tools\eloquent\MbModel;
+use RSC\common\Sessao;
 
 class DocumentoCliente extends MbModel
 {
@@ -22,7 +23,8 @@ class DocumentoCliente extends MbModel
         'caminho',
     ];
 
-    public function getDocumentos($idContrato){
+    public function getDocumentos($idContrato = null){
+        $idCliente = Sessao::instanciar()->get('user')[0]['id'];
         $dados = self::select(
             "tip.nome as tipo_documento",
             "cli.nome as cliente",
@@ -30,13 +32,15 @@ class DocumentoCliente extends MbModel
             "doc.nome_arquivo as nome_arquivo",
             "doc.id_contrato as id_contrato",
             "doc.id",
-            "doc.id_tipo_documento"
+            "doc.id_tipo_documento",
+            "cli.id_usuario"
         )
             ->from("rsc_documentos_cliente as doc")
             ->join("rsc_tipo_documento as tip","doc.id_tipo_documento","=","tip.id")
             ->join("rsc_contrato as con","doc.id_contrato","con.id")
             ->join("rsc_cliente as cli","con.id_cliente","=","cli.id")
             ->where("doc.id_contrato", "=", $idContrato)
+            ->orWhere('cli.id', '=', $idCliente)
             ->get()
             ->toArray();
 
@@ -45,22 +49,39 @@ class DocumentoCliente extends MbModel
 
     public function salvar($dados,$file){
         try {
-            $path = (new Arquivo())->saveFileInDisk($file);
-            $documento = self::updateOrCreate(
-                [
+            error_log(var_export($dados,true));
+            $path = isset($file) ? (new Arquivo())->saveFileInDisk($file) : $dados['caminho'];
+            if (!isset($dados['id'])) {
+                $documento = self::create(
+                    [
                     'id_contrato' => $dados['id_contrato'],
-                    'id_tipo_documento' => $dados['id_tipo_documento']
-                ], [
-                'id_contrato' => $dados['id_contrato'],
-                'id_tipo_documento' => $dados['id_tipo_documento'],
-                'caminho' => $path,
-            ]);
+                    'id_tipo_documento' => $dados['id_tipo_documento'],
+                    'caminho' => $path,
+                ]);
+            }else{
+                $documento = self::where('id',$dados['id'])
+                    ->update(
+                    [
+                        'id_contrato' => $dados['id_contrato'],
+                        'id_tipo_documento' => $dados['id_tipo_documento'],
+                        'caminho' => $path,
+                    ]);
+            }
 
             return ['message' => 'O arquivo foi enviado com sucesso'];
 
         }catch(\Exception $e){
             Log::createFromException($e);
             throw new \Exception("Ocorreu um erro ao fazer o upload do arquivo");
+        }
+    }
+
+    public function remover($dados){
+        try{
+            $documento = self::where('id',$dados['id'])->delete();
+            return ['message' => 'O documento foi excluído com sucesso.'];
+        }catch(\Exception $e){
+            throw new \Exception("Ocorreu um problema ao remover documento");
         }
     }
 

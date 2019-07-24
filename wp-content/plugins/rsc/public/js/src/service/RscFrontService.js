@@ -79,7 +79,6 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
             WizardHandler.wizard().next();
         }, function (meta) {
             //$scope.formContrato = undefined;
-            console.log("erro ao assinar");
             $rootScope.alert.responseError(meta);
             $rootScope.alert.changeType('danger');
             $rootScope.alert.changeTitle('');
@@ -98,7 +97,6 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
         }).addData(formulario).load($rootScope.loading.getRequestLoad('Gerando Boletos. Por favor aguarde e não feche esta tela.')).send(function (data) {
             $rootScope.alert.responseSuccess(data.message);
             $rootScope.boletos = data.boletos;
-            console.log($rootScope.boletos);
             WizardHandler.wizard().next();
         }, function (meta) {
             //$scope.formContrato = undefined;
@@ -170,6 +168,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
         $scope.formCliente = undefined;
         $scope.listaAssinaturas = undefined;
         $scope.listaBoletos = undefined;
+        $scope.listDocumentos = undefined;
         $scope.alert.changeShow(false);
         $request.get(urlAdmin("admin-ajax.php"))
             .addParams({
@@ -189,6 +188,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
         $scope.formCliente = undefined;
         $scope.listaAssinaturas = undefined;
         $scope.listaTransacoes = undefined;
+        $scope.listDocumentos = undefined;
         $scope.alert.changeShow(false);
         $request.get(urlAdmin("admin-ajax.php"))
             .addParams({
@@ -217,7 +217,6 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
                 //$scope.id_sessao = data[0][0];
                 deferred.resolve(data[0][0]);
             }, function (meta) {
-                console.log(meta);
                 $scope.alert.responseError(meta);
                 $scope.alert.changeType("danger");
                 deferred.reject(meta);
@@ -426,6 +425,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
         $scope.listaTransacoes = undefined;
         $scope.formCliente = undefined;
         $scope.listaBoletos = undefined;
+        $scope.listDocumentos = undefined;
         $scope.alert.changeShow(false);
         $request.get(urlAdmin("admin-ajax.php"))
             .addParams({
@@ -498,10 +498,32 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
             });
     };
 
+    this.getDocumentos = function ($scope) {
+        $scope.listaTransacoes = undefined;
+        $scope.listaAssinaturas = undefined;
+        $scope.listaBoletos = undefined;
+        $scope.formCliente = undefined;
+        $scope.alert.changeShow(false);
+        $request.get(urlAdmin("admin-ajax.php"))
+            .addParams({
+                page: "areacliente",
+                action: "getDocumentos",
+            })
+            .load($scope.loading.getRequestLoad('Listando Documentos...'))
+            .send(function (data) {
+                $scope.listDocumentos = data;
+            }, function (meta) {
+                $scope.listDocumentos= undefined;
+                $scope.alert.responseError(meta);
+                $scope.alert.changeType("danger");
+            });
+    };
+
     this.getDadosPessoais = function ($scope) {
         $scope.listaTransacoes = undefined;
         $scope.listaAssinaturas = undefined;
         $scope.listaBoletos = undefined;
+        $scope.listDocumentos = undefined;
         $scope.alert.changeShow(false);
         $scope.mensalidade =undefined;
         $request.get(urlAdmin("admin-ajax.php"))
