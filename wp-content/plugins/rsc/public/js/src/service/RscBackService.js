@@ -17,6 +17,7 @@ appBackRsc.service('RscBackService', function ($request, $timeout, PATHS, Upload
     };
 
     this.getDocumentos = function ($scope,id) {
+        console.log("atualizou");
         $scope.alert.changeShow(false);
         $request.get("admin-ajax.php")
             .addParams({
@@ -46,7 +47,8 @@ appBackRsc.service('RscBackService', function ($request, $timeout, PATHS, Upload
             $scope.alert.responseSuccess(data.data.data.message);
             $scope.alert.changeTitle('');
         }, function(meta) {
-            $scope.alert.responseError(meta.data.data.message);
+            $scope.alert.responseError(meta);
+            console.log(meta);
         }, function(evt) {
 
         });

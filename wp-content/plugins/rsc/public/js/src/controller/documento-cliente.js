@@ -24,16 +24,18 @@ appBackRsc.controller('documentoClienteController', function ($scope,ModalServic
         $window.open(PATHS.PATH_ARQUIVOS + documento.caminho, '_blank');
     };
 
-    $scope.showModalDocumentos = function (id_contrato) {
+    $scope.showModalDocumentos = function (documento) {
         ModalService.showModal({
             templateUrl: './../wp-content/plugins/rsc/view/documentocliente/documentos-modal.phtml',
             controller: "documentoModalController",
             inputs: {
-                id_contrato: id_contrato
+                id_contrato: id,
+                documento: documento,
             }
         }).then(function (modal) {
             modal.element.modal();
             modal.close.then(function (result) {
+                RscBackService.getDocumentos($scope, id_contrato);
                 angular.element('.modal-backdrop').hide();
                 angular.element($document[0].body).removeClass('modal-open');
                 $timeout(function () {

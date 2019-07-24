@@ -28,7 +28,9 @@ class DocumentoCliente extends MbModel
             "cli.nome as cliente",
             "doc.caminho as caminho",
             "doc.nome_arquivo as nome_arquivo",
-            "doc.id_contrato as id_contrato"
+            "doc.id_contrato as id_contrato",
+            "doc.id",
+            "doc.id_tipo_documento"
         )
             ->from("rsc_documentos_cliente as doc")
             ->join("rsc_tipo_documento as tip","doc.id_tipo_documento","=","tip.id")

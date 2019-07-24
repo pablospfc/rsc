@@ -358,6 +358,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pBwDir("jquery/dist/jquery.min.js"))
         ->setCss(MbPath::pBwDir("bootstrap/dist/css/bootstrap.min.css"))
         ->setCss(MbPath::pBwDir("bootstrap/dist/css/bootstrap-grid.min.css"))
+        ->setCss(MbPath::pCssDir("documento.css"))
         ->setJs(MbPath::pBwDir("bootstrap/dist/js/bootstrap.min.js"))
         ->setJs(MbPath::pBwDir("angular/angular.min.js"))
         ->setJs(MbPath::pBwDir("angular-sanitize/angular-sanitize.min.js"))
@@ -379,6 +380,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
 
     $clientePage
         ->getMbAsset()
+
         ->setJs(MbPath::pBwDir("jquery/dist/jquery.min.js"))
         ->setCss(MbPath::pBwDir("bootstrap/dist/css/bootstrap.min.css"))
         ->setCss(MbPath::pBwDir("bootstrap/dist/css/bootstrap-grid.min.css"))

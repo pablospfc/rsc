@@ -1,5 +1,5 @@
 <div class="modal" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width:80%;">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">
@@ -30,21 +30,19 @@
                                           >
                                       </span>
                                 </span>
-                                <select class="form-control"
+                                <select class="selectBootstrap form-control"
                                         id="tipoDocumento"
                                         name="tipoDocumento"
                                         ng-options="tipoDocumento as tipoDocumento.nome for tipoDocumento in listaDocumentos track by tipoDocumento.id"
                                         ng-model="documento.id_tipo_documento"
-                                        ng-required="true"
-                                >
-                                    <option value="">Escolha o tipo de documento...</option>
+                                        ng-required="true">
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button"
-                                class="btn btn-default"
+                                class="btn btn-danger"
                                 ng-click="close('cancel')"
                                 data-dismiss="modal">Cancelar
                         </button>

@@ -24,7 +24,7 @@
             </button>
         </form>
     </div>
-    <table class="table table-hover" ng-if="listaDocumentos.length">
+    <table class="table table-hover">
         <thead>
         <tr>
             <th class="text-center">Cliente</th>
@@ -44,9 +44,16 @@
                 </button>
                 <button type="button"
                         class="btn btn-default btn-xs"
-                        ng-click="showModalDocumentos(documento.id_contrato)">
+                        ng-click="showModalDocumentos(documento)">
                     <i class="fa fa-edit" aria-hidden="true"></i>
                 </button>
+            </td>
+        </tr>
+        <tr class="animate-repeat" ng-if="listaDocumentos.length == 0">
+            <td colspan="8" class="text-center">
+                <em>
+                    Nenhum documento foi cadastrado.
+                </em>
             </td>
         </tr>
         </tbody>
