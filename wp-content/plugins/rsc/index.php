@@ -19,6 +19,7 @@ use MocaBonita\tools\MbPath;
 use RSC\common\Sessao;
 use RSC\controller\AssinaturaController;
 use RSC\controller\BoletoController;
+use RSC\controller\CadastroController;
 use RSC\controller\ClienteController;
 use RSC\controller\AreaClienteController;
 use RSC\controller\DocumentoClienteController;
@@ -68,6 +69,11 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setCapability("read")
         ->setSlug("cliente");
 
+    $cadastroPage = MbPage::create("Cadastro")
+        ->setController(CadastroController::class)
+        ->setHideMenu(true)
+        ->setSlug("cadastro");
+
     $assinaturaPage = MbPage::create("Assinatura")
         ->setController(AssinaturaController::class)
         ->setHideMenu(true)
@@ -106,7 +112,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setRequiresLogin(false)
         ->setCapability("read");
 
-    $clientePage->addMbAction("atualizarCliente")
+    $cadastroPage->addMbAction("atualizarCliente")
         ->setRequiresMethod("POST")
         ->setRequiresLogin(false)
         ->setCapability("read");
@@ -189,7 +195,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setCapability("read")
         ->setRequiresLogin(false);
 
-    $clientePage->addMbAction("cadastro")
+    $cadastroPage->addMbAction("cadastro")
         ->setRequiresMethod("GET")
         ->setCapability("read")
         ->setRequiresLogin(false);
@@ -214,7 +220,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
             return Cliente::getClientes();
         });
 
-    $clientePage->addMbAction("getGeneros")
+    $cadastroPage->addMbAction("getGeneros")
         ->setRequiresMethod("GET")
         ->setRequiresAjax()
         ->setCapability("read")
@@ -223,7 +229,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
             return Genero::all();
         });
 
-    $clientePage->addMbAction("getEstadosCivis")
+    $cadastroPage->addMbAction("getEstadosCivis")
         ->setRequiresMethod("GET")
         ->setRequiresAjax()
         ->setCapability("read")
@@ -232,12 +238,12 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
             return EstadoCivil::all();
         });
 
-    $clientePage->addMbAction("cadastrarCliente")
+    $cadastroPage->addMbAction("cadastrarCliente")
         ->setRequiresMethod("POST")
         ->setRequiresLogin(false)
         ->setCapability("read");
 
-    $clientePage->addMbAction("cadastrarContrato")
+    $cadastroPage->addMbAction("cadastrarContrato")
         ->setRequiresMethod("POST")
         ->setRequiresLogin(false)
         ->setCapability("read");
@@ -309,7 +315,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
 
     //$mocabonita->addMbShortcode("cadastro_cliente", $clientePage, "cliente")
     //$mocabonita->addMbShortcode("login", $loginPage, "login")
-    $mocabonita->addMbShortcode("cadastro_cliente", $clientePage, "cliente")
+    $mocabonita->addMbShortcode("cadastro_cliente", $cadastroPage, "cadastro")
         ->getMbAsset()
         ->setJs(MbPath::pBwDir("jquery/dist/jquery.min.js"))
         ->setCss(MbPath::pCssDir("payment.css"))
@@ -331,7 +337,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pJsDir("pagseguro/pagseguro.directpayment.js"))
         ->setJs(MbPath::pJsDir("src/app.js"))
         ->setJs(MbPath::pJsDir("src/controller/login.js"))
-        ->setJs(MbPath::pJsDir("src/controller/cliente.js"))
+        ->setJs(MbPath::pJsDir("src/controller/cadastro.js"))
         ->setJs(MbPath::pJsDir("src/service/RscFrontService.js"))
         ->setJs(MbPath::pJsDir("src/service/loginService.js"))
         ->setJs(MbPath::pJsDir("src/service/sessionService.js"));
@@ -359,7 +365,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
         ->setJs(MbPath::pJsDir("src/app.js"))
         ->setJs(MbPath::pJsDir("src/controller/login.js"))
         ->setJs(MbPath::pJsDir("src/controller/areacliente.js"))
-        ->setJs(MbPath::pJsDir("src/controller/cliente.js"))
+        ->setJs(MbPath::pJsDir("src/controller/cadastro.js"))
         ->setJs(MbPath::pJsDir("src/service/RscFrontService.js"))
         ->setJs(MbPath::pJsDir("src/service/loginService.js"))
         ->setJs(MbPath::pJsDir("src/service/sessionService.js"));
@@ -425,6 +431,7 @@ MocaBonita::plugin(function (MocaBonita $mocabonita) {
 
     $mocabonita->addMbPage($simuladorPage);
     $mocabonita->addMbPage($clientePage);
+    $mocabonita->addMbPage($cadastroPage);
     $mocabonita->addMbPage($assinaturaPage);
     $mocabonita->addMbPage($loginPage);
     $mocabonita->addMbPage($areaClientePage);

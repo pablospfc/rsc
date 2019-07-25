@@ -22,42 +22,14 @@ class ClienteController extends MbController
         return $this->getMbView()->setAction('clientes');
     }
 
-    public function cadastrarClienteAction(MbRequest $mbRequest)
-    {
-        return (new Cliente())->inserir($mbRequest->inputSource());
-    }
 
-    public function atualizarClienteAction(MbRequest $mbRequest)
-    {
-        return (new Cliente())->atualizar($mbRequest->inputSource());
-    }
 
-    public function cadastrarContratoAction(MbRequest $mbRequest)
-    {
-        return (new Contrato())->inserir($mbRequest->inputSource());
-    }
-
-    public function clienteShortcode()
-    {
-        return $this->getMbView()
-            ->setPage("cliente")
-            ->setAction("index");
-    }
-
-    public function docentesAction()
+    public function clientesAction()
     {
         return $this->getMbView()
             ->setTemplate("index")
             ->setPage("cliente")
             ->setAction("clientes");
-    }
-
-    public function cadastroAction()
-    {
-        return $this->getMbView()
-            ->setTemplate("modal")
-            ->setPage("cliente")
-            ->setAction("cadastro");
     }
 
 }

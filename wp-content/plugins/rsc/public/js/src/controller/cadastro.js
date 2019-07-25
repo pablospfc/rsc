@@ -1,4 +1,4 @@
-appFrontRsc.controller('clienteController', function ($scope, loginService, $rootScope, $window, $document, WizardHandler, RscService) {
+appFrontRsc.controller('cadastroController', function ($scope, loginService, $rootScope, $window, $document, WizardHandler, RscService) {
 
     RscService.getGeneros($scope);
     RscService.getEstadosCivis($scope);

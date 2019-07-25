@@ -8,7 +8,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
         var deferred = $q.defer();
         $rootScope.alert.changeShow(false);
         $request.post(urlAdmin("admin-ajax.php")).addParams({
-            page: 'cliente',
+            page: 'cadastro',
             action: 'cadastrarCliente'
         }).addData($scope.formCliente).load($rootScope.loading.getRequestLoad('Cadastrando cliente...')).send(function (data) {
             $rootScope.alert.responseSuccess(data.message);
@@ -30,7 +30,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
     this.atualizarCliente = function ($scope) {
         $scope.alert.changeShow(false);
         $request.post(urlAdmin("admin-ajax.php")).addParams({
-            page: 'cliente',
+            page: 'cadastro',
             action: 'atualizarCliente'
         }).addData($scope.formCliente).load($scope.loading.getRequestLoad('Atualizando seus dados...')).send(function (data) {
             $scope.alert.responseSuccess(data.message);
@@ -50,7 +50,7 @@ appFrontRsc.service('RscService', function ($request, $location, WizardHandler, 
         var deferred = $q.defer();
         $rootScope.alert.changeShow(false);
         $request.post(urlAdmin("admin-ajax.php")).addParams({
-            page: 'cliente',
+            page: 'cadastro',
             action: 'cadastrarContrato'
         }).addData(formulario).load($rootScope.loading.getRequestLoad('Cadastrando contrato...')).send(function (data) {
             $rootScope.alert.responseSuccess(data.message);

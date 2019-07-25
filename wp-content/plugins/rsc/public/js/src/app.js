@@ -83,10 +83,10 @@ appFrontRsc.config(function ($routeProvider) {
         })
         .when('/cadastro', {
             templateUrl: urlAdmin("admin-post.php?" + serialize({
-                page: "cliente",
+                page: "cadastro",
                 action: "cadastro"
             })),
-            controller: 'clienteController',
+            controller: 'cadastroController',
         })
         .when('/areacliente', {
             templateUrl: urlAdmin("admin-post.php?" + serialize({

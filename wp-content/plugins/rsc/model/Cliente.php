@@ -182,6 +182,7 @@ class Cliente extends MbModel
             return $dados;
 
         }catch(\Exception $e){
+            Log::createFromException($e);
             throw new \Exception("Não foi possível listar os clientes.");
         }
     }
