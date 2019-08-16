@@ -102,7 +102,7 @@ appFrontRsc.run(function ($rootScope, bootstrap, $location, loginService) {
     $rootScope.alert = bootstrap.alert();
     $rootScope.loading = bootstrap.loading();
 //prevent going to homepage if not loggedin
-    var routePermit = ['/areacliente'];
+    var routePermit = ['/areacliente','/cadastro'];
     $rootScope.$on('$routeChangeStart', function(){
         if(routePermit.indexOf($location.path()) !=-1){
             loginService.islogged().then(function(response){

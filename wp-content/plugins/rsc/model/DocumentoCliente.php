@@ -24,27 +24,37 @@ class DocumentoCliente extends MbModel
     ];
 
     public function getDocumentos($idContrato = null){
-        $idCliente = Sessao::instanciar()->get('user')[0]['id'];
-        $dados = self::select(
-            "tip.nome as tipo_documento",
-            "cli.nome as cliente",
-            "doc.caminho as caminho",
-            "doc.nome_arquivo as nome_arquivo",
-            "doc.id_contrato as id_contrato",
-            "doc.id",
-            "doc.id_tipo_documento",
-            "cli.id_usuario"
-        )
-            ->from("rsc_documentos_cliente as doc")
-            ->join("rsc_tipo_documento as tip","doc.id_tipo_documento","=","tip.id")
-            ->join("rsc_contrato as con","doc.id_contrato","con.id")
-            ->join("rsc_cliente as cli","con.id_cliente","=","cli.id")
-            ->where("doc.id_contrato", "=", $idContrato)
-            ->orWhere('cli.id', '=', $idCliente)
-            ->get()
-            ->toArray();
+        try {
+            $idCliente = Sessao::instanciar()->get('user')[0]['id'];
+            $dados = self::select(
+                "tip.nome as tipo_documento",
+                "cli.nome as cliente",
+                "doc.caminho as caminho",
+                "doc.nome_arquivo as nome_arquivo",
+                "doc.id_contrato as id_contrato",
+                "doc.id",
+                "doc.id_tipo_documento",
+                "cli.id_usuario"
+            )
+                ->from("rsc_documentos_cliente as doc")
+                ->join("rsc_tipo_documento as tip", "doc.id_tipo_documento", "=", "tip.id")
+                ->join("rsc_contrato as con", "doc.id_contrato", "con.id")
+                ->join("rsc_cliente as cli", "con.id_cliente", "=", "cli.id")
+                ->where("doc.id_contrato", "=", $idContrato)
+                ->orWhere('cli.id', '=', $idCliente)
+                ->get()
+                ->toArray();
 
-        return $dados;
+            if (!is_array($dados) || empty($dados)){
+                throw new \Exception("Não foi possível listar os arquivos.");
+            }
+
+            return $dados;
+
+        }catch(\Exception $e){
+            Log::createFromException($e);
+            throw new \Exception("Nenhum arquivo foi encontrado".$e);
+        }
     }
 
     public function salvar($dados,$file){

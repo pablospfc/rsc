@@ -1,4 +1,4 @@
-appFrontRsc.factory('loginService', function($http, $request, $rootScope, $q, $location, sessionService){
+appFrontRsc.factory('loginService', function($http, $request, $window, $rootScope, $q, $location, sessionService){
     return{
         login: function($scope){
             $scope.alert.changeShow(false);
@@ -14,14 +14,15 @@ appFrontRsc.factory('loginService', function($http, $request, $rootScope, $q, $l
                 if(uid){
                     sessionService.set('user',uid);
                     $location.path("/areacliente");
-                    /*
+
                     if (completou == 1)
                         $location.path("/areacliente");
                     else{
-                        //$scope.formCliente = data[0];
+                        $scope.formCliente = data[0];
+                        $window.localStorage.setItem("formCliente", data[0]);
                         $location.path("/cadastro");
                     }
-                    */
+
 
                 }
             }, function (meta) {

@@ -46,7 +46,7 @@ class Cliente extends MbModel
 
     public function inserir($dados)
     {
-        error_log(var_export($dados,true));
+        //error_log(var_export($dados,true));
         try {
             MbDatabase::beginTransaction();
             $usuario = Usuario::updateOrCreate(

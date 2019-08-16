@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `logs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `logs` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `message` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -47,7 +47,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_boletos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_boletos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_contrato` int(11) NOT NULL,
@@ -77,7 +77,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_cliente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_cliente` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_usuario` int(11) NOT NULL,
@@ -132,7 +132,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_contrato`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_contrato` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_cliente` int(11) NOT NULL,
@@ -167,7 +167,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_documentos_cliente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_documentos_cliente` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_tipo_documento` int(11) NOT NULL,
@@ -179,7 +179,7 @@ CREATE TABLE `rsc_documentos_cliente` (
   KEY `fk_tipo_documento_idx` (`id_tipo_documento`),
   CONSTRAINT `fk_contrato_4` FOREIGN KEY (`id_contrato`) REFERENCES `rsc_contrato` (`id`),
   CONSTRAINT `fk_tipo_documento` FOREIGN KEY (`id_tipo_documento`) REFERENCES `rsc_tipo_documento` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -197,7 +197,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_estado_civil`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_estado_civil` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) DEFAULT NULL,
@@ -221,7 +221,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_etapa_cadastro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_etapa_cadastro` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) DEFAULT NULL,
@@ -245,7 +245,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_etapa_cadastro_cliente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_etapa_cadastro_cliente` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_etapa_cadastro` int(11) NOT NULL,
@@ -274,7 +274,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_faturamento`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_faturamento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) DEFAULT NULL,
@@ -298,7 +298,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_forma_pagamento`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_forma_pagamento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -322,7 +322,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_genero`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_genero` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) DEFAULT NULL,
@@ -346,7 +346,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_pagamento`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_pagamento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_contrato` int(11) NOT NULL,
@@ -381,7 +381,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_plano`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_plano` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_tipo_empresa` int(255) NOT NULL,
@@ -416,7 +416,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_status` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) DEFAULT NULL,
@@ -440,7 +440,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_status_assinatura`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_status_assinatura` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) DEFAULT NULL,
@@ -464,12 +464,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_tipo_documento`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_tipo_documento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -488,7 +488,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_tipo_empresa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_tipo_empresa` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) DEFAULT NULL,
@@ -512,12 +512,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_tipo_pessoa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_tipo_pessoa` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -536,7 +536,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_tipo_status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_tipo_status` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) DEFAULT NULL,
@@ -560,7 +560,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_unidade`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_unidade` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) DEFAULT NULL,
@@ -584,7 +584,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rsc_usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rsc_usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `login` varchar(45) DEFAULT NULL,

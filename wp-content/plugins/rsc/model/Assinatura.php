@@ -16,11 +16,11 @@ use RSC\model\Contrato;
 
 class Assinatura
 {
-    //private $email = "benidia@rsccontabilidade.com.br";
-    //private $token = "66eb507d-d0bf-4020-a6d8-dbf77c43064cedfb35ca406a9f05b8b8d4ba636f4ae3d6f7-60ad-4585-9698-62d638bd30e9";
-    private $email = "claudiopablosilva@hotmail.com";
-    private $token = "2382B416442D464CADC943D232AD6045";
-    private $sandbox = true;
+    private $email = "benidia@rsccontabilidade.com.br";
+    private $token = "66eb507d-d0bf-4020-a6d8-dbf77c43064cedfb35ca406a9f05b8b8d4ba636f4ae3d6f7-60ad-4585-9698-62d638bd30e9";
+    //private $email = "claudiopablosilva@hotmail.com";
+    //private $token = "2382B416442D464CADC943D232AD6045";
+    private $sandbox = false;
     private $pagseguro = null;
 
     function __construct()
@@ -32,7 +32,6 @@ class Assinatura
     {
         $id = $this->pagseguro->iniciaSessao();
         return [$id];
-
     }
 
     public function criarPlanoPagseguro(){
